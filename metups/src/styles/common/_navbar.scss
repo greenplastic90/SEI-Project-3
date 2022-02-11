@@ -1,0 +1,23 @@
+@import './variables';
+
+.navbar {
+  .container-fluid {
+    .nav-item {
+      padding-inline: 0.5rem;
+      .clickable {
+        cursor: pointer;
+        color: #000;
+        &:hover {
+          zoom: 105%;
+        }
+      }
+      a {
+        text-decoration: none;
+        color: #000;
+        &:hover {
+          zoom: 105%;
+        }
+      }
+    }
+  }
+}
