@@ -1,5 +1,6 @@
 import express from 'express'
 import { registerUser, loginUser } from '../controllers/auth.js'
+import { addComment, deleteComment } from '../controllers/comments.js'
 import {
   createEvent,
   deleteEvent,
@@ -18,6 +19,10 @@ router
   .get(getSingleEvent)
   .delete(secureRoute, deleteEvent)
   .put(secureRoute, updateEvent)
+router.route('/events/:id/comments').post(secureRoute, addComment)
+router
+  .route('/events/:id/comments/:commentId')
+  .delete(secureRoute, deleteComment)
 
 router.route('/register').post(registerUser)
 router.route('/login').post(loginUser)

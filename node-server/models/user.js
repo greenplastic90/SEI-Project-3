@@ -14,6 +14,7 @@ const userSchema = new Schema({
   password: { type: String, required: true, minlength: 8 },
   email: { type: String, required: true, unique: true },
   profilePhoto: String,
+  profileDescription: { type: String, maxlength: 280 },
 })
 
 userSchema.virtual('ownedEvents', {
