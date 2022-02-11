@@ -17,7 +17,7 @@ const startServer = async () => {
       next()
     })
 
-    app.use(router)
+    app.use('/api', router)
 
     app.use((_req, res) => res.status(404).json({ message: 'Route Not Found' }))
 
