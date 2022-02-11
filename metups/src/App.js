@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import axios from 'axios'
 
-// Importing 
+// Importing
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 // Importing made elements
@@ -15,20 +15,20 @@ import Login from './components/pages/auth/Login'
 import Button from 'react-bootstrap/Button'
 
 function App() {
-  useEffect(() => {
-    const getData = async () => {
-      const { data } = await axios.get('/api/events/') // * <-- replace with your endpoint
-      console.log(data)
-    }
-    getData()
-  })
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     const { data } = await axios.get('/api/events/') // * <-- replace with your endpoint
+  //     console.log(data)
+  //   }
+  //   getData()
+  // })
 
   return (
     <div className='site-wrapper'>
       <Router>
         <PageNavbar />
         <Routes>
-          <Route path = '/' element={<Home />} />
+          <Route path='/' element={<Home />} />
           <Route path='/register' element={<Signup />} />
           <Route path='/login' element={<Login />} />
         </Routes>
