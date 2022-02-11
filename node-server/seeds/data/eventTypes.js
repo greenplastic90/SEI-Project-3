@@ -1,0 +1,15 @@
+export default [
+  'Music',
+  'Sports',
+  'Outdoor',
+  'Workshop',
+  'Class',
+  'Tech',
+  'Craft',
+  'Art',
+  'Party',
+  'Culture',
+  'Food',
+  'History',
+  'Philosophy',
+]
