@@ -30,7 +30,7 @@ const PageNavbar = () => {
           <Navbar.Collapse className='justify-content-end'>
             {/* commented out -> causing UserIsauthenticated issues -> Buffer is not definied error*/}
 
-            {/* { userIsAuthenticated() ?
+            { userIsAuthenticated() ?
               <>
                 <Nav.Item>
                   <Link to='/events'>Events</Link>
@@ -54,7 +54,7 @@ const PageNavbar = () => {
                   <Link to = '/login'>Login</Link>
                 </Nav.Item>
               </>
-            } */}
+            }
           </Navbar.Collapse>
         </Container>
       </Navbar>
