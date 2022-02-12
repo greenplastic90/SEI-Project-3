@@ -10,7 +10,6 @@ import Nav from 'react-bootstrap/Nav'
 import Container from 'react-bootstrap/Container'
 
 const PageNavbar = () => {
-
   const navigate = useNavigate()
   // This just gets rid of the token, logs the user out and directs them to the homepage
   const handleLogout = () => {
@@ -22,10 +21,16 @@ const PageNavbar = () => {
     <>
       <Navbar>
         <Container fluid>
-          <Navbar.Brand href='/'>METUPS</Navbar.Brand>
+          {/* changing href <Link> as href causes reload */}
+
+          <Navbar.Brand>
+            <Link to='/'> METUPS</Link>
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse className='justify-content-end'>
-            { userIsAuthenticated() ?
+            {/* commented out -> causing UserIsauthenticated issues -> Buffer is not definied error*/}
+
+            {/* { userIsAuthenticated() ?
               <>
                 <Nav.Item>
                   <Link to='/events'>Events</Link>
@@ -49,7 +54,7 @@ const PageNavbar = () => {
                   <Link to = '/login'>Login</Link>
                 </Nav.Item>
               </>
-            }
+            } */}
           </Navbar.Collapse>
         </Container>
       </Navbar>

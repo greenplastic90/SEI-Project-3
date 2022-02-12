@@ -12,7 +12,7 @@ export const registerUser = async (req, res) => {
   } catch (err) {
     console.log(err)
     // unprocessable entity 422
-    return res.status(422).json({ message: err.message })
+    return res.status(422).json(err)
   }
 }
 

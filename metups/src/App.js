@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import axios from 'axios'
 
-// Importing 
+// Importing
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 // Importing made elements
@@ -14,9 +14,6 @@ import EventCreate from './components/pages/EventCreate'
 import Event from './components/pages/Event'
 import EventIndex from './components/pages/EventIndex'
 import Profile from './components/pages/Profile'
-
-// Importing Bootstrap elements
-import Button from 'react-bootstrap/Button'
 
 function App() {
   useEffect(() => {
@@ -32,7 +29,7 @@ function App() {
       <Router>
         <PageNavbar />
         <Routes>
-          <Route path = '/' element={<Home />} />
+          <Route path='/' element={<Home />} />
           <Route path='/register' element={<Signup />} />
           <Route path='/login' element={<Login />} />
           <Route path='/event' element={<Event />} />
