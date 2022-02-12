@@ -22,6 +22,7 @@ const eventSchema = new Schema(
     locationName: { type: String, required: true, maxlength: 58 },
     description: { type: String, required: true, maxlength: 3000 },
     eventDate: { type: String, required: true, maxlength: 30 },
+    eventTime: { type: String, required: true, maxlength: 30 },
     image: { type: String },
     owner: { type: mongoose.Schema.ObjectId, ref: 'User', required: true },
     likedBy: [userLikesSchema],
