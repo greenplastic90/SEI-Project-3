@@ -52,7 +52,22 @@ const Signup = () => {
       // console.log('keys ->', Object.keys(err.response.data.errors))
       const obj = {}
       Object.keys(err.response.data.errors).forEach((key) => {
-        obj[key] = err.response.data.errors[key].message
+        if (
+          err.response.data.errors[key].message.includes(
+            'is shorter than the minimum allowed length (8).'
+          )
+        ) {
+          obj[key] = 'Password is shorter than the minimum allowed length (8).'
+        } else if (
+          err.response.data.errors[key].message.includes(
+            'is longer than the maximum allowed length (280).'
+          )
+        ) {
+          obj[key] =
+            'Profile description is longer than the maximum allowed length (280).'
+        } else {
+          obj[key] = err.response.data.errors[key].message
+        }
       })
 
       setFormErrors({
@@ -143,13 +158,14 @@ const Signup = () => {
             <Form.Label htmlFor='profileDescription'>
               Profile Description
             </Form.Label>
+            <Form.Text className='text-muted'>- optional -</Form.Text>
             <Form.Control
               onChange={handleChange}
               as='textarea'
               name='profileDescription'
               defaultValue={formData.profileDescription}
             />
-            <Form.Text className='text-muted'>- optional -</Form.Text>
+
             {formErrors.profileDescription && (
               <Form.Text className='text-muted'>
                 {formErrors.profileDescription}
@@ -159,13 +175,14 @@ const Signup = () => {
 
           <Form.Group className='mb-3'>
             <Form.Label htmlFor='profilePhoto'>Profile Photo</Form.Label>
+            <Form.Text className='text-muted'> - optional - </Form.Text>
             <Form.Control
               onChange={handelImageUpload}
               type='file'
               name='profilePhoto'
               defaultValue={formData.profilePhoto}
             />
-            <Form.Text className='text-muted'> - optional - </Form.Text>
+
             {/* this Col is here to size the image a bit smaller for now */}
             <Row>
               <Col md={4}>

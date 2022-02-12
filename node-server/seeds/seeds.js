@@ -29,6 +29,7 @@ const seedDatabase = async () => {
         eventType: eventTypes[randomTypeIndex],
         longitude: randomLong,
         latitude: randomLat,
+        eventTime: '14/04/2022',
         likedBy: [{ owner: users[randomUserIndex] }],
       }
 
