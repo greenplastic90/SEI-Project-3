@@ -36,7 +36,9 @@ const Login = () => {
       setTokenToLocalStorage(data.token)
       navigate('/')
     } catch (err) {
-      console.log(err)
+      console.log(err.response)
+
+      setFormError(err.response.data.message)
     }
   }
 
@@ -72,11 +74,13 @@ const Login = () => {
                     />
                   </Form.Group>
                 </Col>
+                {formError && (
+                  <Form.Text className='text-center'>{formError}</Form.Text>
+                )}
               </Row>
             </Col>
           </Row>
 
-          {formError && <Form.Text>{formError}</Form.Text>}
           <Form.Group className='mt-4 text-center'>
             <Button type='submit'>Log in</Button>
           </Form.Group>

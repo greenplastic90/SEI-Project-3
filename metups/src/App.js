@@ -15,17 +15,14 @@ import Event from './components/pages/Event'
 import EventIndex from './components/pages/EventIndex'
 import Profile from './components/pages/Profile'
 
-// Importing Bootstrap elements
-import Button from 'react-bootstrap/Button'
-
 function App() {
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     const { data } = await axios.get('/api/events/') // * <-- replace with your endpoint
-  //     console.log(data)
-  //   }
-  //   getData()
-  // })
+  useEffect(() => {
+    const getData = async () => {
+      const { data } = await axios.get('/api/events/') // * <-- replace with your endpoint
+      console.log(data)
+    }
+    getData()
+  })
 
   return (
     <div className='site-wrapper'>
