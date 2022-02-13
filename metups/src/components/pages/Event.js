@@ -14,26 +14,39 @@ import Button from 'react-bootstrap/Button'
 const SingleEvent = () => {
 
   const navigate = useNavigate()
-  const [ event, setEvent ] = useState(null)
+  const [ event, setEvent ] = useState('')
   const [ hasError, setHasError ] = useState({ error: false, message: '' })
 
-  const { eventId } = useParams()
+  const { id } = useParams()
 
   useEffect(() => {
     const getSingleEvent = async () => {
       try {
-        const { data } = await axios.get(`/api/events/${eventId}`)
+        const { data } = await axios.get(`/api/events/${id}`)
+        console.log('SINGLE EVENT DATA HERE ->', data)
         setEvent(data)
       } catch (err) {
         setHasError({ error: true, message: err.message })
       }
     }
     getSingleEvent()
-  }, [eventId])
+  }, [id])
 
   
 
-  return <div>Event</div>
+  return(
+  <>
+  <h2>{event.eventName}</h2>
+
+  <div>{event.description}</div>
+  <div>{event.eventType}</div>
+  <div>{event.locationName}</div>
+  <div>{event.eventDate}</div>
+  <div>{event.eventTime}</div>
+  <div>{event.image}</div>
+  </>
+  
+  )
 
 }
 
