@@ -50,8 +50,8 @@ const SingleEvent = () => {
       <Row>
         <Col>
           <div>
-            <p> Hosted by: {event.owner.username} </p>
             <Image src={event.owner.profilePhoto} alt="host's profile image" responsive/>
+            <p> Hosted by: {event.owner.username} </p>
           </div>
         </Col>
         <Col>
@@ -83,6 +83,7 @@ const SingleEvent = () => {
       </Row>
 
       {/* comments section */}
+      
 
       
     </Container>
