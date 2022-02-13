@@ -21,7 +21,7 @@ function App() {
   useEffect(() => {
     const getAllEvents = async () => {
       try {
-        const { data } = await axios.get('/api/events')
+        const { data } = await axios.get('/api/events/')
         setAllEvents(data)
       } catch (err) {
         console.log(err.response)
@@ -61,7 +61,10 @@ function App() {
             path='/eventCreate'
             element={<EventCreate options={options} />}
           />
-          <Route path='/events' element={<EventIndex />} />
+          <Route
+            path='/events'
+            element={<EventIndex options={options} events={allEvents} />}
+          />
           <Route path='/profile' element={<Profile />} />
         </Routes>
       </Router>
