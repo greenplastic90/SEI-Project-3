@@ -29,8 +29,8 @@ const seedDatabase = async () => {
         eventType: eventTypes[randomTypeIndex],
         longitude: randomLong,
         latitude: randomLat,
-        eventTime: '14/04/2022',
-        image: `https://picsum.photos/1000/300?random=${i}`,
+        eventTime: '12:30pm',
+        image: `https://picsum.photos/2000/500?random=${i}`,
         likedBy: [{ owner: users[randomUserIndex] }],
       }
 
