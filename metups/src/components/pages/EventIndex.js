@@ -20,9 +20,20 @@ const EventIndex = ({ options, events }) => {
   const [filteredEvents, setFilteredEvents] = useState([])
 
   useEffect(() => {
-    const filtered = events.filter((event) =>
-      searchParams.type.some((type) => event.eventType.includes(type))
+    const filtered = []
+    events.forEach((event) =>
+      searchParams.type.length === 0
+        ? event.eventName
+            .toLowerCase()
+            .includes(searchParams.searchBar.toLowerCase()) &&
+          filtered.push(event)
+        : searchParams.type.some((type) => event.eventType.includes(type)) &&
+          event.eventName
+            .toLowerCase()
+            .includes(searchParams.searchBar.toLowerCase()) &&
+          filtered.push(event)
     )
+
     searchParams.type.length === 0 && searchParams.searchBar === ''
       ? setFilteredEvents(events)
       : setFilteredEvents(filtered)
