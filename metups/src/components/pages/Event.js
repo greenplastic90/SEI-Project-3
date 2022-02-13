@@ -17,12 +17,12 @@ const SingleEvent = () => {
   const [ event, setEvent ] = useState('')
   const [ hasError, setHasError ] = useState({ error: false, message: '' })
 
-  const { eventId } = useParams()
+  const { id } = useParams()
 
   useEffect(() => {
     const getSingleEvent = async () => {
       try {
-        const { data } = await axios.get(`/api/events/${eventId}`)
+        const { data } = await axios.get(`/api/events/${id}`)
         console.log('SINGLE EVENT DATA HERE ->', data)
         setEvent(data)
       } catch (err) {
@@ -30,7 +30,7 @@ const SingleEvent = () => {
       }
     }
     getSingleEvent()
-  }, [eventId])
+  }, [id])
 
   
 

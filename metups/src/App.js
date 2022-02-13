@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import axios from 'axios'
 
@@ -16,13 +16,37 @@ import EventIndex from './components/pages/EventIndex'
 import Profile from './components/pages/Profile'
 
 function App() {
+  const [allEvents, setAllEvents] = useState([])
+
   useEffect(() => {
-    const getData = async () => {
-      const { data } = await axios.get('/api/events/') // * <-- replace with your endpoint
-      console.log(data)
+    const getAllEvents = async () => {
+      try {
+        const { data } = await axios.get('/api/events/')
+        setAllEvents(data)
+      } catch (err) {
+        console.log(err.response)
+      }
     }
-    getData()
-  })
+    getAllEvents()
+  }, [])
+
+  // --- Event Types ----
+  const options = [
+    { value: 'music', label: 'Music' },
+    { value: 'sports', label: 'Sports' },
+    { value: 'outdoor', label: 'Outdoor' },
+    { value: 'workshop', label: 'Workshop' },
+    { value: 'class', label: 'Class' },
+    { value: 'tech', label: 'Tech' },
+    { value: 'craft', label: 'Craft' },
+    { value: 'art', label: 'Art' },
+    { value: 'party', label: 'Party' },
+    { value: 'culture', label: 'Culture' },
+    { value: 'food', label: 'Food' },
+    { value: 'history', label: 'History' },
+    { value: 'philosophy', label: 'Philosophy' },
+  ]
+  // --------------------
 
   return (
     <div className='site-wrapper'>
@@ -32,9 +56,15 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/register' element={<Signup />} />
           <Route path='/login' element={<Login />} />
-          <Route path='/events/:eventId' element={<SingleEvent />} />
-          <Route path='/eventCreate' element={<EventCreate />} />
-          <Route path='/eventIndex' element={<EventIndex />} />
+          <Route path='/events/:id' element={<SingleEvent />} />
+          <Route
+            path='/eventCreate'
+            element={<EventCreate options={options} />}
+          />
+          <Route
+            path='/events'
+            element={<EventIndex options={options} events={allEvents} />}
+          />
           <Route path='/profile' element={<Profile />} />
         </Routes>
       </Router>

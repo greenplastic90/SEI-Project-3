@@ -9,6 +9,7 @@ import Button from 'react-bootstrap/Button'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Image from 'react-bootstrap/Image'
+import Figure from 'react-bootstrap/Figure'
 
 // evnviroment.js imports for uploading images
 import { cloudinaryURL, uploadPreset } from '../../../config/enviroments.js'
@@ -187,12 +188,14 @@ const Signup = () => {
             <Row>
               <Col md={4}>
                 {formData.profilePhoto && (
-                  <Image
-                    fluid
-                    src={formData.profilePhoto}
-                    thumbnail={true}
-                    // roundedCircle={true}
-                  />
+                  <Figure>
+                    <Figure.Image
+                      width={171}
+                      height={180}
+                      alt='profile photo'
+                      src={formData.profilePhoto}
+                    />
+                  </Figure>
                 )}
               </Col>
               {formErrors.profilePhoto && (
