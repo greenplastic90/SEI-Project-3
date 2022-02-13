@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Select from 'react-select'
 import { useNavigate } from 'react-router-dom'
 
@@ -13,10 +13,28 @@ import Spinner from 'react-bootstrap/Spinner'
 const EventIndex = ({ options, events }) => {
   const navigate = useNavigate()
 
-  const [typesSelected, setTypesSelected] = useState([])
+  const [searchParams, setSearchParams] = useState({
+    type: [],
+    searchBar: '',
+  })
+  const [filteredEvents, setFilteredEvents] = useState([])
 
-  const handleTypeChange = (e) => {
-    setTypesSelected(e)
+  useEffect(() => {
+    const filtered = events.filter((event) =>
+      searchParams.type.some((type) => event.eventType.includes(type))
+    )
+    searchParams.type.length === 0 && searchParams.searchBar === ''
+      ? setFilteredEvents(events)
+      : setFilteredEvents(filtered)
+  }, [events, searchParams])
+
+  const handleChange = (e) => {
+    if (!e.target) {
+      const labels = e.map((obj) => obj.label)
+      setSearchParams({ ...searchParams, type: labels })
+    } else {
+      setSearchParams({ ...searchParams, [e.target.name]: e.target.value })
+    }
   }
   return (
     <section>
@@ -27,7 +45,12 @@ const EventIndex = ({ options, events }) => {
         <Form>
           <Form.Group>
             <Form.Label htmlFor='search bar'>Search</Form.Label>
-            <Form.Control type='text' name='search' />
+            <Form.Control
+              type='text'
+              name='searchBar'
+              defaultValue={searchParams.searchBar}
+              onChange={handleChange}
+            />
           </Form.Group>
           <Form.Group className='mb-3'>
             <Form.Label htmlFor='event type'>Type of Event</Form.Label>
@@ -36,15 +59,15 @@ const EventIndex = ({ options, events }) => {
               isMulti
               options={options}
               name='eventType'
-              onChange={handleTypeChange}
+              onChange={handleChange}
             />
           </Form.Group>
         </Form>
         <Row>
           {events.length > 0 ? (
-            events.map((event) => {
+            filteredEvents.map((event) => {
               return (
-                <Col md={4} className='mb-3'>
+                <Col md={4} className='mb-3' key={event._id}>
                   <Card>
                     <Card.Img variant='top' src={event.image} />
                     <Card.Body>
