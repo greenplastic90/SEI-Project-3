@@ -1,0 +1,25 @@
+// @import '';
+
+footer {
+  padding: 1.5rem;
+  text-align: center;
+  background-color: grey;
+  .names {
+    display: flex;
+    flex-direction: column;
+    p {
+      margin: 0;
+      a {
+        text-decoration: none;
+        color: black;
+        &:hover {
+          zoom: 105%;
+        }
+      }
+    }
+    img {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
