@@ -19,17 +19,15 @@ const PageNavbar = () => {
 
   return (
     <>
-      <Navbar>
+      <Navbar variant='light' expand='md'>
         <Container fluid>
           {/* changing href <Link> as href causes reload */}
 
           <Navbar.Brand>
             <Link to='/'> METUPS</Link>
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls='navbar' />
-          <Navbar.Collapse className='justify-content-end'>
-            {/* commented out -> causing UserIsauthenticated issues -> Buffer is not definied error*/}
-
+          <Navbar.Toggle aria-controls='basic-navbar-nav' />
+          <Navbar.Collapse id='basic-navbar-basic' className='justify-content-end align-items-end'>
             { userIsAuthenticated() ?
               <>
                 <Nav.Item>
