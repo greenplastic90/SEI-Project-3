@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import axios from 'axios'
+import { getTokenFromLocalStorage } from './auth/helpers.js'
 
 // Importing
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
@@ -19,6 +20,7 @@ import Footer from './components/pages/common/Footer'
 
 function App() {
   const [allEvents, setAllEvents] = useState([])
+  const [user, setUser] = useState(null)
   const [userGeoLocation, setUserGeoLocation] = useState(null)
 
   const getRandomInRange = (from, to) => {
@@ -65,6 +67,23 @@ function App() {
     getAllEvents()
   }, [userGeoLocation])
 
+  useEffect(() => {
+    try {
+      const getUserProfile = async () => {
+        const { data } = await axios.get('/api/profile', {
+          headers: {
+            Authorization: `Bearer ${getTokenFromLocalStorage()}`,
+          },
+        })
+        console.log('Profile ->', data)
+        setUser(data)
+      }
+      getUserProfile()
+    } catch (error) {
+      console.log(error)
+    }
+  }, [])
+
   // --- Event Types ----
   const options = [
     { value: 'music', label: 'Music' },
@@ -88,10 +107,13 @@ function App() {
       <Router>
         <PageNavbar />
         <Routes>
-          <Route path='/' element={<Home options={options} events={allEvents} /> } />
+          <Route
+            path='/'
+            element={<Home options={options} events={allEvents} />}
+          />
           <Route path='/register' element={<Signup />} />
           <Route path='/login' element={<Login />} />
-          <Route path='/events/:id' element={<SingleEvent />} />
+          <Route path='/events/:id' element={<SingleEvent user={user} />} />
           <Route
             path='/eventCreate'
             element={<EventCreate options={options} />}
@@ -106,7 +128,7 @@ function App() {
               />
             }
           />
-          <Route path='/profile' element={<Profile />} />
+          <Route path='/profile' element={<Profile user={user} />} />
         </Routes>
         <Footer />
       </Router>

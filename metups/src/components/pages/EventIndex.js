@@ -62,11 +62,14 @@ const EventIndex = ({ options, events, userGeoLocation }) => {
               initialViewState={{
                 longitude: userGeoLocation.longitude,
                 latitude: userGeoLocation.latitude,
-                zoom: 10,
+                zoom: 11,
               }}
-              style={{ height: 400 }}
+              style={{ height: 500 }}
               mapStyle='mapbox://styles/mapbox/streets-v11'
               mapboxAccessToken={mapToken}
+              pitch={50}
+              minZoom={11}
+              maxZoom={13}
             >
               <NavigationControl visualizePitch={true} />
               {filteredEvents.map((event) => {
@@ -80,11 +83,10 @@ const EventIndex = ({ options, events, userGeoLocation }) => {
               })}
 
               <Marker
+                color='green'
                 longitude={userGeoLocation.longitude}
                 latitude={userGeoLocation.latitude}
-              >
-                <span style={{ height: 50, width: 50 }}>📍</span>
-              </Marker>
+              ></Marker>
             </Map>
           </>
         )}
