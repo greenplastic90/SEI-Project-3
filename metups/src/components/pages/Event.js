@@ -61,8 +61,8 @@ const SingleEvent = () => {
           </div>
         </Col>
       </Row> 
-
-      :<Spinner animation='border'> </Spinner>
+      :
+      <Spinner animation='border'></Spinner>
       }
 
       {/* description + date and time */}
