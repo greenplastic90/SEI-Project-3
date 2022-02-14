@@ -1,8 +1,14 @@
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/mixins";
+@import "../../node_modules/bootstrap/scss/root";
+
 @import './common/variables';
 @import './common/base';
 @import './common/navbar';
 @import './home';
 @import './profile';
+@import './footer';
 
 * {
   box-sizing: border-box;
