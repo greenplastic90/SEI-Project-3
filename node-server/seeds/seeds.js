@@ -18,7 +18,7 @@ const seedDatabase = async () => {
     await mongoose.connection.db.dropDatabase()
     console.log('👌 Database dropped')
     const users = await User.create(userData)
-    const eventsWithEverythingAdded = eventData.map((event) => {
+    const eventsWithEverythingAdded = eventData.map((event, i) => {
       const randomUserIndex = Math.floor(Math.random() * users.length)
       const randomTypeIndex = Math.floor(Math.random() * eventTypes.length)
       const randomLat = getRandomInRange(-0.02, 0.02) + userLocation.latitude
@@ -29,7 +29,8 @@ const seedDatabase = async () => {
         eventType: eventTypes[randomTypeIndex],
         longitude: randomLong,
         latitude: randomLat,
-        eventTime: '14/04/2022',
+        eventTime: '12:30pm',
+        image: `https://picsum.photos/2000/500?random=${i}`,
         likedBy: [{ owner: users[randomUserIndex] }],
       }
 
