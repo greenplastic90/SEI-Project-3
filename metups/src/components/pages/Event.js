@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { useParams } from "react-router-dom";
-import { getTokenFromLocalStorage } from "../../auth/helpers";
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
+import { useParams } from 'react-router-dom'
 
 // Import helpers
-// import { getPayload, getTokenFromLocalStorage } from "../../auth/helpers";
+import { getTokenFromLocalStorage } from "../../auth/helpers";
 
 // Import Bootstrap Components
 import Container from "react-bootstrap/Container";
@@ -37,11 +36,11 @@ const SingleEvent = ({user}) => {
         const { data } = await axios.get(`/api/events/${id}`);
         setEvent(data);
       } catch (err) {
-        setHasError({ error: true, message: err.message });
+        setHasError({ error: true, message: err.message })
       }
-    };
-    getSingleEvent();
-  }, [id]);
+    }
+    getSingleEvent()
+  }, [id])
 
   const handleLikes = () => {
     const likedByArray = event.likedBy
@@ -218,7 +217,7 @@ const SingleEvent = ({user}) => {
         )}
       </section>
     </>
-  );
-};
+  )
+}
 
-export default SingleEvent;
+export default SingleEvent

@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import Select from 'react-select'
 import { useNavigate } from 'react-router-dom'
+import Map, { Marker, NavigationControl, Popup } from 'react-map-gl'
+
+import { mapToken } from '../../config/enviroments.js'
 
 import Form from 'react-bootstrap/Form'
 import Container from 'react-bootstrap/Container'
@@ -10,7 +13,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Spinner from 'react-bootstrap/Spinner'
 
-const EventIndex = ({ options, events }) => {
+const EventIndex = ({ options, events, userGeoLocation }) => {
   const navigate = useNavigate()
 
   const [searchParams, setSearchParams] = useState({
@@ -18,6 +21,7 @@ const EventIndex = ({ options, events }) => {
     searchBar: '',
   })
   const [filteredEvents, setFilteredEvents] = useState([])
+  const [showPopup, setShowPopup] = useState(true)
 
   useEffect(() => {
     const filtered = []
@@ -47,11 +51,46 @@ const EventIndex = ({ options, events }) => {
       setSearchParams({ ...searchParams, [e.target.name]: e.target.value })
     }
   }
+
   return (
     <section>
       <Container className='mt-5'>
-        {/* Map is located here */}
-        <h2 className='text-center'>MAP</h2>
+        {userGeoLocation && (
+          <>
+            <h2 className='text-center'>Events Near You</h2>
+            <Map
+              initialViewState={{
+                longitude: userGeoLocation.longitude,
+                latitude: userGeoLocation.latitude,
+                zoom: 11,
+              }}
+              style={{ height: 500 }}
+              mapStyle='mapbox://styles/mapbox/streets-v11'
+              mapboxAccessToken={mapToken}
+              pitch={50}
+              minZoom={11}
+              maxZoom={13}
+            >
+              <NavigationControl visualizePitch={true} />
+              {filteredEvents.map((event) => {
+                return (
+                  <Marker
+                    key={event._id}
+                    longitude={event.longitude}
+                    latitude={event.latitude}
+                  ></Marker>
+                )
+              })}
+
+              <Marker
+                color='green'
+                longitude={userGeoLocation.longitude}
+                latitude={userGeoLocation.latitude}
+              ></Marker>
+            </Map>
+          </>
+        )}
+
         <h2>Search for an event</h2>
         <Form>
           <Form.Group>
