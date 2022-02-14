@@ -14,6 +14,7 @@ import EventCreate from './components/pages/EventCreate'
 import SingleEvent from './components/pages/Event'
 import EventIndex from './components/pages/EventIndex'
 import Profile from './components/pages/Profile'
+import Footer from './components/pages/common/Footer'
 
 function App() {
   const [allEvents, setAllEvents] = useState([])
@@ -53,7 +54,7 @@ function App() {
       <Router>
         <PageNavbar />
         <Routes>
-          <Route path='/' element={<Home />} />
+          <Route path='/' element={<Home options={options} events={allEvents} /> } />
           <Route path='/register' element={<Signup />} />
           <Route path='/login' element={<Login />} />
           <Route path='/events/:id' element={<SingleEvent />} />
@@ -67,6 +68,7 @@ function App() {
           />
           <Route path='/profile' element={<Profile />} />
         </Routes>
+        <Footer />
       </Router>
     </div>
   )

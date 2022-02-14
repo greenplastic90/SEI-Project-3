@@ -21,13 +21,13 @@ const PageNavbar = () => {
     <>
       <Navbar variant='light' expand='md'>
         <Container fluid>
-          {/* changing href <Link> as href causes reload */}
-
           <Navbar.Brand>
-            <Link to='/'> METUPS</Link>
+            <Nav.Item>
+              <Link to='/'> METUPS</Link>
+            </Nav.Item>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
-          <Navbar.Collapse id='basic-navbar-basic' className='justify-content-end align-items-end'>
+          <Navbar.Collapse id='basic-navbar-basic' className='justify-content-end'>
             { userIsAuthenticated() ?
               <>
                 <Nav.Item>

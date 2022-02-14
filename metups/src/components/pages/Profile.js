@@ -1,24 +1,25 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import Button from 'react-bootstrap/Button'
-import { useParams } from 'react-router-dom'
-import { getTokenFromLocalStorage } from '../../auth/helpers'
 
 const Profile = () => {
 
   // State variables
-  const [ people, setPeople ] = useState([])
-  const user = useParams()
+  const [ people, setPeople ] = useState(null)
+
+  const getToken = () => {
+    return window.localStorage.getItem('metups-login-token')
+  }
+
   useEffect(() => {
     try {
       const getPeople = async () => {
-        const { data } = await axios.get(`/api/events/${user}`, {}, {
+        const { data } = await axios.get(`/api/profile`, {
           headers: {
-            Authorization: `Bearer ${getTokenFromLocalStorage}`
+            Authorization: `Bearer ${getToken()}`
           }
-        })
-        // Can't get the authentication to work for some reason.
-        // Not taking the token, maybe I just wrote something wrong but I can't see a fix for it yet.
+        }
+        )
         console.log('Profile ->', data)
         setPeople(data)
       }
@@ -26,31 +27,17 @@ const Profile = () => {
     } catch (error) {
       console.log(error)
     }
-  }, [user])
-
+  }, [])
 
   return (
     <>
-      {/* Need an rounded Image, next to it. Display username, email and allow them to create an event */}
-        {people.map(({ username, email, profilePhoto, ownedEvents }) => 
-        { 
+    {people && <> {people.map(({ username, email }, i) => {
           return (
-          <>
-            <section className='topProfile'>
-            <img className='rounded-circle z-depth-1' src='https://picsum.photos/200/200' alt='profile pic' />
-            <div className="profile-container">
-              <p>Username: {username}</p>
-              <p>Email: {email}</p>
-              <Button>Create Event</Button>
-            </div>
-            </section>
-            <hr />
-            <section className='midProfile'>
-
-            </section>
-          </>
-        )
-        })}
+            <h1 key={i}>{username}</h1>
+          )
+        })}</>}
+      {/* Need an rounded Image, next to it. Display username, email and allow them to create an event */}
+        {}
     </>
   )
 }
