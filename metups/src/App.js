@@ -4,6 +4,7 @@ import axios from 'axios'
 
 // Importing
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+// Mapbox styles
 
 // Importing made elements
 import PageNavbar from './components/pages/common/PageNavbar'
@@ -17,18 +18,51 @@ import Profile from './components/pages/Profile'
 
 function App() {
   const [allEvents, setAllEvents] = useState([])
+  const [userGeoLocation, setUserGeoLocation] = useState(null)
+
+  const getRandomInRange = (from, to) => {
+    return (Math.random() * (to - from) + from).toFixed(2) * 1
+  }
+  // get users location
+  useEffect(() => {
+    try {
+      window.navigator.geolocation.getCurrentPosition((position) => {
+        // console.log(position.coords)
+        setUserGeoLocation({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        })
+      })
+    } catch (err) {
+      console.log(err)
+    }
+  }, [])
 
   useEffect(() => {
     const getAllEvents = async () => {
       try {
         const { data } = await axios.get('/api/events/')
-        setAllEvents(data)
+
+        const eventsWithUpdatedLocations = data.map((event) => {
+          if (userGeoLocation) {
+            return {
+              ...event,
+              longitude:
+                getRandomInRange(-0.12, 0.12) + userGeoLocation.longitude,
+              latitude:
+                getRandomInRange(-0.08, 0.08) + userGeoLocation.latitude,
+            }
+          }
+          return event
+        })
+
+        setAllEvents(eventsWithUpdatedLocations)
       } catch (err) {
         console.log(err.response)
       }
     }
     getAllEvents()
-  }, [])
+  }, [userGeoLocation])
 
   // --- Event Types ----
   const options = [
@@ -63,7 +97,13 @@ function App() {
           />
           <Route
             path='/events'
-            element={<EventIndex options={options} events={allEvents} />}
+            element={
+              <EventIndex
+                options={options}
+                events={allEvents}
+                userGeoLocation={userGeoLocation}
+              />
+            }
           />
           <Route path='/profile' element={<Profile />} />
         </Routes>
