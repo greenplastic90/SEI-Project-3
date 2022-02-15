@@ -151,7 +151,7 @@ const EventCreate = ({ options, userGeoLocation }) => {
           {formData.longitude && (
             <>
               <Map
-                initialViewState={{
+                viewState={{
                   longitude: formData.longitude,
                   latitude: formData.latitude,
                   zoom: 13,
@@ -159,6 +159,10 @@ const EventCreate = ({ options, userGeoLocation }) => {
                 mapboxAccessToken={mapToken}
                 style={{ height: 100 }}
                 mapStyle='mapbox://styles/mapbox/streets-v11'
+                onData={function (event, data) {
+                  console.log('event ->', event)
+                  console.log('this ->', this)
+                }}
               >
                 <Marker
                   longitude={formData.longitude}

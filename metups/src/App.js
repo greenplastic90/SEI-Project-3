@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import axios from 'axios'
 import { getTokenFromLocalStorage } from './auth/helpers.js'
+import { mapToken } from './config/enviroments.js'
 
 // Importing
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
@@ -41,6 +42,19 @@ function App() {
     }
   }, [])
 
+  const getRealAddress = async (long, lat) => {
+    try {
+      const { data } = await axios.get(
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${long},${lat}.json?access_token=${mapToken}`
+      )
+      console.log(data)
+      return data.features[0].place_name
+    } catch (err) {
+      console.log(err)
+    }
+  }
+  getRealAddress()
+
   useEffect(() => {
     const getAllEvents = async () => {
       try {
@@ -56,6 +70,7 @@ function App() {
                 getRandomInRange(-0.08, 0.08) + userGeoLocation.latitude,
             }
           }
+
           return event
         })
 
