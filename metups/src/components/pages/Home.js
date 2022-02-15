@@ -12,7 +12,10 @@ const Home = ({ options, events }) => {
           <Col md={6}>
             <div>
               <h4>Welcome to Metups</h4>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ut nibh dictum, vulputate est quis, maximus odio. </p>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
+                ut nibh dictum, vulputate est quis, maximus odio.{' '}
+              </p>
             </div>
           </Col>
           <Col md={6}>
@@ -22,10 +25,14 @@ const Home = ({ options, events }) => {
           </Col>
           <Col md={12} className='py-5'>
             <Row>
-              {events.map(item => {
+              {events.map((item) => {
                 return (
-                  <Col md={4}>
-                    <img className='homeImg' src={item.image} alt="random images of things" />
+                  <Col key={item._id} md={4}>
+                    <img
+                      className='homeImg'
+                      src={item.image}
+                      alt='random images of things'
+                    />
                   </Col>
                 )
               })}
