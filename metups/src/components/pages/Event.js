@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import Map, { Marker } from "react-map-gl";
+import { mapToken } from "../../config/enviroments.js";
 
 // Import helpers
 import { getTokenFromLocalStorage } from "../../auth/helpers";
@@ -16,10 +18,10 @@ import Image from "react-bootstrap/Image";
 import Spinner from "react-bootstrap/Spinner";
 import { Heart } from "react-bootstrap-icons";
 
-const SingleEvent = ({ user }) => {
+const SingleEvent = ({ user, userGeoLocation }) => {
   const [event, setEvent] = useState("");
   const [hasError, setHasError] = useState({ error: false, message: "" });
-  const [hasLiked, setHasLiked] = useState(null)
+  const [hasLiked, setHasLiked] = useState(null);
   const [comments, setComments] = useState({
     owner: "",
     text: "",
@@ -84,10 +86,7 @@ const SingleEvent = ({ user }) => {
     }
   };
 
-  useEffect(() => {
-    setHasLiked(likedBy.some((like) => user._id === like.owner._id))
-  }, [event.likedBy.owner])
-
+  
 
   // HANDLECHANGE AND SUBMIT FOR COMMENT
   const handleChange = (e) => {
@@ -154,7 +153,7 @@ const SingleEvent = ({ user }) => {
                     <Image
                       src={event.owner.profilePhoto}
                       alt="host's profile image"
-                      className="rounded-circle my-2 mx-3"
+                      className="rounded-circle my-2 mx-5"
                     />
                   </div>
                 </Col>
@@ -164,18 +163,25 @@ const SingleEvent = ({ user }) => {
                 </Col>
                 <Col xs lg="6" className="mt-9">
                   <div>
-                    <h2> {event.eventName} </h2>
+                    <h1> {event.eventName} </h1>
+                    <p>{event.eventType} Event </p>
+                  </div>
 
+                  <div>
                     {/* LIKE BUTTON */}
-                    {likedBy.some((like) => user._id === like.owner._id) ? (
+                    {likedBy.length && user ?
+                    likedBy.some((like) => {
+                      console.log(user)
+                      return user._id === like.owner.id
+                    }) ? 
                       <Button
                         variant="primary"
-                        className="m-2"
+                        className="my-3"
                         onClick={handleLikes}
                       >
                         <Heart /> Unlike
                       </Button>
-                    ) : (
+                    : 
                       <Button
                         variant="danger"
                         className="m-2"
@@ -183,7 +189,9 @@ const SingleEvent = ({ user }) => {
                       >
                         <Heart /> Like
                       </Button>
-                    )}
+                    
+                    : 
+                    '' } 
                   </div>
                 </Col>
               </Row>
@@ -203,8 +211,29 @@ const SingleEvent = ({ user }) => {
                   <div>Event Location: {event.locationName}</div>
                   <div>Date: {event.eventDate}</div>
                   <div>Time: {event.eventTime}</div>
-                  <div>Type of event: {event.eventType}</div>
                 </div>
+                {userGeoLocation && (
+                  <>
+                    <div>
+                      <Map
+                        initialViewState={{
+                          longitude: event.longitude,
+                          latitude: event.latitude,
+                          zoom: 9,
+                        }}
+                        style={{ height: 300 }}
+                        mapStyle="mapbox://styles/mapbox/streets-v11"
+                        mapboxAccessToken={mapToken}
+                      >
+                        <Marker
+                          color="green"
+                          longitude={event.longitude}
+                          latitude={event.latitude}
+                        ></Marker>
+                      </Map>
+                    </div>
+                  </>
+                )}
               </Col>
             </Row>
 

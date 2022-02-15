@@ -128,7 +128,7 @@ function App() {
           />
           <Route path='/register' element={<Signup />} />
           <Route path='/login' element={<Login />} />
-          <Route path='/events/:id' element={<SingleEvent user={user} />} />
+          <Route path='/events/:id' element={<SingleEvent user={user} userGeoLocation={userGeoLocation} />} />
           <Route
             path='/eventCreate'
             element={
