@@ -75,7 +75,7 @@ function App() {
             Authorization: `Bearer ${getTokenFromLocalStorage()}`,
           },
         })
-        console.log('Profile ->', data)
+        // console.log('Profile ->', data)
         setUser(data)
       }
       getUserProfile()
@@ -116,7 +116,12 @@ function App() {
           <Route path='/events/:id' element={<SingleEvent user={user} userGeoLocation={userGeoLocation} />} />
           <Route
             path='/eventCreate'
-            element={<EventCreate options={options} />}
+            element={
+              <EventCreate
+                options={options}
+                userGeoLocation={userGeoLocation}
+              />
+            }
           />
           <Route
             path='/events'
