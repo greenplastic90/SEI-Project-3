@@ -1,51 +1,71 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
-import Button from 'react-bootstrap/Button'
+import React from 'react'
+import { Box, Container, Button, Text, Image, Stack, Table, Tbody, Tr, Td, Heading } from '@chakra-ui/react'
 
-const Profile = () => {
-
-  // State variables
-  const [ people, setPeople ] = useState([])
-
-  const getToken = () => {
-    return window.localStorage.getItem('metups-login-token')
-  }
-
-  useEffect(() => {
-    try {
-      const getPeople = async () => {
-        const { data } = await axios.get(`/api/profile`, {
-          headers: {
-            Authorization: `Bearer ${getToken()}`
-          }
-        })
-        console.log('Profile ->', data)
-        setPeople(data)
-      }
-      getPeople()
-    } catch (error) {
-      console.log(error)
-    }
-  }, [])
-
-  console.log(`People object -> ${Object.keys(people)}`)
-  console.log(`People values -> ${Object.values(people)}`)
-  
+const Profile = ({ user }) => {
   return (
-    <>
-    {/* {people && <> {Object.keys( people.map(({ username, email }, i) => {
-          return (
-            <h1 key={i}>{username}</h1>
-          )
-        }))}</>}
-        
-      {/* Need an rounded Image, next to it. Display username, email and allow them to create an event */}
-      {Object.keys(people.map(item => {
-        return (
-          <h1>{item.username}</h1>
-        )
-      }))}
-    </>
+    <Container display={'flex'} flexDirection={'column'} justifyContent={'center'} width={'100%'} height={'100%'}>
+      {user && (
+        <>
+          <Container display='flex' flexDirection={{ base:'column', md: 'row'}} alignItems={'center'} boxShadow={'lg'} justifyContent={'center'} borderRadius={'8'} py={'1.5rem'} my={'5'} width={{ base: 'full', md: 'container.md', lg: 'container.lg', 'xl': 'container.xl' }}>
+            <Box boxSize={['100', '150', '200']} display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'center'} pb={'2rem'}>
+              <Image boxSize={120} src={user.profilePhoto} alt="profile" borderRadius='100' rounded={'full'} objectFit={'cover'}/>
+              <Text fontSize={'lg'} textAlign={'center'}>{user.username}</Text>
+            </Box>
+            <Box>
+              <Table variant={'striped'} colorScheme={'twitter'}>
+                <Tbody>
+                  <Tr>
+                    <Td>{user.username}</Td>
+                    <Td></Td>
+                  </Tr>
+                  <Tr>
+                    <Td>{user.email}</Td>
+                    <Td></Td>
+                  </Tr>
+                  <Tr>
+                    <Td>Password</Td>
+                    <Td><Button>Update Password</Button></Td>
+                  </Tr>
+                  <Tr>
+                    <Td>Add Event</Td>
+                    <Td><Button>Add Event</Button></Td>
+                  </Tr>
+                </Tbody>
+              </Table>
+            </Box>
+          </Container>
+          {/* <Divider /> */}
+          <Container>
+            <Stack direction={{ base: 'column', md: 'row'}} spacing={'10'} mt={5}>
+              <Box maxW={250} alignSelf={'center'}>
+                <Heading fontSize={'2rem'} textAlign={'center'} pb={2}>Events Created</Heading>
+                {user.ownedEvents.map(({ image, eventName, description }, i) => {
+                  return (
+                  <Box key={i} py={2}>
+                    <Image maxHeight={100} src={image} alt='event' />
+                    <Text>{eventName}</Text>
+                    <Text isTruncated>{description}</Text>
+                  </Box>
+                  )
+                })}
+              </Box>
+              <Box maxW={250} alignSelf={'center'}>
+                <Heading fontSize={'2rem'} textAlign={'center'} pb={2}>Events Attended</Heading>
+                {user.likedEvents.map(({ image, eventName, description }, i) => {
+                  return (
+                  <Box key={i} py={2}>
+                    <Image src={image} alt='event' />
+                    <Text>{eventName}</Text>
+                    <Text isTruncated>{description}</Text>
+                  </Box>
+                  )
+                })}
+              </Box>
+            </Stack>
+          </Container>
+        </>
+      )}
+    </Container>
   )
 }
 

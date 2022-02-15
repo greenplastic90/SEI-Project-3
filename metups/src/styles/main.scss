@@ -6,6 +6,7 @@
 @import './common/variables';
 @import './common/base';
 @import './common/navbar';
+@import './common/event';
 @import './home';
 @import './profile';
 @import './footer';
@@ -13,4 +14,8 @@
 * {
   box-sizing: border-box;
   margin: 0;
+}
+
+#site-wrapper {
+  min-height: 100vh;
 }
