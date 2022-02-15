@@ -74,10 +74,24 @@ const EventIndex = ({ options, events, userGeoLocation }) => {
               <NavigationControl visualizePitch={true} />
               {filteredEvents.map((event) => {
                 return (
+                  <Popup
+                    key={event._id}
+                    longitude={event.longitude}
+                    latitude={event.latitude}
+                    onClose={() => setShowPopup(false)}
+                    closeOnClick={false}
+                  >
+                    popup
+                  </Popup>
+                )
+              })}
+              {filteredEvents.map((event) => {
+                return (
                   <Marker
                     key={event._id}
                     longitude={event.longitude}
                     latitude={event.latitude}
+                    onClick={() => setShowPopup()}
                   ></Marker>
                 )
               })}

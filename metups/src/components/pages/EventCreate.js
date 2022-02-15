@@ -1,7 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Select from 'react-select'
 import axios from 'axios'
 import { getTokenFromLocalStorage } from '../../auth/helpers'
+
+import { mapToken } from '../../config/enviroments.js'
+import Map, { Marker, NavigationControl, Popup } from 'react-map-gl'
 
 import { useNavigate } from 'react-router-dom'
 import { cloudinaryURL, uploadPreset } from '../../config/enviroments.js'
@@ -10,7 +13,7 @@ import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
-const EventCreate = ({ options }) => {
+const EventCreate = ({ options, userGeoLocation }) => {
   const navigate = useNavigate()
 
   const [formData, setFormData] = useState({
@@ -18,8 +21,8 @@ const EventCreate = ({ options }) => {
     eventType: [],
     description: '',
     locationName: '',
-    latitude: 1,
-    longitude: 1,
+    latitude: null,
+    longitude: null,
     map: '',
     eventDate: '',
     eventTime: '',
@@ -27,6 +30,24 @@ const EventCreate = ({ options }) => {
   })
 
   const [formErrors, setFormErrors] = useState('')
+  const [searchQueryData, setSearchQueryData] = useState([])
+  const [addressPicked, setAddressPicked] = useState({})
+
+  useEffect(() => {
+    const forwardQuery = async () => {
+      try {
+        const { data } = await axios.get(
+          `https://api.mapbox.com/geocoding/v5/mapbox.places/${formData.map}.json?access_token=${mapToken}`
+        )
+        // console.log(data)
+
+        setSearchQueryData(data.features)
+      } catch (err) {
+        console.log(err.response)
+      }
+    }
+    forwardQuery()
+  }, [formData.map])
 
   const handleChange = (e) => {
     if (e.target) {
@@ -64,11 +85,19 @@ const EventCreate = ({ options }) => {
       data.append('file', e.target.files[0])
       data.append('upload_preset', uploadPreset)
       const res = await axios.post(cloudinaryURL, data)
-      console.log(res.data.url)
+      // console.log(res.data.url)
       setFormData({ ...formData, image: res.data.url })
     } catch (err) {
       console.log(err)
     }
+  }
+  const handelLocationChange = (feature) => {
+    setFormData({
+      ...formData,
+      longitude: feature.geometry.coordinates[0],
+      latitude: feature.geometry.coordinates[1],
+      locationName: feature.text,
+    })
   }
 
   return (
@@ -118,26 +147,46 @@ const EventCreate = ({ options }) => {
             </Form.Text>
           </Form.Group>
 
-          {/* Location Name */}
+          {/* map */}
+          {formData.longitude && (
+            <>
+              <Map
+                initialViewState={{
+                  longitude: formData.longitude,
+                  latitude: formData.latitude,
+                  zoom: 13,
+                }}
+                mapboxAccessToken={mapToken}
+                style={{ height: 100 }}
+                mapStyle='mapbox://styles/mapbox/streets-v11'
+              >
+                <Marker
+                  longitude={formData.longitude}
+                  latitude={formData.latitude}
+                ></Marker>
+              </Map>
+            </>
+          )}
           <Form.Group className='mb-3'>
-            <Form.Label htmlFor='location'>Location</Form.Label>
+            <Form.Label htmlFor='map'>Address</Form.Label>
             <Form.Control
-              name='locationName'
-              type='locationName'
-              placeholder='Location'
+              type='text'
+              placeholder='Address'
+              name='map'
               onChange={handleChange}
             />
-            <Form.Text className='text-muted'>
-              Add the location of your event
-            </Form.Text>
           </Form.Group>
-
-          {/* map */}
-          <Form.Group className='mb-3'>
-            <Form.Label htmlFor='map'>ADD MAP HERE</Form.Label>
-            <Form.Control type='map' placeholder='map' />
-          </Form.Group>
-
+          {searchQueryData.map((feature) => {
+            return (
+              <h4
+                key={feature.id}
+                defaultValue={feature}
+                onClick={() => handelLocationChange(feature)}
+              >
+                {feature.place_name}
+              </h4>
+            )
+          })}
           {/* eventDate */}
           <Form.Group className='mb-3'>
             <Form.Label htmlFor='eventDate'>Date</Form.Label>
@@ -176,7 +225,6 @@ const EventCreate = ({ options }) => {
               defaultValue={formData.image}
             />
             <Form.Text className='text-muted'>
-              {' '}
               Add an image banner for your event!{' '}
             </Form.Text>
           </Form.Group>
