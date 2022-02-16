@@ -44,3 +44,18 @@ export const updateProfile = async (req, res) => {
     return res.status(404).json({ message: err.message })
   }
 }
+
+// export const updatePassword = async (req, res) => {
+//   try {
+//     const passUpdate = await User.findOne({
+//       password: req.currentUser.password,
+//     })
+//     if (!passUpdate._id.equals(req.currentUser._id)) throw new Error('Unauthorized')
+//     Object.assign(passUpdate, req.body)
+//     await passUpdate.save()
+//     return res.status(202).json(passUpdate)
+//   } catch (error) {
+//     console.log(error)
+//     return res.status(401).json({ message: error.message })
+//   }
+// }

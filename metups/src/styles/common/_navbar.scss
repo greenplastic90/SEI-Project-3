@@ -1,26 +1,24 @@
-.navbar {
-  .container-fluid {
-    .show {
-      .nav-item {
-        padding-block: 0.2rem;
-      }
+
+.show {
+  .nav-item {
+    padding-block: 0.2rem;
+  }
+}
+.nav-item {
+  padding-inline: 0.5rem;
+  .clickable {
+    cursor: pointer;
+    color: #000;
+    &:hover {
+      zoom: 105%;
     }
-    .nav-item {
-      padding-inline: 0.5rem;
-      .clickable {
-        cursor: pointer;
-        color: #000;
-        &:hover {
-          zoom: 105%;
-        }
-      }
-      a {
-        text-decoration: none;
-        color: #000;
-        &:hover {
-          zoom: 105%;
-        }
-      }
+  }
+  a, .clickable {
+    text-decoration: none;
+    color: #000;
+    &:hover {
+      zoom: 105%;
+      color: #000;
     }
   }
 }
