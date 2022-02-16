@@ -8,7 +8,7 @@ import Map, { Marker, NavigationControl, Popup } from 'react-map-gl'
 
 import { useNavigate } from 'react-router-dom'
 import { cloudinaryURL, uploadPreset } from '../../config/enviroments.js'
-
+import Image from 'react-bootstrap/Image'
 import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
@@ -32,6 +32,8 @@ const EventCreate = ({ options, userGeoLocation }) => {
   const [formErrors, setFormErrors] = useState('')
   const [searchQueryData, setSearchQueryData] = useState([])
   const [addressPicked, setAddressPicked] = useState({})
+
+
 
   useEffect(() => {
     const forwardQuery = async () => {
@@ -230,6 +232,7 @@ const EventCreate = ({ options, userGeoLocation }) => {
           </Form.Group>
 
           {/* Upload Image */}
+
           <Form.Group className='mb-3'>
             <Form.Label htmlFor='image'>Add Image</Form.Label>
             <Form.Control
@@ -242,6 +245,13 @@ const EventCreate = ({ options, userGeoLocation }) => {
               Add an image banner for your event!{' '}
             </Form.Text>
           </Form.Group>
+          {formData.image && (
+            <>
+            <Image src={formData.image} alt="event image" />
+            </>
+          )}
+          
+
 
           <Form.Group className='mt-4 text-center'>
             <Button type='submit'>Create Event</Button>
