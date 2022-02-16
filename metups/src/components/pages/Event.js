@@ -18,8 +18,9 @@ import Image from 'react-bootstrap/Image'
 import Spinner from 'react-bootstrap/Spinner'
 import { Heart } from 'react-bootstrap-icons'
 
-const SingleEvent = ({ user, userGeoLocation }) => {
-  const [event, setEvent] = useState('')
+const SingleEvent = ({ user, userGeoLocation, allEvents, fakeAccountsId }) => {
+  const [event, setEvent] = useState(null)
+  const [updatedEventLocation, setUpdatedEventLocation] = useState(null)
   const [hasError, setHasError] = useState({ error: false, message: '' })
   const [hasLiked, setHasLiked] = useState(null)
   const [comments, setComments] = useState({
@@ -39,11 +40,50 @@ const SingleEvent = ({ user, userGeoLocation }) => {
         setLikedBy(data.likedBy)
         setEvent(data)
       } catch (err) {
+        console.log(err)
         setHasError({ error: true, message: err.message })
       }
     }
     getSingleEvent()
   }, [id])
+
+  // update event.locationName api
+  useEffect(() => {
+    // console.log('event ->', event)
+    if (event && !fakeAccountsId.includes(event._id)) {
+      setUpdatedEventLocation({
+        longitude: event.longitude,
+        latitude: event.latitude,
+        locationName: event.locationName,
+      })
+    } else {
+      event &&
+        allEvents.forEach((item) => {
+          console.log('item ->', item._id, event._id)
+          const getRealAddress = async (long, lat) => {
+            try {
+              const { data } = await axios.get(
+                `https://api.mapbox.com/geocoding/v5/mapbox.places/${long},${lat}.json?access_token=${mapToken}`
+              )
+              // console.log(data.features[0].place_name)
+              console.log('get real address')
+              setUpdatedEventLocation({
+                longitude: item.longitude,
+                latitude: item.latitude,
+                locationName: data.features[0].place_name,
+              })
+            } catch (err) {
+              console.log(err)
+            }
+          }
+
+          if (item._id === event._id) {
+            console.log('IDS match')
+            getRealAddress(item.longitude, item.latitude)
+          }
+        })
+    }
+  }, [event, allEvents, fakeAccountsId])
 
   // LIKES API
   const handleLikes = async (e) => {
@@ -84,17 +124,6 @@ const SingleEvent = ({ user, userGeoLocation }) => {
       console.log(err.response)
     }
   }
-  // const getRealAddress = async (long, lat) => {
-  //   try {
-  //     const { data } = await axios.get(
-  //       `https://api.mapbox.com/geocoding/v5/mapbox.places/${long},${lat}.json?access_token=${mapToken}`
-  //     )
-  //     console.log(typeof data.features[0].place_name)
-  //     return data.features[0].place_name
-  //   } catch (err) {
-  //     console.log(err)
-  //   }
-  // }
 
   // HANDLECHANGE AND SUBMIT FOR COMMENT
   const handleChange = (e) => {
@@ -137,7 +166,7 @@ const SingleEvent = ({ user, userGeoLocation }) => {
   return (
     <>
       <section>
-        {event ? (
+        {event && updatedEventLocation ? (
           <Container className='mt-5 mx-9000'>
             <Row className='my-5'>
               {/* EVENT IMAGE AND EVENT NAME*/}
@@ -173,7 +202,7 @@ const SingleEvent = ({ user, userGeoLocation }) => {
 
                   <div>
                     {/* LIKE BUTTON */}
-                    {likedBy.length && user ? (
+                    {likedBy && user ? (
                       likedBy.some((like) => {
                         return user._id === like.owner.id
                       }) ? (
@@ -215,7 +244,7 @@ const SingleEvent = ({ user, userGeoLocation }) => {
                   <div>
                     <p>
                       Event Location:
-                      {event.locationName}
+                      {updatedEventLocation.locationName}
                     </p>
                   </div>
                   <div>
@@ -229,9 +258,9 @@ const SingleEvent = ({ user, userGeoLocation }) => {
                   <>
                     <div>
                       <Map
-                        initialViewState={{
-                          longitude: event.longitude,
-                          latitude: event.latitude,
+                        viewState={{
+                          longitude: updatedEventLocation.longitude,
+                          latitude: updatedEventLocation.latitude,
                           zoom: 13,
                         }}
                         style={{ height: 300 }}
@@ -240,8 +269,8 @@ const SingleEvent = ({ user, userGeoLocation }) => {
                       >
                         <Marker
                           color='green'
-                          longitude={event.longitude}
-                          latitude={event.latitude}
+                          longitude={updatedEventLocation.longitude}
+                          latitude={updatedEventLocation.latitude}
                         ></Marker>
                       </Map>
                     </div>

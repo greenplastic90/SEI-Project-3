@@ -41,14 +41,31 @@ function App() {
       console.log(err)
     }
   }, [])
+  const fakeAccountsId = [
+    '620ccacc2fad9bb81ccbb3f1',
+    '620ccacc2fad9bb81ccbb3f3',
+    '620ccacc2fad9bb81ccbb3f5',
+    '620ccacc2fad9bb81ccbb3f7',
+    '620ccacc2fad9bb81ccbb3fb',
+    '620ccacc2fad9bb81ccbb3f9',
+    '620ccacc2fad9bb81ccbb3fd',
+    '620ccacc2fad9bb81ccbb3ff',
+    '620ccacc2fad9bb81ccbb401',
+    '620ccacc2fad9bb81ccbb403',
+    '620ccacc2fad9bb81ccbb405',
+    '620ccacc2fad9bb81ccbb409',
+    '620ccacc2fad9bb81ccbb407',
+  ]
 
   useEffect(() => {
     const getAllEvents = async () => {
       try {
         const { data } = await axios.get('/api/events/')
+        // const allEventIds = data.map((event) => event._id)
+        // console.log('All IDs ->', allEventIds)
 
         const eventsWithUpdatedLocations = data.map((event) => {
-          if (userGeoLocation) {
+          if (userGeoLocation && fakeAccountsId.includes(event._id)) {
             return {
               ...event,
               longitude:
@@ -118,7 +135,12 @@ function App() {
           <Route
             path='/events/:id'
             element={
-              <SingleEvent user={user} userGeoLocation={userGeoLocation} />
+              <SingleEvent
+                user={user}
+                userGeoLocation={userGeoLocation}
+                allEvents={allEvents}
+                fakeAccountsId={fakeAccountsId}
+              />
             }
           />
           <Route
