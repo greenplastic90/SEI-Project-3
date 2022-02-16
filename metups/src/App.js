@@ -42,19 +42,6 @@ function App() {
     }
   }, [])
 
-  const getRealAddress = async (long, lat) => {
-    try {
-      const { data } = await axios.get(
-        `https://api.mapbox.com/geocoding/v5/mapbox.places/${long},${lat}.json?access_token=${mapToken}`
-      )
-      console.log(data)
-      return data.features[0].place_name
-    } catch (err) {
-      console.log(err)
-    }
-  }
-  getRealAddress()
-
   useEffect(() => {
     const getAllEvents = async () => {
       try {
@@ -128,7 +115,12 @@ function App() {
           />
           <Route path='/register' element={<Signup />} />
           <Route path='/login' element={<Login />} />
-          <Route path='/events/:id' element={<SingleEvent user={user} userGeoLocation={userGeoLocation} />} />
+          <Route
+            path='/events/:id'
+            element={
+              <SingleEvent user={user} userGeoLocation={userGeoLocation} />
+            }
+          />
           <Route
             path='/eventCreate'
             element={
