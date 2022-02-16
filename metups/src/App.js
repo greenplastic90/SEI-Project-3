@@ -122,9 +122,9 @@ function App() {
   // --------------------
 
   return (
-    <div className='site-wrapper'>
-      <Router>
-        <PageNavbar />
+    <Router>
+      <PageNavbar />
+      <div className="site-wrapper">
         <Routes>
           <Route
             path='/'
@@ -164,9 +164,9 @@ function App() {
           />
           <Route path='/profile' element={<Profile user={user} />} />
         </Routes>
-        <Footer />
-      </Router>
-    </div>
+      </div>
+      <Footer />
+    </Router>
   )
 }
 
