@@ -130,7 +130,7 @@ function App() {
         <Routes>
           <Route
             path='/'
-            element={<Home options={options} events={allEvents} />}
+            element={<Home options={options} events={allEvents} user={user} />}
           />
           <Route path='/register' element={<Signup />} />
           <Route path='/login' element={<Login />} />
