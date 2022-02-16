@@ -258,7 +258,7 @@ const SingleEvent = ({ user, userGeoLocation, allEvents, fakeAccountsId }) => {
                   <>
                     <div>
                       <Map
-                        viewState={{
+                        initialViewState={{
                           longitude: updatedEventLocation.longitude,
                           latitude: updatedEventLocation.latitude,
                           zoom: 13,
