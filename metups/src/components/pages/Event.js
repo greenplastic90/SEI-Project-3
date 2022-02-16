@@ -142,6 +142,7 @@ const SingleEvent = ({ user, userGeoLocation, allEvents, fakeAccountsId }) => {
     }
   }
 
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {

@@ -12,40 +12,42 @@ import { getTokenFromLocalStorage } from '../../../auth/helpers'
 import { useNavigate } from 'react-router-dom'
 
 const ResetPassword = ({ pass }) => {
-
   const toast = useToast()
   const navigate = useNavigate()
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   // State variable
-  const [ formData, setFormData ] = useState({
+  const [formData, setFormData] = useState({
     password: '',
-    passwordConfirmation: ''
+    passwordConfirmation: '',
   })
-  const [ formError, setFormError] = useState('')
+  const [formError, setFormError] = useState('')
 
   const handleChange = (e) => {
     const newValue = { ...formData, [e.target.name]: e.target.value }
     setFormData(newValue)
     setFormError('')
   }
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const { data } = await axios.put('/api/profile', formData, {
+      await axios.put('/api/profile', formData, {
         headers: {
-          Authorization: `Bearer ${getTokenFromLocalStorage()}`
-        }
+          Authorization: `Bearer ${getTokenFromLocalStorage()}`,
+        },
       })
       navigate('/profile')
     } catch (err) {
       console.log(err.response.data)
-      
+
       const obj = {}
-      if (err.response.data.message.includes('is shorter than the minimum allowed length (8).'))
-    
-      setFormError('Password is shorter than is allowed (8).')
+      if (
+        err.response.data.message.includes(
+          'is shorter than the minimum allowed length (8).'
+        )
+      )
+        setFormError('Password is shorter than is allowed (8).')
     }
   }
   // console.log(password)
@@ -126,7 +128,6 @@ const ResetPassword = ({ pass }) => {
       // </form>
     // </Container>
   )
-
 }
 
 export default ResetPassword

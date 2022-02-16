@@ -53,6 +53,21 @@ const Profile = ({ user, setUser }) => {
     } catch (err) {
       console.log(err.response.data)
     }
+
+    try {
+      const getUserProfile = async () => {
+        const { data } = await axios.get('/api/profile', {
+          headers: {
+            Authorization: `Bearer ${getTokenFromLocalStorage()}`,
+          },
+        })
+        // console.log('Profile')
+        setUser(data)
+      }
+      getUserProfile()
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (

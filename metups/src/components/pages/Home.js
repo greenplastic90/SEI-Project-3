@@ -1,8 +1,12 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import Container from 'react-bootstrap/Container'
+import Image from 'react-bootstrap/Image'
+
+import { userIsAuthenticated } from '../../auth/helpers'
 
 
 const Home = ({ options, events, user }) => {
@@ -22,21 +26,44 @@ const Home = ({ options, events, user }) => {
           </Col>
           <Col md={6}>
             <div>
-              <h4>This is an img</h4>
+              <Image src="https://media.istockphoto.com/vectors/multicultural-group-of-people-is-standing-together-team-of-colleagues-vector-id1223631367?s=612x612" alt="gathering stock image" />
             </div>
           </Col>
           <Col md={12} className='py-5'>
             <Row>
-              {events.map((item) => {
-                return (
-                  <Col key={item._id} md={4}>
-                    <img
-                      className='homeImg'
-                      src={item.image}
-                      alt='random images of things'
-                    />
-                  </Col>
-                )
+              
+            
+
+              {events.map((item, i) => {
+                if (userIsAuthenticated()) {
+                  return (
+                    i < 6 &&
+                    <Col key={item._id} md={4}>
+                      <div>
+                        <img
+                          className='homeImg'
+                          src={item.image}
+                          alt='event images'
+                        />
+                        <Link to={`/events/${item._id}`}> {item.eventName} </Link>
+                      </div>
+                    </Col>
+                  )
+                } else {
+                  return (
+                    i < 6 &&
+                    <Col key={item._id} md={4}>
+                      <div>
+                        <img
+                          className='homeImg'
+                          src={item.image}
+                          alt='event images'
+                        />
+                        <Link to='/login'> {item.eventName} </Link>
+                      </div>
+                    </Col>
+                  )
+                }
               })}
             </Row>
           </Col>
