@@ -45,8 +45,16 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    let formDataUpdated = formData
+    if (!formDataUpdated.profilePhoto) {
+      formDataUpdated = {
+        ...formDataUpdated,
+        profilePhoto:
+          'https://prospectdirect.com/wpstagemct/wp-content/uploads/2017/05/generic-profile-photo-3.jpg',
+      }
+    }
     try {
-      const { data } = await axios.post('/api/register/', formData)
+      const { data } = await axios.post('/api/register/', formDataUpdated)
       console.log(data)
       navigate('/login')
     } catch (err) {
