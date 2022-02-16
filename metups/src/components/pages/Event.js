@@ -24,7 +24,7 @@ const SingleEvent = ({ user, userGeoLocation }) => {
   const [hasLiked, setHasLiked] = useState(null);
   const [comments, setComments] = useState({
     owner: "",
-    text: "",
+    text: ""
   });
 
   const [likedBy, setLikedBy] = useState([]);
@@ -69,7 +69,7 @@ const SingleEvent = ({ user, userGeoLocation }) => {
         `/api/events/${id}/likes`,
         { likedBy: updatedLikedByArray },
         {
-          headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` },
+          headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` }
         }
       );
       const getSingleEvent = async () => {
@@ -85,8 +85,6 @@ const SingleEvent = ({ user, userGeoLocation }) => {
       console.log(err.response);
     }
   };
-
-  
 
   // HANDLECHANGE AND SUBMIT FOR COMMENT
   const handleChange = (e) => {
@@ -112,8 +110,8 @@ const SingleEvent = ({ user, userGeoLocation }) => {
         comments,
         {
           headers: {
-            Authorization: `Bearer ${getTokenFromLocalStorage()}`,
-          },
+            Authorization: `Bearer ${getTokenFromLocalStorage()}`
+          }
         }
       );
       const getSingleEvent = async () => {
@@ -169,29 +167,30 @@ const SingleEvent = ({ user, userGeoLocation }) => {
 
                   <div>
                     {/* LIKE BUTTON */}
-                    {likedBy.length && user ?
-                    likedBy.some((like) => {
-                      console.log(user)
-                      return user._id === like.owner.id
-                    }) ? 
-                      <Button
-                        variant="primary"
-                        className="my-3"
-                        onClick={handleLikes}
-                      >
-                        <Heart /> Unlike
-                      </Button>
-                    : 
-                      <Button
-                        variant="danger"
-                        className="m-2"
-                        onClick={handleLikes}
-                      >
-                        <Heart /> Like
-                      </Button>
-                    
-                    : 
-                    '' } 
+                    {likedBy.length && user ? (
+                      likedBy.some((like) => {
+                        console.log(user);
+                        return user._id === like.owner.id;
+                      }) ? (
+                        <Button
+                          variant="primary"
+                          className="my-3"
+                          onClick={handleLikes}
+                        >
+                          <Heart /> Unlike
+                        </Button>
+                      ) : (
+                        <Button
+                          variant="danger"
+                          className="m-2"
+                          onClick={handleLikes}
+                        >
+                          <Heart /> Like
+                        </Button>
+                      )
+                    ) : (
+                      ""
+                    )}
                   </div>
                 </Col>
               </Row>
@@ -219,7 +218,7 @@ const SingleEvent = ({ user, userGeoLocation }) => {
                         initialViewState={{
                           longitude: event.longitude,
                           latitude: event.latitude,
-                          zoom: 9,
+                          zoom: 9
                         }}
                         style={{ height: 300 }}
                         mapStyle="mapbox://styles/mapbox/streets-v11"
