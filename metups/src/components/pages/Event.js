@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import Map, { Marker } from 'react-map-gl'
 import { mapToken } from '../../config/enviroments.js'
+import Banner from '../../images/genericProfilePic.png'
 
 // Import helpers
 import { getTokenFromLocalStorage } from '../../auth/helpers'

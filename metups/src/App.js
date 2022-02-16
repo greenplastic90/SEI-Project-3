@@ -175,7 +175,7 @@ function App() {
             element={<Profile user={user} setUser={setUser} />}
           />
 
-          <Route path='/resetPassword' element={<ResetPassword />} />
+          {/* <Route path='/resetPassword' element={<ResetPassword />} /> */}
         </Routes>
       </div>
       <Footer />

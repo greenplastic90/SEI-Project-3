@@ -12,6 +12,8 @@ import {
 import { useNavigate } from 'react-router-dom'
 import { getTokenFromLocalStorage } from '../../auth/helpers'
 import axios from 'axios'
+import ProfilePicture from '../../images/genericProfilePic.png'
+import ResetPassword from './auth/ResetPassword'
 
 const Profile = ({ user, setUser }) => {
   const navigate = useNavigate()
@@ -36,9 +38,10 @@ const Profile = ({ user, setUser }) => {
       console.log(error)
     }
   }, [setUser])
-  const resetPass = () => {
-    navigate('/resetPassword')
-  }
+  
+  // const resetPass = () => {
+  //   navigate('/resetPassword')
+  // }
 
   const deleteEvent = async (id) => {
     try {
@@ -83,14 +86,14 @@ const Profile = ({ user, setUser }) => {
             >
               <Image
                 boxSize='120'
-                src={user.profilePhoto}
+                src={user.profilePhoto ? user.profilePhoto : ProfilePicture}
                 alt='profile'
                 borderRadius='100%'
                 rounded={'100%'}
                 objectFit={'cover'}
               />
               <Text fontSize={'lg'} textAlign={'center'}>
-                {user.username}
+                {user.name}
               </Text>
             </Box>
             <Box textAlign={'center'}>
@@ -103,7 +106,7 @@ const Profile = ({ user, setUser }) => {
                 <Button onClick={createEvent}>Create Event</Button>
               </Text>
               <Text>
-                Password | <Button onClick={resetPass}>Reset Password</Button>
+                Password | <ResetPassword /> {/* <Button onClick={resetPass}>Reset Password</Button> */}
               </Text>
             </Box>
           </Container>
@@ -139,7 +142,7 @@ const Profile = ({ user, setUser }) => {
                   }
                 )}
               </Box>
-              <Box maxW={250} alignSelf={'center'}>
+              <Box maxW={250} alignSelf={{ base: 'center', md: 'flex-start' }}>
                 <Heading fontSize={'2rem'} textAlign={'center'} pb={2}>
                   Events Attended
                 </Heading>
