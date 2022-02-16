@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import './styles/main.scss'
 import App from './App'
+import 'bootstrap/dist/css/bootstrap.min.css'
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 
 const colors = {

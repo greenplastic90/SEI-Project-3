@@ -1,6 +1,7 @@
 export default [
   {
     username: 'BasharOthman',
+    name: 'Bashar Othman',
     email: 'bash@email.com',
     password: '12345678',
     passwordConfirmation: '12345678',
@@ -9,6 +10,7 @@ export default [
   },
   {
     username: 'MehtaabMasood',
+    name: 'Mehtaab Masood',
     email: 'Meh@email.com',
     password: '12345678',
     passwordConfirmation: '12345678',
@@ -16,6 +18,7 @@ export default [
   },
   {
     username: 'FlorentHaxhiu',
+    name: 'Florent Haxhiu',
     email: 'Flor@email.com',
     password: '12345678',
     passwordConfirmation: '12345678',
@@ -23,6 +26,7 @@ export default [
   },
   {
     username: 'SamHarris',
+    name: 'Sam Harries',
     email: 'sam@email.com',
     password: '12345678',
     passwordConfirmation: '12345678',
@@ -30,6 +34,7 @@ export default [
   },
   {
     username: 'ChloeBrown',
+    name: 'Chloe Brown',
     email: 'Chloe@email.com',
     password: '12345678',
     passwordConfirmation: '12345678',
@@ -37,6 +42,7 @@ export default [
   },
   {
     username: 'ChristianBaker',
+    name: 'Christian Baker',
     email: 'Christian@email.com',
     password: '12345678',
     passwordConfirmation: '12345678',
@@ -44,6 +50,7 @@ export default [
   },
   {
     username: 'IuryLiberato',
+    name: 'Iury Liberato',
     email: 'Iury@email.com',
     password: '12345678',
     passwordConfirmation: '12345678',

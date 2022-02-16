@@ -19,6 +19,7 @@ const Signup = () => {
 
   const [formData, setFormData] = useState({
     username: '',
+    name: '',
     email: '',
     password: '',
     passwordConfirmation: '',
@@ -100,7 +101,7 @@ const Signup = () => {
             <Form.Label htmlFor='username'>Username</Form.Label>
             <Form.Control
               name='username'
-              type='username'
+              type='text'
               placeholder='Username'
               onChange={handleChange}
             />
@@ -110,6 +111,22 @@ const Signup = () => {
               </Form.Text>
             )}
           </Form.Group>
+
+          {/* name */}
+          <Form.Group className='mb-3'>
+            <Form.Label htmlFor='name'>name</Form.Label>
+            <Form.Control
+              reqired
+              name='name'
+              type='text'
+              placeholder='Name'
+              onChange={handleChange}
+            />
+            {formErrors.name && (
+              <Form.Text className='text-muted'>{formErrors.name}</Form.Text>
+            )}
+          </Form.Group>
+
           {/* email  */}
           <Form.Group className='mb-3'>
             <Form.Label htmlFor='email'>Email</Form.Label>

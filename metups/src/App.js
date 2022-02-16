@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css'
+
 import axios from 'axios'
 import { getTokenFromLocalStorage } from './auth/helpers.js'
 import { mapToken } from './config/enviroments.js'
@@ -42,25 +42,27 @@ function App() {
     }
   }, [])
   const fakeAccountsId = [
-    '620ccacc2fad9bb81ccbb3f1',
-    '620ccacc2fad9bb81ccbb3f3',
-    '620ccacc2fad9bb81ccbb3f5',
-    '620ccacc2fad9bb81ccbb3f7',
-    '620ccacc2fad9bb81ccbb3fb',
-    '620ccacc2fad9bb81ccbb3f9',
-    '620ccacc2fad9bb81ccbb3fd',
-    '620ccacc2fad9bb81ccbb3ff',
-    '620ccacc2fad9bb81ccbb401',
-    '620ccacc2fad9bb81ccbb403',
-    '620ccacc2fad9bb81ccbb405',
-    '620ccacc2fad9bb81ccbb409',
-    '620ccacc2fad9bb81ccbb407',
+    '620d03a55fd998469b09e731',
+    '620d03a55fd998469b09e733',
+    '620d03a55fd998469b09e735',
+    '620d03a55fd998469b09e737',
+    '620d03a55fd998469b09e739',
+    '620d03a55fd998469b09e73b',
+    '620d03a55fd998469b09e73d',
+    '620d03a55fd998469b09e73f',
+    '620d03a55fd998469b09e741',
+    '620d03a55fd998469b09e743',
+    '620d03a55fd998469b09e745',
+    '620d03a55fd998469b09e747',
+    '620d03a55fd998469b09e749',
   ]
 
   useEffect(() => {
     const getAllEvents = async () => {
       try {
         const { data } = await axios.get('/api/events/')
+        // uncommnet below an save all the IDs in fake AccountsId after you seed
+
         // const allEventIds = data.map((event) => event._id)
         // console.log('All IDs ->', allEventIds)
 
@@ -124,7 +126,7 @@ function App() {
   return (
     <Router>
       <PageNavbar />
-      <div className="site-wrapper">
+      <div className='site-wrapper'>
         <Routes>
           <Route
             path='/'

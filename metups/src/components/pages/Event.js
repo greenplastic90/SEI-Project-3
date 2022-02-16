@@ -192,7 +192,7 @@ const SingleEvent = ({ user, userGeoLocation, allEvents, fakeAccountsId }) => {
                 </Col>
 
                 <Col className='mt-5'>
-                  <p> Hosted by: {event.owner.username} </p>
+                  <p> Hosted by: {event.owner.name} </p>
                 </Col>
                 <Col xs lg='6' className='mt-9'>
                   <div>
