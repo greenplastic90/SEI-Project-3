@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import axios from 'axios'
 import { getTokenFromLocalStorage } from './auth/helpers.js'
+import { mapToken } from './config/enviroments.js'
 
 // Importing
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
@@ -40,14 +41,31 @@ function App() {
       console.log(err)
     }
   }, [])
+  const fakeAccountsId = [
+    '620ccacc2fad9bb81ccbb3f1',
+    '620ccacc2fad9bb81ccbb3f3',
+    '620ccacc2fad9bb81ccbb3f5',
+    '620ccacc2fad9bb81ccbb3f7',
+    '620ccacc2fad9bb81ccbb3fb',
+    '620ccacc2fad9bb81ccbb3f9',
+    '620ccacc2fad9bb81ccbb3fd',
+    '620ccacc2fad9bb81ccbb3ff',
+    '620ccacc2fad9bb81ccbb401',
+    '620ccacc2fad9bb81ccbb403',
+    '620ccacc2fad9bb81ccbb405',
+    '620ccacc2fad9bb81ccbb409',
+    '620ccacc2fad9bb81ccbb407',
+  ]
 
   useEffect(() => {
     const getAllEvents = async () => {
       try {
         const { data } = await axios.get('/api/events/')
+        // const allEventIds = data.map((event) => event._id)
+        // console.log('All IDs ->', allEventIds)
 
         const eventsWithUpdatedLocations = data.map((event) => {
-          if (userGeoLocation) {
+          if (userGeoLocation && fakeAccountsId.includes(event._id)) {
             return {
               ...event,
               longitude:
@@ -56,6 +74,7 @@ function App() {
                 getRandomInRange(-0.08, 0.08) + userGeoLocation.latitude,
             }
           }
+
           return event
         })
 
@@ -103,9 +122,9 @@ function App() {
   // --------------------
 
   return (
-    <div className='site-wrapper'>
-      <Router>
-        <PageNavbar />
+    <Router>
+      <PageNavbar />
+      <div className="site-wrapper">
         <Routes>
           <Route
             path='/'
@@ -113,7 +132,17 @@ function App() {
           />
           <Route path='/register' element={<Signup />} />
           <Route path='/login' element={<Login />} />
-          <Route path='/events/:id' element={<SingleEvent user={user} userGeoLocation={userGeoLocation} />} />
+          <Route
+            path='/events/:id'
+            element={
+              <SingleEvent
+                user={user}
+                userGeoLocation={userGeoLocation}
+                allEvents={allEvents}
+                fakeAccountsId={fakeAccountsId}
+              />
+            }
+          />
           <Route
             path='/eventCreate'
             element={
@@ -135,9 +164,9 @@ function App() {
           />
           <Route path='/profile' element={<Profile user={user} />} />
         </Routes>
-        <Footer />
-      </Router>
-    </div>
+      </div>
+      <Footer />
+    </Router>
   )
 }
 

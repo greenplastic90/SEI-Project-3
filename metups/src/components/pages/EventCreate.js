@@ -151,7 +151,7 @@ const EventCreate = ({ options, userGeoLocation }) => {
           {formData.longitude && (
             <>
               <Map
-                initialViewState={{
+                viewState={{
                   longitude: formData.longitude,
                   latitude: formData.latitude,
                   zoom: 13,

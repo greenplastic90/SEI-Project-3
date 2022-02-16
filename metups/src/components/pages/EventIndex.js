@@ -72,7 +72,7 @@ const EventIndex = ({ options, events, userGeoLocation }) => {
               maxZoom={13}
             >
               <NavigationControl visualizePitch={true} />
-              {filteredEvents.map((event) => {
+              {/* {filteredEvents.map((event) => {
                 return (
                   <Popup
                     key={event._id}
@@ -84,7 +84,7 @@ const EventIndex = ({ options, events, userGeoLocation }) => {
                     popup
                   </Popup>
                 )
-              })}
+              })} */}
               {filteredEvents.map((event) => {
                 return (
                   <Marker

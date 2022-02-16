@@ -8,14 +8,18 @@ import { userIsAuthenticated } from '../../../auth/helpers'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Container from 'react-bootstrap/Container'
+import { useToast } from '@chakra-ui/react'
 
 const PageNavbar = () => {
   const navigate = useNavigate()
+  const toast = useToast()
   // This just gets rid of the token, logs the user out and directs them to the homepage
   const handleLogout = () => {
     window.localStorage.removeItem('metups-login-token')
     navigate('/')
   }
+
+
 
   return (
     <>
@@ -40,7 +44,15 @@ const PageNavbar = () => {
                   <Link to='/profile'>Profile</Link>
                 </Nav.Item>
                 <Nav.Item onClick={handleLogout}>
-                  <span className='clickable'>Logout</span>
+                  <span onClick={() => {
+                    toast({
+                      title: "Successfully Logged Out",
+                      desc: "You clicked log out",
+                      status: "success",
+                      duration: "2000",
+                      isClosable: true
+                    })
+                  }} className='clickable'>Logout</span>
                 </Nav.Item>
               </>
               :

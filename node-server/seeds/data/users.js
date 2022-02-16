@@ -5,6 +5,7 @@ export default [
     password: '12345678',
     passwordConfirmation: '12345678',
     profilePhoto: 'https://randomuser.me/api/portraits/men/6.jpg',
+    userLocation: { long: 2, lat: 5 },
   },
   {
     username: 'MehtaabMasood',
