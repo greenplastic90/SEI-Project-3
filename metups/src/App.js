@@ -23,6 +23,25 @@ function App() {
   const [allEvents, setAllEvents] = useState([])
   const [user, setUser] = useState(null)
   const [userGeoLocation, setUserGeoLocation] = useState(null)
+  const [fakeAccountsId, setFakeAccountsId] = useState([])
+
+  useEffect(() => {
+    setFakeAccountsId([
+      '620d03a55fd998469b09e731',
+      '620d03a55fd998469b09e733',
+      '620d03a55fd998469b09e735',
+      '620d03a55fd998469b09e737',
+      '620d03a55fd998469b09e739',
+      '620d03a55fd998469b09e73b',
+      '620d03a55fd998469b09e73d',
+      '620d03a55fd998469b09e73f',
+      '620d03a55fd998469b09e741',
+      '620d03a55fd998469b09e743',
+      '620d03a55fd998469b09e745',
+      '620d03a55fd998469b09e747',
+      '620d03a55fd998469b09e749',
+    ])
+  }, [])
 
   const getRandomInRange = (from, to) => {
     return (Math.random() * (to - from) + from).toFixed(2) * 1
@@ -32,6 +51,7 @@ function App() {
     try {
       window.navigator.geolocation.getCurrentPosition((position) => {
         // console.log(position.coords)
+        console.log('user geoLocation')
         setUserGeoLocation({
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
@@ -41,21 +61,6 @@ function App() {
       console.log(err)
     }
   }, [])
-  const fakeAccountsId = [
-    '620d03a55fd998469b09e731',
-    '620d03a55fd998469b09e733',
-    '620d03a55fd998469b09e735',
-    '620d03a55fd998469b09e737',
-    '620d03a55fd998469b09e739',
-    '620d03a55fd998469b09e73b',
-    '620d03a55fd998469b09e73d',
-    '620d03a55fd998469b09e73f',
-    '620d03a55fd998469b09e741',
-    '620d03a55fd998469b09e743',
-    '620d03a55fd998469b09e745',
-    '620d03a55fd998469b09e747',
-    '620d03a55fd998469b09e749',
-  ]
 
   useEffect(() => {
     const getAllEvents = async () => {
@@ -86,7 +91,7 @@ function App() {
       }
     }
     getAllEvents()
-  }, [userGeoLocation])
+  }, [fakeAccountsId, userGeoLocation])
 
   useEffect(() => {
     try {
@@ -96,7 +101,7 @@ function App() {
             Authorization: `Bearer ${getTokenFromLocalStorage()}`,
           },
         })
-        // console.log('Profile ->', data)
+        //console.log('App.js Profile')
         setUser(data)
       }
       getUserProfile()
@@ -164,7 +169,10 @@ function App() {
               />
             }
           />
-          <Route path='/profile' element={<Profile user={user} />} />
+          <Route
+            path='/profile'
+            element={<Profile user={user} setUser={setUser} />}
+          />
         </Routes>
       </div>
       <Footer />

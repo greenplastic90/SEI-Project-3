@@ -1,25 +1,97 @@
 import React, { useEffect } from 'react'
-import { Box, Container, Button, Text, Image, Stack, Table, Tbody, Tr, Td, Heading } from '@chakra-ui/react'
+import {
+  Box,
+  Container,
+  Button,
+  Text,
+  Image,
+  Stack,
+  Table,
+  Tbody,
+  Tr,
+  Td,
+  Heading,
+} from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
+import { getTokenFromLocalStorage } from '../../auth/helpers.js'
+import axios from 'axios'
 
-const Profile = ({ user }) => {
+const Profile = ({ user, setUser }) => {
   const navigate = useNavigate()
 
   const createEvent = () => {
     navigate('/eventCreate')
   }
 
+  useEffect(() => {
+    try {
+      const getUserProfile = async () => {
+        const { data } = await axios.get('/api/profile', {
+          headers: {
+            Authorization: `Bearer ${getTokenFromLocalStorage()}`,
+          },
+        })
+        // console.log('Profile')
+        setUser(data)
+      }
+      getUserProfile()
+    } catch (error) {
+      console.log(error)
+    }
+  }, [setUser])
+
   return (
-    <Container display={'flex'} flexDirection={'column'} justifyContent={'center'} width={'100%'} height={'100%'}>
+    <Container
+      display={'flex'}
+      flexDirection={'column'}
+      justifyContent={'center'}
+      width={'100%'}
+      height={'100%'}
+    >
       {user && (
         <>
-          <Container display='flex' flexDirection={{ base:'column', md: 'row'}} alignItems={'center'} boxShadow={'lg'} justifyContent={'center'} borderRadius={'8'} py={'1.5rem'} my={'5'} width={{ base: 'full', md: 'container.md', lg: 'container.lg', 'xl': 'container.xl' }}>
-            <Box boxSize={['100', '150', '200']} display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'center'} pb={'2rem'}>
-              <Image boxSize={120} src={user.profilePhoto} alt="profile" borderRadius='100' rounded={'full'} objectFit={'cover'}/>
-              <Text fontSize={'lg'} textAlign={'center'}>{user.username}</Text>
+          <Container
+            display='flex'
+            flexDirection={{ base: 'column', md: 'row' }}
+            alignItems={'center'}
+            boxShadow={'lg'}
+            justifyContent={'center'}
+            borderRadius={'8'}
+            py={'1.5rem'}
+            my={'5'}
+            width={{
+              base: 'full',
+              md: 'container.md',
+              lg: 'container.lg',
+              xl: 'container.xl',
+            }}
+          >
+            <Box
+              boxSize={['100', '150', '200']}
+              display={'flex'}
+              flexDirection={'column'}
+              justifyContent={'center'}
+              alignItems={'center'}
+              pb={'2rem'}
+            >
+              <Image
+                boxSize={120}
+                src={user.profilePhoto}
+                alt='profile'
+                borderRadius='100'
+                rounded={'full'}
+                objectFit={'cover'}
+              />
+              <Text fontSize={'lg'} textAlign={'center'}>
+                {user.username}
+              </Text>
             </Box>
             <Box>
-              <Table variant={'striped'} colorScheme={'twitter'} borderRadius={'8px'}>
+              <Table
+                variant={'striped'}
+                colorScheme={'twitter'}
+                borderRadius={'8px'}
+              >
                 <Tbody>
                   <Tr>
                     <Td>{user.username}</Td>
@@ -31,11 +103,15 @@ const Profile = ({ user }) => {
                   </Tr>
                   <Tr>
                     <Td>Password</Td>
-                    <Td><Button>Update Password</Button></Td>
+                    <Td>
+                      <Button>Update Password</Button>
+                    </Td>
                   </Tr>
                   <Tr>
                     <Td>Add Event</Td>
-                    <Td><Button onClick={createEvent}>Add Event</Button></Td>
+                    <Td>
+                      <Button onClick={createEvent}>Add Event</Button>
+                    </Td>
                   </Tr>
                 </Tbody>
               </Table>
@@ -43,30 +119,42 @@ const Profile = ({ user }) => {
           </Container>
           {/* <Divider /> */}
           <Container>
-            <Stack direction={{ base: 'column', md: 'row'}} spacing={'10'} mt={5}>
+            <Stack
+              direction={{ base: 'column', md: 'row' }}
+              spacing={'10'}
+              mt={5}
+            >
               <Box maxW={250} alignSelf={'center'}>
-                <Heading fontSize={'2rem'} textAlign={'center'} pb={2}>Events Created</Heading>
-                {user.ownedEvents.map(({ image, eventName, description }, i) => {
-                  return (
-                  <Box key={i} py={2}>
-                    <Image maxHeight={100} src={image} alt='event' />
-                    <Text>{eventName}</Text>
-                    <Text isTruncated>{description}</Text>
-                  </Box>
-                  )
-                })}
+                <Heading fontSize={'2rem'} textAlign={'center'} pb={2}>
+                  Events Created
+                </Heading>
+                {user.ownedEvents.map(
+                  ({ image, eventName, description }, i) => {
+                    return (
+                      <Box key={i} py={2}>
+                        <Image maxHeight={100} src={image} alt='event' />
+                        <Text>{eventName}</Text>
+                        <Text isTruncated>{description}</Text>
+                      </Box>
+                    )
+                  }
+                )}
               </Box>
               <Box maxW={250} alignSelf={'center'}>
-                <Heading fontSize={'2rem'} textAlign={'center'} pb={2}>Events Attended</Heading>
-                {user.likedEvents.map(({ image, eventName, description }, i) => {
-                  return (
-                  <Box key={i} py={2}>
-                    <Image src={image} alt='event' />
-                    <Text>{eventName}</Text>
-                    <Text isTruncated>{description}</Text>
-                  </Box>
-                  )
-                })}
+                <Heading fontSize={'2rem'} textAlign={'center'} pb={2}>
+                  Events Attended
+                </Heading>
+                {user.likedEvents.map(
+                  ({ image, eventName, description }, i) => {
+                    return (
+                      <Box key={i} py={2}>
+                        <Image src={image} alt='event' />
+                        <Text>{eventName}</Text>
+                        <Text isTruncated>{description}</Text>
+                      </Box>
+                    )
+                  }
+                )}
               </Box>
             </Stack>
           </Container>

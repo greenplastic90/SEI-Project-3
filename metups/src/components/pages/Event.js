@@ -108,7 +108,7 @@ const SingleEvent = ({ user, userGeoLocation, allEvents, fakeAccountsId }) => {
         `/api/events/${id}/likes`,
         { likedBy: updatedLikedByArray },
         {
-          headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` }
+          headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` },
         }
       )
       const getSingleEvent = async () => {
@@ -149,6 +149,7 @@ const SingleEvent = ({ user, userGeoLocation, allEvents, fakeAccountsId }) => {
           Authorization: `Bearer ${getTokenFromLocalStorage()}`,
         },
       })
+      setComments({ ...comments, text: '' })
       const getSingleEvent = async () => {
         try {
           const { data } = await axios.get(`/api/events/${id}`)
@@ -197,35 +198,57 @@ const SingleEvent = ({ user, userGeoLocation, allEvents, fakeAccountsId }) => {
                 <Col xs lg='6' className='mt-9'>
                   <div>
                     <h1> {event.eventName} </h1>
-                    <p>{event.eventType} Event </p>
+                    {/* Types */}
+                    {event.eventType.map((type) => {
+                      // maybe have each type srounded in a light colored box of sorts?
+                      return (
+                        <span key={type} className='mx-2'>
+                          {type}
+                        </span>
+                      )
+                    })}
                   </div>
 
-                  <div>
-                    {/* LIKE BUTTON */}
-                    {likedBy && user ? (
-                      likedBy.some((like) => {
-                        return user._id === like.owner.id
-                      }) ? (
-                        <Button
-                          variant='primary'
-                          className='my-3'
-                          onClick={handleLikes}
-                        >
-                          <Heart /> Unlike
-                        </Button>
+                  <Row>
+                    <Col>
+                      {/* LIKE BUTTON */}
+                      {likedBy && user ? (
+                        likedBy.some((like) => {
+                          return user._id === like.owner.id
+                        }) ? (
+                          <Button
+                            variant='primary'
+                            className='my-3'
+                            onClick={handleLikes}
+                          >
+                            <Heart /> Unlike
+                          </Button>
+                        ) : (
+                          <Button
+                            variant='danger'
+                            className='m-2'
+                            onClick={handleLikes}
+                          >
+                            <Heart /> Like
+                          </Button>
+                        )
                       ) : (
-                        <Button
-                          variant='danger'
-                          className='m-2'
-                          onClick={handleLikes}
-                        >
-                          <Heart /> Like
-                        </Button>
-                      )
-                    ) : (
-                      ''
-                    )}
-                  </div>
+                        ''
+                      )}
+                    </Col>
+                    <Col>
+                      {likedBy &&
+                        likedBy.map((like) => {
+                          return (
+                            <img
+                              key={like.owner._id}
+                              src={like.owner.profilePhoto}
+                              alt={like.owner.name}
+                            />
+                          )
+                        })}
+                    </Col>
+                  </Row>
                 </Col>
               </Row>
             ) : (
@@ -279,41 +302,6 @@ const SingleEvent = ({ user, userGeoLocation, allEvents, fakeAccountsId }) => {
               </Col>
             </Row>
 
-            {/* COMMENTS DISPLAY */}
-            <Row>
-              <hr />
-              <Col className='my-4'>
-                <h2> Comments </h2>
-              </Col>
-            </Row>
-
-            {!event.comments.length ? (
-              <></>
-            ) : (
-              <Row>
-                {event.comments.map((comment) => {
-                  return (
-                    <Col key={comment._id}>
-                      <Card border='light' style={{ width: '60rem' }}>
-                        <Card.Header>
-                          <Image
-                            src={comment.owner.profilePhoto}
-                            className='comment-profilePhoto rounded-circle my-2 mx-3'
-                          />
-                          {comment.owner.username}
-                        </Card.Header>
-                        <Card.Body>
-                          <Card.Text>{comment.text}</Card.Text>
-                        </Card.Body>
-                      </Card>
-                    </Col>
-                  )
-                })}
-              </Row>
-            )}
-
-            {/* ADD COMMENT */}
-            <hr />
             <Row>
               <Col>
                 <div>
@@ -324,7 +312,8 @@ const SingleEvent = ({ user, userGeoLocation, allEvents, fakeAccountsId }) => {
                         name='text'
                         as='textarea'
                         onChange={handleChange}
-                        placeholder='add comment here'
+                        placeholder='Add Comment Here'
+                        value={comments.text}
                       />
                     </Form.Group>
                     <Form.Group className='mt-4 text-center'>
@@ -336,6 +325,42 @@ const SingleEvent = ({ user, userGeoLocation, allEvents, fakeAccountsId }) => {
                 </div>
               </Col>
             </Row>
+            <hr />
+            {/* COMMENTS DISPLAY */}
+            <Row>
+              <Col className='my-4'>
+                <h2> Comments </h2>
+              </Col>
+            </Row>
+
+            {!event.comments.length ? (
+              <></>
+            ) : (
+              <Row>
+                {event.comments
+                  .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+                  .map((comment) => {
+                    return (
+                      <Col key={comment._id}>
+                        <Card border='light' style={{ width: '60rem' }}>
+                          <Card.Header>
+                            <Image
+                              src={comment.owner.profilePhoto}
+                              className='comment-profilePhoto rounded-circle my-2 mx-3'
+                            />
+                            {comment.owner.username}
+                          </Card.Header>
+                          <Card.Body>
+                            <Card.Text>{comment.text}</Card.Text>
+                          </Card.Body>
+                        </Card>
+                      </Col>
+                    )
+                  })}
+              </Row>
+            )}
+
+            {/* ADD COMMENT */}
           </Container>
         ) : (
           <div>loading</div>

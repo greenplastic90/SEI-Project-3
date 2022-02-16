@@ -96,10 +96,26 @@ const Signup = () => {
     <section>
       <Container className='mt-5'>
         <Form onSubmit={handleSubmit}>
+          {/* name */}
+          <Form.Group className='mb-3'>
+            <Form.Label htmlFor='name'>Full Name</Form.Label>
+            <Form.Control
+              reqired
+              name='name'
+              type='text'
+              placeholder='Full Name'
+              onChange={handleChange}
+            />
+            {formErrors.name && (
+              <Form.Text className='text-muted'>{formErrors.name}</Form.Text>
+            )}
+          </Form.Group>
+
           {/* username */}
           <Form.Group className='mb-3'>
             <Form.Label htmlFor='username'>Username</Form.Label>
             <Form.Control
+              reqired
               name='username'
               type='text'
               placeholder='Username'
@@ -112,25 +128,11 @@ const Signup = () => {
             )}
           </Form.Group>
 
-          {/* name */}
-          <Form.Group className='mb-3'>
-            <Form.Label htmlFor='name'>name</Form.Label>
-            <Form.Control
-              reqired
-              name='name'
-              type='text'
-              placeholder='Name'
-              onChange={handleChange}
-            />
-            {formErrors.name && (
-              <Form.Text className='text-muted'>{formErrors.name}</Form.Text>
-            )}
-          </Form.Group>
-
           {/* email  */}
           <Form.Group className='mb-3'>
             <Form.Label htmlFor='email'>Email</Form.Label>
             <Form.Control
+              reqired
               name='email'
               type='email'
               placeholder='Email'
@@ -144,6 +146,7 @@ const Signup = () => {
           <Form.Group className='mb-3'>
             <Form.Label htmlFor='password'>Password</Form.Label>
             <Form.Control
+              reqired
               name='password'
               type='password'
               placeholder='Password'
@@ -159,6 +162,7 @@ const Signup = () => {
           <Form.Group className='mb-3'>
             <Form.Label htmlFor='confirm password'>Confirm Password</Form.Label>
             <Form.Control
+              reqired
               name='passwordConfirmation'
               type='password'
               placeholder='Confirm Password'
