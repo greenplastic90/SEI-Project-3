@@ -1,7 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Box, Container, Button, Text, Image, Stack, Table, Tbody, Tr, Td, Heading } from '@chakra-ui/react'
+import { useNavigate } from 'react-router-dom'
 
 const Profile = ({ user }) => {
+  const navigate = useNavigate()
+
+  const createEvent = () => {
+    navigate('/eventCreate')
+  }
+
   return (
     <Container display={'flex'} flexDirection={'column'} justifyContent={'center'} width={'100%'} height={'100%'}>
       {user && (
@@ -12,7 +19,7 @@ const Profile = ({ user }) => {
               <Text fontSize={'lg'} textAlign={'center'}>{user.username}</Text>
             </Box>
             <Box>
-              <Table variant={'striped'} colorScheme={'twitter'}>
+              <Table variant={'striped'} colorScheme={'twitter'} borderRadius={'8px'}>
                 <Tbody>
                   <Tr>
                     <Td>{user.username}</Td>
@@ -28,7 +35,7 @@ const Profile = ({ user }) => {
                   </Tr>
                   <Tr>
                     <Td>Add Event</Td>
-                    <Td><Button>Add Event</Button></Td>
+                    <Td><Button onClick={createEvent}>Add Event</Button></Td>
                   </Tr>
                 </Tbody>
               </Table>
