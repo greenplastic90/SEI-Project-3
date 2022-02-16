@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css'
+
 import axios from 'axios'
 import { getTokenFromLocalStorage } from './auth/helpers.js'
 import { mapToken } from './config/enviroments.js'
@@ -42,14 +42,33 @@ function App() {
       console.log(err)
     }
   }, [])
+  const fakeAccountsId = [
+    '620d03a55fd998469b09e731',
+    '620d03a55fd998469b09e733',
+    '620d03a55fd998469b09e735',
+    '620d03a55fd998469b09e737',
+    '620d03a55fd998469b09e739',
+    '620d03a55fd998469b09e73b',
+    '620d03a55fd998469b09e73d',
+    '620d03a55fd998469b09e73f',
+    '620d03a55fd998469b09e741',
+    '620d03a55fd998469b09e743',
+    '620d03a55fd998469b09e745',
+    '620d03a55fd998469b09e747',
+    '620d03a55fd998469b09e749',
+  ]
 
   useEffect(() => {
     const getAllEvents = async () => {
       try {
         const { data } = await axios.get('/api/events/')
+        // uncommnet below an save all the IDs in fake AccountsId after you seed
+
+        // const allEventIds = data.map((event) => event._id)
+        // console.log('All IDs ->', allEventIds)
 
         const eventsWithUpdatedLocations = data.map((event) => {
-          if (userGeoLocation) {
+          if (userGeoLocation && fakeAccountsId.includes(event._id)) {
             return {
               ...event,
               longitude:
@@ -108,18 +127,23 @@ function App() {
   return (
     <Router>
       <PageNavbar />
-      <div className="site-wrapper">
+      <div className='site-wrapper'>
         <Routes>
           <Route
             path='/'
-            element={<Home options={options} events={allEvents} />}
+            element={<Home options={options} events={allEvents} user={user} />}
           />
           <Route path='/register' element={<Signup />} />
           <Route path='/login' element={<Login />} />
           <Route
             path='/events/:id'
             element={
-              <SingleEvent user={user} userGeoLocation={userGeoLocation} />
+              <SingleEvent
+                user={user}
+                userGeoLocation={userGeoLocation}
+                allEvents={allEvents}
+                fakeAccountsId={fakeAccountsId}
+              />
             }
           />
           <Route

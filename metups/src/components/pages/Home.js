@@ -4,14 +4,16 @@ import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import Container from 'react-bootstrap/Container'
 
-const Home = ({ options, events }) => {
+
+const Home = ({ options, events, user }) => {
   return (
     <section>
       <Container>
         <Row className='justify-content-around'>
+
           <Col md={6}>
             <div>
-              <h4>Welcome to Metups</h4>
+              <h4>Welcome {user && user.username} to Metups</h4>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
                 ut nibh dictum, vulputate est quis, maximus odio.{' '}

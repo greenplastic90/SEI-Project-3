@@ -108,6 +108,7 @@ const EventCreate = ({ options, userGeoLocation }) => {
           <Form.Group className='mb-3'>
             <Form.Label htmlFor='eventName'>Event Name</Form.Label>
             <Form.Control
+            required
               name='eventName'
               type='eventName'
               placeholder='Event Name'
@@ -138,6 +139,7 @@ const EventCreate = ({ options, userGeoLocation }) => {
           <Form.Group className='mb-3'>
             <Form.Label htmlFor='description'>Description</Form.Label>
             <Form.Control
+            required
               as='textarea'
               name='description'
               onChange={handleChange}
@@ -159,10 +161,6 @@ const EventCreate = ({ options, userGeoLocation }) => {
                 mapboxAccessToken={mapToken}
                 style={{ height: 100 }}
                 mapStyle='mapbox://styles/mapbox/streets-v11'
-                onData={function (event, data) {
-                  console.log('event ->', event)
-                  console.log('this ->', this)
-                }}
               >
                 <Marker
                   longitude={formData.longitude}
@@ -174,9 +172,11 @@ const EventCreate = ({ options, userGeoLocation }) => {
           <Form.Group className='mb-3'>
             <Form.Label htmlFor='map'>Address</Form.Label>
             <Form.Control
+            required
               type='text'
               placeholder='Address'
               name='map'
+              
               onChange={handleChange}
             />
           </Form.Group>
@@ -195,6 +195,7 @@ const EventCreate = ({ options, userGeoLocation }) => {
           <Form.Group className='mb-3'>
             <Form.Label htmlFor='eventDate'>Date</Form.Label>
             <Form.Control
+            required
               type='date'
               name='eventDate'
               onChange={handleChange}
@@ -209,6 +210,7 @@ const EventCreate = ({ options, userGeoLocation }) => {
           <Form.Group className='mb-3'>
             <Form.Label htmlFor='eventTime'>Time</Form.Label>
             <Form.Control
+            required
               type='Time'
               name='eventTime'
               placeholder='eventTime'
@@ -223,6 +225,7 @@ const EventCreate = ({ options, userGeoLocation }) => {
           <Form.Group className='mb-3'>
             <Form.Label htmlFor='image'>Add Image</Form.Label>
             <Form.Control
+          
               onChange={handelImageUpload}
               type='file'
               name='image'
