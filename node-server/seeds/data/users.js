@@ -55,5 +55,5 @@ export default [
     password: '12345678',
     passwordConfirmation: '12345678',
     profilePhoto: 'https://randomuser.me/api/portraits/men/43.jpg',
-  },
+  }
 ]

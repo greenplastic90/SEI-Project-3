@@ -108,7 +108,7 @@ const SingleEvent = ({ user, userGeoLocation, allEvents, fakeAccountsId }) => {
         `/api/events/${id}/likes`,
         { likedBy: updatedLikedByArray },
         {
-          headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` },
+          headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` }
         }
       )
       const getSingleEvent = async () => {
