@@ -94,7 +94,7 @@ const Signup = () => {
   return (
     <section>
       <Container className='mt-5'>
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} required>
           {/* username */}
           <Form.Group className='mb-3'>
             <Form.Label htmlFor='username'>Username</Form.Label>

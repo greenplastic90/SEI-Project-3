@@ -18,6 +18,7 @@ import SingleEvent from './components/pages/Event'
 import EventIndex from './components/pages/EventIndex'
 import Profile from './components/pages/Profile'
 import Footer from './components/pages/common/Footer'
+import ResetPassword from './components/pages/auth/ResetPassword.js'
 
 function App() {
   const [allEvents, setAllEvents] = useState([])
@@ -141,6 +142,7 @@ function App() {
             }
           />
           <Route path='/profile' element={<Profile user={user} />} />
+          <Route path='/resetPassword' element={<ResetPassword />} />
         </Routes>
       </div>
       <Footer />

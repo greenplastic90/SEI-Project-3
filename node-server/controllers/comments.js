@@ -6,7 +6,7 @@ export const addComment = async (req, res) => {
 
     const eventToAddCommentTo = await Event.findById(id)
     if (!eventToAddCommentTo) throw new Error('Event not found')
-    if (!req.body.text) throw new Error("Can't submit an empty comment")
+    if (!req.body.text) throw new Error('Can\'t submit an empty comment')
 
     const newComment = {
       ...req.body,
