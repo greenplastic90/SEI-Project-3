@@ -5,21 +5,24 @@ import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import Container from 'react-bootstrap/Container'
 import Image from 'react-bootstrap/Image'
+import { Text } from '@chakra-ui/react'
+import { Heading } from '@chakra-ui/react'
+// import { Box, Container } from '@chakra-ui/react'
 
 import { userIsAuthenticated } from '../../auth/helpers'
 
 
 const Home = ({ options, events, user }) => {
   return (
-    <section>
-      <Container>
-        <Row className="justify-content-center">
-          <Col md={8}>
+    <section className='mainHome'>
+      <Container className='pt-5'>
         <Row className='justify-content-around'>
+        <Heading as='h1' size='4xl'>Welcome {user && user.name} to Metups</Heading>
+
           <Col md={6}>
             <div>
-              <h4>Welcome {user && user.name} to Metups</h4>
-              <p> Metups is the perfect place for everything you're looking to do this year! For 0 days, people have been turning to Metup to organise, host and arrange events. Through Metup, people have explored their intrerests, grown their community and expanded their skill sets. Join the fun now and sign up to create your first event! </p>
+              
+              <Text fontSize='2xl'> Metups is the perfect place for everything you're looking to do this year! For 0 days, people have been turning to Metup to organise, host and arrange events. Through Metup, people have explored their intrerests, grown their community and expanded their skill sets. Join the fun now and sign up to create your first event! </Text>
             </div>
           </Col>
           <Col md={6}>
@@ -29,9 +32,6 @@ const Home = ({ options, events, user }) => {
           </Col>
           <Col md={12} className='py-5'>
             <Row>
-              
-            
-
               {events.map((item, i) => {
                 if (userIsAuthenticated()) {
                   return (
@@ -56,10 +56,8 @@ const Home = ({ options, events, user }) => {
             </Row>
           </Col>
         </Row>
-        </Col>
-        </Row>
-      </Container>
-    </section>
+      </Container >
+    </section >
   )
 }
 

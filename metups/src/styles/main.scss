@@ -16,10 +16,12 @@
   margin: 0;
 }
 
-// .site-wrapper {
-//   min-height: 100vh;
-// }
-
-#root {
+.site-wrapper {
   min-height: 100vh;
+  background: linear-gradient(#F8F4F2, #FFE184, #FFE195);
+}
+
+button:focus {
+  outline: none !important;
+  outline-offset: none !important;
 }

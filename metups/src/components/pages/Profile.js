@@ -8,13 +8,17 @@ import {
   Stack,
   Heading,
   Divider,
+  Table,
+  Tbody,
+  Tr,
+  Td
 } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
 import { getTokenFromLocalStorage } from '../../auth/helpers'
 import axios from 'axios'
 import ProfilePicture from '../../images/genericProfilePic.png'
 import ResetPassword from './auth/ResetPassword'
-import { Link } from '@chakra-ui/react'
+import Boxes from './common/Boxes'
 
 const Profile = ({ user, setUser }) => {
   const navigate = useNavigate()
@@ -23,8 +27,8 @@ const Profile = ({ user, setUser }) => {
     navigate('/eventCreate')
   }
 
-  const link = (id) => {
-    return `/events/${id}`
+  const nav = (id) => {
+    navigate(`/events/${id}`)
   }
 
   useEffect(() => {
@@ -78,10 +82,13 @@ const Profile = ({ user, setUser }) => {
   return (
     <Container
       display={'flex'}
-      flexDirection={'column'}
+      flexDirection={{ base: 'column', xl: 'row'}}
       justifyContent={'center'}
+      alignItems={'center'}
       width={'100%'}
       height={'100%'}
+      maxW={'full'}
+      gap={4}
     >
       {user && (
         <>
@@ -95,6 +102,7 @@ const Profile = ({ user, setUser }) => {
             py={'1.5rem'}
             my={'5'}
             width={{ base: 'full', md: '100%', lg: '100%' }}
+            margin={0}
           >
             <Box
               boxSize={['100', '150', '200']}
@@ -116,22 +124,40 @@ const Profile = ({ user, setUser }) => {
                 {user.name}
               </Text>
             </Box>
-            <Box textAlign={'center'}>
+            <Container textAlign={'center'} my={'2'} maxW={'inherit'}>
               <Heading>Profile Details</Heading>
               <Divider />
-              <Text>Username | {user.username}</Text>
-              <Text>Email | {user.email}</Text>
-              <Text>
-                Create Event |{' '}
-                <Button onClick={createEvent}>Create Event</Button>
-              </Text>
-              <Text>
-                Password | <ResetPassword /> {/* <Button onClick={resetPass}>Reset Password</Button> */}
-              </Text>
-            </Box>
+              <Table variant={'unstyled'}>
+                <Tbody>
+                  <Tr>
+                    <Td>Username</Td>
+                    <Td>{user.username}</Td>
+                  </Tr>
+                  {user.profileDescription && 
+                    <Tr>
+                      <Td>Desc</Td>
+                      <Td>{user.profileDescription}</Td>
+                    </Tr>
+                  }
+                  <Tr>
+                    <Td>Email</Td>
+                    <Td>{user.email}</Td>
+                  </Tr>
+                  <Tr>
+                    <Td>Create Event</Td>
+                    <Td><Button onClick={createEvent}>Create Event</Button></Td>
+                  </Tr>
+                  <Tr>
+                    <Td>Password</Td>
+                    <Td><ResetPassword/></Td>
+                  </Tr>
+                </Tbody>
+              </Table>
+            </Container>
           </Container>
           <Stack>
             <Stack
+              alignSelf={'center'}
               direction={{ base: 'column', md: 'row' }}
               spacing={'10'}
               mt={5}
@@ -141,23 +167,26 @@ const Profile = ({ user, setUser }) => {
                   Events Created
                 </Heading>
                 {user.ownedEvents.map(
-                  ({ image, eventName, description, _id }, i) => {
+                  (items, i) => {
                     return (
-                      <Box key={i} id={_id} px={2}>
-                        <Image maxHeight={100} src={image} alt='event' />
-                        <Text>{eventName}</Text>
-                        <Text isTruncated>{description}</Text>
+                      // <Box key={i} id={_id} px={2}>
+                      //   <Image maxH={'64px'} width={'fit-content'} src={image} alt='event' />
+                      //   <Text fontSize={'lg'}>{eventName}</Text>
+                      //   <Text isTruncated>{description}</Text>
+                      <>
+                      <Boxes item={items} />
                         <Button
-                          onClick={() => deleteEvent(_id)}
+                          onClick={() => deleteEvent(items._id)}
                           color={'white'}
                           p={1}
                           bg={'red'}
-                          rounded={'sm'}
+                          rounded={'md'}
                           size={'24px'}
                         >
                           Delete Event
                         </Button>
-                      </Box>
+                      </>
+                      // </Box>
                     )
                   }
                 )}
@@ -167,15 +196,14 @@ const Profile = ({ user, setUser }) => {
                   Events Attended
                 </Heading>
                 {user.likedEvents.map(
-                  ({ image, eventName, description, _id }, i) => {
+                  (items, i) => {
                     return (
-                      <Box key={i} py={2}>
-                        <Link to={link(_id)}>
-                          <Image id={_id} src={image} alt='event' />
-                        </Link>
-                        <Text fontSize={'lg'}>{eventName}</Text>
-                        <Text isTruncated>{description}</Text>
-                      </Box>
+                      <Boxes item={items} key={i} />
+                      // <Box key={i} py={2}>
+                      //   <Image width={'fit-content'} objectFit={'fill'} maxH={'64px'} src={image} alt='event' onClick={() => nav(_id)} className='Pointer-Cur' />
+                      //   <Text fontSize={'lg'}>{eventName}</Text>
+                      //   <Text isTruncated>{description}</Text>
+                      // </Box>
                     )
                   }
                 )}

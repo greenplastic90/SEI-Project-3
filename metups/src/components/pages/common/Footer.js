@@ -6,7 +6,7 @@ const Footer = () => {
 
   return (
     <>
-      <Container className='footer' as={'footer'} mt={'2.5rem'}>
+      <Container className='footer' as={'footer'} bg={'#FFE195'}>
         <div>
           <p>Made by:</p>
           <div className="names">
