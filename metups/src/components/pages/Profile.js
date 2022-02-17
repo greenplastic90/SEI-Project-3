@@ -14,12 +14,17 @@ import { getTokenFromLocalStorage } from '../../auth/helpers'
 import axios from 'axios'
 import ProfilePicture from '../../images/genericProfilePic.png'
 import ResetPassword from './auth/ResetPassword'
+import { Link } from '@chakra-ui/react'
 
 const Profile = ({ user, setUser }) => {
   const navigate = useNavigate()
 
   const createEvent = () => {
     navigate('/eventCreate')
+  }
+
+  const link = (id) => {
+    return `/events/${id}`
   }
 
   useEffect(() => {
@@ -138,7 +143,7 @@ const Profile = ({ user, setUser }) => {
                 {user.ownedEvents.map(
                   ({ image, eventName, description, _id }, i) => {
                     return (
-                      <Box key={i} id={_id} py={2}>
+                      <Box key={i} id={_id} px={2}>
                         <Image maxHeight={100} src={image} alt='event' />
                         <Text>{eventName}</Text>
                         <Text isTruncated>{description}</Text>
@@ -162,10 +167,12 @@ const Profile = ({ user, setUser }) => {
                   Events Attended
                 </Heading>
                 {user.likedEvents.map(
-                  ({ image, eventName, description }, i) => {
+                  ({ image, eventName, description, _id }, i) => {
                     return (
                       <Box key={i} py={2}>
-                        <Image src={image} alt='event' />
+                        <Link to={link(_id)}>
+                          <Image id={_id} src={image} alt='event' />
+                        </Link>
                         <Text fontSize={'lg'}>{eventName}</Text>
                         <Text isTruncated>{description}</Text>
                       </Box>
