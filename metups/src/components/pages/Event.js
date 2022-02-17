@@ -13,10 +13,15 @@ import Form from 'react-bootstrap/Form'
 import Card from 'react-bootstrap/Card'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import Button from 'react-bootstrap/Button'
-import Image from 'react-bootstrap/Image'
 import Spinner from 'react-bootstrap/Spinner'
-import { Heart } from 'react-bootstrap-icons'
+// Import Chakra Components
+import { Box, Image, Wrap, WrapItem } from '@chakra-ui/react'
+import { Heading } from '@chakra-ui/react'
+import { Table, Tbody, Tr, Th, Td } from '@chakra-ui/react'
+import { Badge } from '@chakra-ui/react'
+import { Text } from '@chakra-ui/react'
+import { Button } from '@chakra-ui/react'
+import { Avatar } from '@chakra-ui/react'
 
 const SingleEvent = ({ user, userGeoLocation, allEvents, fakeAccountsId }) => {
   const [event, setEvent] = useState(null)
@@ -180,29 +185,28 @@ const SingleEvent = ({ user, userGeoLocation, allEvents, fakeAccountsId }) => {
                       alt='event image'
                     />
                   </Col>
-                  <Col md={12}>
-                    <h1> {event.eventName} </h1>
+                  <Col md={12} className='my-3'>
+                    <Heading>{event.eventName}</Heading>
                   </Col>
                   {event.owner ? (
                     // Col for all info of event owner and event info
-                    <Col md={12}>
+                    <Col md={12} className='mb-3'>
                       <Row>
                         <Col md={6}>
                           {/*  HOSTED BY */}
                           <Row className='justify-content-center'>
-                            <Col md={12}>
+                            <Col md={12} className='mb-3'>
                               <Image
-                                style={{ height: '8rem' }}
+                                borderRadius='full'
                                 src={event.owner.profilePhoto}
                                 alt="host's profile image"
-                                className='rounded-circle my-2 mx-5'
                               />
                             </Col>
-                            <Col md={12}>
+                            <Col md={12} className='mb-3'>
                               <p> Hosted by: {event.owner.name} </p>
                             </Col>
                             {/* Button and attendies */}
-                            <Col md={12}>
+                            <Col md={12} className='mb-2'>
                               {/* LIKE BUTTON */}
                               {likedBy && user ? (
                                 likedBy.some((like) => {
@@ -210,7 +214,7 @@ const SingleEvent = ({ user, userGeoLocation, allEvents, fakeAccountsId }) => {
                                 }) ? (
                                   <Button
                                     className='px-5'
-                                    variant='primary'
+                                    colorScheme='blue'
                                     onClick={handleLikes}
                                   >
                                     Cancel
@@ -218,7 +222,7 @@ const SingleEvent = ({ user, userGeoLocation, allEvents, fakeAccountsId }) => {
                                 ) : (
                                   <Button
                                     className='px-5'
-                                    variant='danger'
+                                    colorScheme='red'
                                     onClick={handleLikes}
                                   >
                                     RSVP
@@ -229,7 +233,7 @@ const SingleEvent = ({ user, userGeoLocation, allEvents, fakeAccountsId }) => {
                               )}
                             </Col>
                             <Col md={12}>
-                              <Row>
+                              <Wrap>
                                 {likedBy &&
                                   likedBy
                                     .sort(
@@ -239,42 +243,55 @@ const SingleEvent = ({ user, userGeoLocation, allEvents, fakeAccountsId }) => {
                                     )
                                     .map((like) => {
                                       return (
-                                        <Col md={2}>
-                                          <img
-                                            style={{ height: '2rem' }}
-                                            key={like.owner._id}
+                                        <WrapItem key={like.owner._id}>
+                                          <Avatar
+                                            name={like.owner.name}
                                             src={like.owner.profilePhoto}
-                                            alt={like.owner.name}
                                           />
-                                        </Col>
+                                        </WrapItem>
                                       )
                                     })}
-                              </Row>
+                              </Wrap>
                             </Col>
                           </Row>
                         </Col>
                         <Col md={6}>
                           {/* Event Info */}
-                          <Row>
-                            {event.eventType.map((type) => {
-                              // maybe have each type srounded in a light colored box of sorts?
-                              return (
-                                <Col>
-                                  <p key={type}>{type}</p>
-                                </Col>
-                              )
-                            })}
-                          </Row>
-                          <p>
-                            Date:<span> {event.eventDate}</span>
-                          </p>
-                          <p>
-                            Time: <span>{event.eventTime}</span>
-                          </p>
-                          <p>
-                            Event Location:
-                            <span>{updatedEventLocation.locationName}</span>
-                          </p>
+                          <Box border='1px solid grey' borderRadius='xl'>
+                            <Table variant='simple'>
+                              <Tbody>
+                                <Tr>
+                                  <Th>Type</Th>
+                                  <Td>
+                                    {event.eventType.map((type) => {
+                                      // maybe have each type srounded in a light colored box of sorts?
+                                      return <Badge key={type}>{type}</Badge>
+                                    })}
+                                  </Td>
+                                </Tr>
+                                <Tr>
+                                  <Th>Date:</Th>
+                                  <Td>
+                                    <Badge>{event.eventDate}</Badge>
+                                  </Td>
+                                </Tr>
+                                <Tr>
+                                  <Th>Time:</Th>
+                                  <Td>
+                                    <Badge>{event.eventTime}</Badge>
+                                  </Td>
+                                </Tr>
+                                <Tr>
+                                  <Th>Event Location:</Th>
+                                  <Td>
+                                    <Text fontSize='sm' fontStyle='bold'>
+                                      {updatedEventLocation.locationName}
+                                    </Text>
+                                  </Td>
+                                </Tr>
+                              </Tbody>
+                            </Table>
+                          </Box>
                         </Col>
                       </Row>
                     </Col>
