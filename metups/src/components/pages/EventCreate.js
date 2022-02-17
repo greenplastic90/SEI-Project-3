@@ -254,7 +254,7 @@ const EventCreate = ({ options, userGeoLocation }) => {
 
 
           <Form.Group className='mt-4 text-center'>
-            <Button type='submit'>Create Event</Button>
+            <Button type='submit' onClick={handleSubmit}>Create Event</Button>
           </Form.Group>
         </Form>
       </Container>

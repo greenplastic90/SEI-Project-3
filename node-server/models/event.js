@@ -10,9 +10,12 @@ const commentSchema = new Schema(
   { timestamps: true }
 )
 
-const userLikesSchema = new Schema({
-  owner: { type: mongoose.Schema.ObjectId, ref: 'User', required: true },
-})
+const userLikesSchema = new Schema(
+  {
+    owner: { type: mongoose.Schema.ObjectId, ref: 'User', required: true },
+  },
+  { timestamps: true }
+)
 
 const eventSchema = new Schema(
   {
