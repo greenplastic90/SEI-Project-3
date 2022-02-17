@@ -57,7 +57,7 @@ const EventIndex = ({ options, events, userGeoLocation }) => {
 
   return (
     <section>
-      <Container className='mt-5'>
+      <Container className='py-5'>
         {userGeoLocation && (
           <>
             <h2 className='text-center'>Events Near You</h2>

@@ -168,7 +168,7 @@ const SingleEvent = ({ user, userGeoLocation, allEvents, fakeAccountsId }) => {
     <>
       <section>
         {event && updatedEventLocation ? (
-          <Container className='mt-5 mx-9000'>
+          <Container className='pt-5 mx-9000'>
             <Row className='justify-content-center'>
               <Col md={8}>
                 <Row>
