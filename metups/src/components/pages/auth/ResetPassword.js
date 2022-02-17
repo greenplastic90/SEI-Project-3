@@ -54,7 +54,7 @@ const ResetPassword = ({ pass }) => {
 
   return (
     <>
-      <Button onClick={onOpen}>Reset Password</Button>
+      <Button onClick={onOpen} color={'#BF4040'}>Reset Password</Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
@@ -79,7 +79,7 @@ const ResetPassword = ({ pass }) => {
                         duration: "2000",
                         isClosable: true
                       })
-                    }} onClose={onClose} >
+                    }} onClose={onClose}>
                     Submit
                   </Button>
                 </Center>
@@ -89,7 +89,7 @@ const ResetPassword = ({ pass }) => {
               </FormControl>
             </form>
           </ModalBody>
-          <ModalFooter>
+          <ModalFooter alignSelf={'center'}>
             <Center>
               <Text textAlign={'center'}>Click anywhere on the page to leave</Text>
             </Center>

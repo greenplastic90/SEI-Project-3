@@ -84,11 +84,12 @@ const Profile = ({ user, setUser }) => {
       display={'flex'}
       flexDirection={{ base: 'column', xl: 'row'}}
       justifyContent={'center'}
-      alignItems={'center'}
+      alignItems={{ base: 'center', xl: 'flex-end'}}
       width={'100%'}
       height={'100%'}
       maxW={'full'}
       gap={4}
+      py={5}
     >
       {user && (
         <>
@@ -103,9 +104,11 @@ const Profile = ({ user, setUser }) => {
             my={'5'}
             width={{ base: 'full', md: '100%', lg: '100%' }}
             margin={0}
+            bg={'#174C4F'}
+            color={'white'}
           >
             <Box
-              boxSize={['100', '150', '200']}
+              boxSize={['100', '150']}
               display={'flex'}
               flexDirection={'column'}
               justifyContent={'center'}
@@ -113,14 +116,14 @@ const Profile = ({ user, setUser }) => {
               pb={'2rem'}
             >
               <Image
-                boxSize='120'
+                boxSize='inherit'
                 src={user.profilePhoto ? user.profilePhoto : ProfilePicture}
                 alt='profile'
                 borderRadius='100%'
                 rounded={'100%'}
                 objectFit={'cover'}
               />
-              <Text fontSize={'lg'} textAlign={'center'}>
+              <Text fontSize={{ base: 'sm', md: 'xl'}} textAlign={'center'}>
                 {user.name}
               </Text>
             </Box>
@@ -145,7 +148,7 @@ const Profile = ({ user, setUser }) => {
                   </Tr>
                   <Tr>
                     <Td>Create Event</Td>
-                    <Td><Button onClick={createEvent}>Create Event</Button></Td>
+                    <Td><Button color={'#BF4040'} onClick={createEvent}>Create Event</Button></Td>
                   </Tr>
                   <Tr>
                     <Td>Password</Td>
