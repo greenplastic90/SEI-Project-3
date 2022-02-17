@@ -26,7 +26,7 @@ const PageNavbar = () => {
       <Navbar variant='light' expand='md'>
         <Navbar.Brand>
           <Nav.Item>
-            <Link to='/'> <Image src="https://res.cloudinary.com/dhpy1llxc/image/upload/v1645109533/SEI_61_PROJECT_3/Seeds%20Folder/LOGO.jpg" alt='MetUps Logo' maxH={'30%'} maxW={'30%'} /> </Link>
+            <Link to='/'> <Image src="https://res.cloudinary.com/dhpy1llxc/image/upload/v1645109533/SEI_61_PROJECT_3/Seeds%20Folder/LOGO.jpg" alt='MetUps Logo' maxH={'40%'} maxW={'40%'} /> </Link>
           </Nav.Item>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls='basic-navbar-nav' />

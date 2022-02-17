@@ -28,20 +28,19 @@ function App() {
 
   useEffect(() => {
     setFakeAccountsId([
-      '620e2593144d363677d02d33',
-      '620e2593144d363677d02d41',
-      '620e2593144d363677d02d35',
-      '620e2593144d363677d02d3f',
-      '620e2593144d363677d02d3b',
-      '620e2593144d363677d02d39',
-      '620e2593144d363677d02d49',
-      '620e2593144d363677d02d47',
-      '620e2593144d363677d02d4b',
-      '620e2593144d363677d02d45',
-      '620e2593144d363677d02d37',
-      '620e2593144d363677d02d43',
-      '620e2593144d363677d02d3d',
-    ])
+      "620e580649b0d3c4631a70e6",
+      "620e580649b0d3c4631a70ea",
+      "620e580649b0d3c4631a70ec",
+      "620e580649b0d3c4631a70f0",
+      "620e580649b0d3c4631a70f2",
+      "620e580649b0d3c4631a70ee",
+      "620e580649b0d3c4631a70f4",
+      "620e580649b0d3c4631a70f6",
+      "620e580649b0d3c4631a70f8",
+      "620e580649b0d3c4631a70fa",
+      "620e580649b0d3c4631a70fc",
+      "620e580649b0d3c4631a70fe"
+  ])
   }, [])
 
   const getRandomInRange = (from, to) => {
@@ -69,8 +68,8 @@ function App() {
         const { data } = await axios.get('/api/events/')
         // uncommnet below an save all the IDs in fake AccountsId after you seed
 
-        // const allEventIds = data.map((event) => event._id)
-        // console.log('All IDs ->', allEventIds)
+        const allEventIds = data.map((event) => event._id)
+        console.log('All IDs ->', allEventIds)
 
         const eventsWithUpdatedLocations = data.map((event) => {
           if (userGeoLocation && fakeAccountsId.includes(event._id)) {
