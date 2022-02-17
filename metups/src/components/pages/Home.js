@@ -5,12 +5,8 @@ import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import Container from 'react-bootstrap/Container'
 import Image from 'react-bootstrap/Image'
-import { Text } from '@chakra-ui/react'
-import { Heading } from '@chakra-ui/react'
-// import { Box, Container } from '@chakra-ui/react'
-
 import { userIsAuthenticated } from '../../auth/helpers'
-import { Box, Heading, LinkBox, LinkOverlay, Text } from '@chakra-ui/react'
+import { Box, Heading, Text } from '@chakra-ui/react'
 
 
 const Home = ({ options, events, user }) => {
@@ -21,11 +17,6 @@ const Home = ({ options, events, user }) => {
         <Heading className='text-center mb-5' as='h1' size='3xl'>Welcome {user && user.name} to MetUps</Heading>
           <Col md={6}>
             <div>
-              {user && userIsAuthenticated ? 
-                <Heading>Welcome to Metups | {user.username}</Heading>
-                :
-                <Heading>Welcome to Metups</Heading>
-              }  
               <Text className='mt-5' fontSize='2xl'> MetUps is the perfect place for everything you're looking to do this year! For 0 days, people have been turning to MetUp to organise, host and arrange events. Through MetUp, people have explored their intrerests, grown their community and expanded their skill sets. Join the fun now and sign up to create your first event! </Text>
             </div>
           </Col>
