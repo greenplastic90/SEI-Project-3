@@ -19,6 +19,8 @@ import EventIndex from './components/pages/EventIndex'
 import Profile from './components/pages/Profile'
 import Footer from './components/pages/common/Footer'
 import ResetPassword from './components/pages/auth/ResetPassword.js'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 function App() {
   const [allEvents, setAllEvents] = useState([])
@@ -133,50 +135,56 @@ function App() {
     <Router>
       <PageNavbar />
       <div className='site-wrapper'>
-        <Routes>
-          <Route
-            path='/'
-            element={<Home options={options} events={allEvents} user={user} />}
-          />
-          <Route path='/register' element={<Signup />} />
-          <Route path='/login' element={<Login />} />
-          <Route
-            path='/events/:id'
-            element={
-              <SingleEvent
-                user={user}
-                userGeoLocation={userGeoLocation}
-                allEvents={allEvents}
-                fakeAccountsId={fakeAccountsId}
+        <Row className='justify-content-center'>
+          <Col md={8}>
+            <Routes>
+              <Route
+                path='/'
+                element={
+                  <Home options={options} events={allEvents} user={user} />
+                }
               />
-            }
-          />
-          <Route
-            path='/eventCreate'
-            element={
-              <EventCreate
-                options={options}
-                userGeoLocation={userGeoLocation}
+              <Route path='/register' element={<Signup />} />
+              <Route path='/login' element={<Login />} />
+              <Route
+                path='/events/:id'
+                element={
+                  <SingleEvent
+                    user={user}
+                    userGeoLocation={userGeoLocation}
+                    allEvents={allEvents}
+                    fakeAccountsId={fakeAccountsId}
+                  />
+                }
               />
-            }
-          />
-          <Route
-            path='/events'
-            element={
-              <EventIndex
-                options={options}
-                events={allEvents}
-                userGeoLocation={userGeoLocation}
+              <Route
+                path='/eventCreate'
+                element={
+                  <EventCreate
+                    options={options}
+                    userGeoLocation={userGeoLocation}
+                  />
+                }
               />
-            }
-          />
-          <Route
-            path='/profile'
-            element={<Profile user={user} setUser={setUser} />}
-          />
+              <Route
+                path='/events'
+                element={
+                  <EventIndex
+                    options={options}
+                    events={allEvents}
+                    userGeoLocation={userGeoLocation}
+                  />
+                }
+              />
+              <Route
+                path='/profile'
+                element={<Profile user={user} setUser={setUser} />}
+              />
 
-          {/* <Route path='/resetPassword' element={<ResetPassword />} /> */}
-        </Routes>
+              {/* <Route path='/resetPassword' element={<ResetPassword />} /> */}
+            </Routes>
+          </Col>
+        </Row>
       </div>
       <Footer />
     </Router>
