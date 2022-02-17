@@ -26,11 +26,11 @@ const seedDatabase = async () => {
       return {
         ...event,
         owner: users[randomUserIndex]._id,
-        eventType: eventTypes[randomTypeIndex],
+        // eventType: eventTypes[randomTypeIndex],
         longitude: randomLong,
         latitude: randomLat,
         eventTime: '12:30pm',
-        image: `https://picsum.photos/2000/500?random=${i}`,
+        // image: `https://picsum.photos/2000/500?random=${i}`,
         likedBy: [{ owner: users[randomUserIndex] }],
       }
 
