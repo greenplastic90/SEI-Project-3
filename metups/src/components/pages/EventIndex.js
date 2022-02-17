@@ -12,6 +12,8 @@ import Button from 'react-bootstrap/Button'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Spinner from 'react-bootstrap/Spinner'
+import { Text } from '@chakra-ui/react'
+import { Heading } from '@chakra-ui/react'
 import { userIsAuthenticated } from '../../auth/helpers.js'
 
 const EventIndex = ({ options, events, userGeoLocation }) => {
@@ -60,7 +62,7 @@ const EventIndex = ({ options, events, userGeoLocation }) => {
       <Container className='py-5'>
         {userGeoLocation && (
           <>
-            <h2 className='text-center'>Events Near You</h2>
+            <Heading className='text-center mb-5' as='h1' size='3xl'>Events Near You</Heading>
             <Map
               initialViewState={{
                 longitude: userGeoLocation.longitude,
@@ -108,10 +110,10 @@ const EventIndex = ({ options, events, userGeoLocation }) => {
           </>
         )}
 
-        <h2>Search for an event</h2>
+        <Text className='mt-2 text-center' fontSize='3xl'>Search for an event</Text>
         <Form>
           <Form.Group>
-            <Form.Label htmlFor='search bar'>Search</Form.Label>
+            <Form.Label htmlFor='search bar'> <Text className='mt-2 text-center' fontSize='2xl'>Search</Text> </Form.Label>
             <Form.Control
               type='text'
               name='searchBar'
@@ -120,7 +122,7 @@ const EventIndex = ({ options, events, userGeoLocation }) => {
             />
           </Form.Group>
           <Form.Group className='mb-3'>
-            <Form.Label htmlFor='event type'>Type of Event</Form.Label>
+            <Form.Label htmlFor='event type'> <Text className='mt-2 text-center' fontSize='2xl'>Serach by type</Text></Form.Label>
             <Select
               closeMenuOnSelect={false}
               isMulti
