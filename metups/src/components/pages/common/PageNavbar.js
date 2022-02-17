@@ -59,7 +59,7 @@ const PageNavbar = () => {
             <Nav.Item>
               <Link to = '/register'>
                 <Button>
-                  Register
+                  Sign up
                 </Button>
               </Link>
             </Nav.Item>

@@ -13,20 +13,18 @@ const Home = ({ options, events, user }) => {
   return (
     <section>
       <Container>
+        <Row className="justify-content-center">
+          <Col md={8}>
         <Row className='justify-content-around'>
-
           <Col md={6}>
             <div>
-              <h4>Welcome {user && user.username} to Metups</h4>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
-                ut nibh dictum, vulputate est quis, maximus odio.{' '}
-              </p>
+              <h4>Welcome {user && user.name} to Metups</h4>
+              <p> Metups is the perfect place for everything you're looking to do this year! For 0 days, people have been turning to Metup to organise, host and arrange events. Through Metup, people have explored their intrerests, grown their community and expanded their skill sets. Join the fun now and sign up to create your first event! </p>
             </div>
           </Col>
           <Col md={6}>
             <div>
-              <Image src="https://media.istockphoto.com/vectors/multicultural-group-of-people-is-standing-together-team-of-colleagues-vector-id1223631367?s=612x612" alt="gathering stock image" />
+              <Image src="https://res.cloudinary.com/dhpy1llxc/image/upload/v1645114080/SEI_61_PROJECT_3/Seeds%20Folder/AdobeStock_315614892_ccexpress_ufxmhx.png" alt="gathering stock image" />
             </div>
           </Col>
           <Col md={12} className='py-5'>
@@ -39,13 +37,8 @@ const Home = ({ options, events, user }) => {
                   return (
                     i < 6 &&
                     <Col key={item._id} md={4}>
-                      <div>
-                        <img
-                          className='homeImg'
-                          src={item.image}
-                          alt='event images'
-                        />
-                        <Link to={`/events/${item._id}`}> {item.eventName} </Link>
+                      <div className='homepage-events text-center'>
+                        <Link to={`/events/${item._id}`}> <Image className='homeImg' src={item.image} alt='event images' /> {item.eventName} </Link>
                       </div>
                     </Col>
                   )
@@ -53,13 +46,8 @@ const Home = ({ options, events, user }) => {
                   return (
                     i < 6 &&
                     <Col key={item._id} md={4}>
-                      <div>
-                        <img
-                          className='homeImg'
-                          src={item.image}
-                          alt='event images'
-                        />
-                        <Link to='/login'> {item.eventName} </Link>
+                      <div className='homepage-events text-center'>
+                        <Link to='/login'> <Image className='homeImg' src={item.image} alt='event images' /> {item.eventName} </Link>
                       </div>
                     </Col>
                   )
@@ -67,6 +55,8 @@ const Home = ({ options, events, user }) => {
               })}
             </Row>
           </Col>
+        </Row>
+        </Col>
         </Row>
       </Container>
     </section>

@@ -102,6 +102,7 @@ const Signup = () => {
 
   return (
     <section>
+      
       <Container className='mt-5'>
         <Form onSubmit={handleSubmit}>
           {/* name */}
