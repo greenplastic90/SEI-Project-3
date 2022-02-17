@@ -12,12 +12,19 @@ import {
 import { useNavigate } from 'react-router-dom'
 import { getTokenFromLocalStorage } from '../../auth/helpers'
 import axios from 'axios'
+import ProfilePicture from '../../images/genericProfilePic.png'
+import ResetPassword from './auth/ResetPassword'
+import { Link } from '@chakra-ui/react'
 
 const Profile = ({ user, setUser }) => {
   const navigate = useNavigate()
 
   const createEvent = () => {
     navigate('/eventCreate')
+  }
+
+  const link = (id) => {
+    return `/events/${id}`
   }
 
   useEffect(() => {
@@ -36,10 +43,10 @@ const Profile = ({ user, setUser }) => {
       console.log(error)
     }
   }, [setUser])
-
-  const resetPass = () => {
-    navigate('/resetPassword')
-  }
+  
+  // const resetPass = () => {
+  //   navigate('/resetPassword')
+  // }
 
   const deleteEvent = async (id) => {
     try {
@@ -99,14 +106,14 @@ const Profile = ({ user, setUser }) => {
             >
               <Image
                 boxSize='120'
-                src={user.profilePhoto}
+                src={user.profilePhoto ? user.profilePhoto : ProfilePicture}
                 alt='profile'
                 borderRadius='100%'
                 rounded={'100%'}
                 objectFit={'cover'}
               />
               <Text fontSize={'lg'} textAlign={'center'}>
-                {user.username}
+                {user.name}
               </Text>
             </Box>
             <Box textAlign={'center'}>
@@ -119,7 +126,7 @@ const Profile = ({ user, setUser }) => {
                 <Button onClick={createEvent}>Create Event</Button>
               </Text>
               <Text>
-                Password | <Button onClick={resetPass}>Reset Password</Button>
+                Password | <ResetPassword /> {/* <Button onClick={resetPass}>Reset Password</Button> */}
               </Text>
             </Box>
           </Container>
@@ -136,7 +143,7 @@ const Profile = ({ user, setUser }) => {
                 {user.ownedEvents.map(
                   ({ image, eventName, description, _id }, i) => {
                     return (
-                      <Box key={i} id={_id} py={2}>
+                      <Box key={i} id={_id} px={2}>
                         <Image maxHeight={100} src={image} alt='event' />
                         <Text>{eventName}</Text>
                         <Text isTruncated>{description}</Text>
@@ -155,15 +162,17 @@ const Profile = ({ user, setUser }) => {
                   }
                 )}
               </Box>
-              <Box maxW={250} alignSelf={'center'}>
+              <Box maxW={250} alignSelf={{ base: 'center', md: 'flex-start' }}>
                 <Heading fontSize={'2rem'} textAlign={'center'} pb={2}>
                   Events Attended
                 </Heading>
                 {user.likedEvents.map(
-                  ({ image, eventName, description }, i) => {
+                  ({ image, eventName, description, _id }, i) => {
                     return (
                       <Box key={i} py={2}>
-                        <Image src={image} alt='event' />
+                        <Link to={link(_id)}>
+                          <Image id={_id} src={image} alt='event' />
+                        </Link>
                         <Text fontSize={'lg'}>{eventName}</Text>
                         <Text isTruncated>{description}</Text>
                       </Box>

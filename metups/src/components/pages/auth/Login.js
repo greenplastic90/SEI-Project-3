@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 // BOOTSTRAP COMPONENTS
 import Container from 'react-bootstrap/Container'
@@ -8,6 +8,8 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+
+import { Text } from '@chakra-ui/react'
 
 const Login = () => {
   const navigate = useNavigate()
@@ -49,7 +51,7 @@ const Login = () => {
           <Row className='justify-content-center'>
             <Col md={6}>
               <Row>
-                <h2 className='text-center'>Login</h2>
+                <h2 className='text-center mb-5'>Login</h2>
                 <Col md={6}>
                   <Form.Group className='mb-2'>
                     <Form.Label htmlFor='username'>Username</Form.Label>
@@ -85,6 +87,7 @@ const Login = () => {
             <Button type='submit'>Log in</Button>
           </Form.Group>
         </Form>
+        <Text textAlign={'center'} mt='5'>If you aren't already signed up, <Link to='/register'>Sign up here</Link></Text>
       </Container>
     </section>
   )
