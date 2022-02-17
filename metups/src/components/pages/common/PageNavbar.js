@@ -7,6 +7,8 @@ import { userIsAuthenticated } from '../../../auth/helpers'
 // Importing Bootstrap
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
+import Image from 'react-bootstrap/Image'
+
 // import Container from 'react-bootstrap/Container'
 import { Button, Container } from '@chakra-ui/react'
 import { useToast } from '@chakra-ui/react'
@@ -24,7 +26,7 @@ const PageNavbar = () => {
     <Navbar variant='light' expand='md' className='mb-3'>
       <Navbar.Brand>
         <Nav.Item>
-          <Link to='/'> METUPS</Link>
+          <Link to='/'> <Image src="https://res.cloudinary.com/dhpy1llxc/image/upload/v1645109533/SEI_61_PROJECT_3/Seeds%20Folder/LOGO.jpg"/> </Link>
         </Nav.Item>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls='basic-navbar-nav' />
