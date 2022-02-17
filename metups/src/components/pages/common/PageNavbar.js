@@ -28,7 +28,7 @@ const PageNavbar = () => {
         </Nav.Item>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls='basic-navbar-nav' />
-      <Navbar.Collapse id='basic-navbar-basic' className='justify-content-end gap-3'>
+      <Navbar.Collapse id='basic-navbar-basic' className='justify-content-end gap-4'>
         { userIsAuthenticated() ?
           <>
             <Nav.Item>

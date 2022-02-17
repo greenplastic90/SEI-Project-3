@@ -79,7 +79,7 @@ const ResetPassword = ({ pass }) => {
                         duration: "2000",
                         isClosable: true
                       })
-                    }} >
+                    }} onClose={onClose} >
                     Submit
                   </Button>
                 </Center>

@@ -12,6 +12,7 @@ import Button from 'react-bootstrap/Button'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Spinner from 'react-bootstrap/Spinner'
+import { userIsAuthenticated } from '../../auth/helpers.js'
 
 const EventIndex = ({ options, events, userGeoLocation }) => {
   const navigate = useNavigate()
@@ -51,6 +52,8 @@ const EventIndex = ({ options, events, userGeoLocation }) => {
       setSearchParams({ ...searchParams, [e.target.name]: e.target.value })
     }
   }
+
+  if (!userIsAuthenticated) return
 
   return (
     <section>
