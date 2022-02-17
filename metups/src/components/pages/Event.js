@@ -3,7 +3,6 @@ import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import Map, { Marker } from 'react-map-gl'
 import { mapToken } from '../../config/enviroments.js'
-import Banner from '../../images/genericProfilePic.png'
 
 // Import helpers
 import { getTokenFromLocalStorage } from '../../auth/helpers'
@@ -142,7 +141,6 @@ const SingleEvent = ({ user, userGeoLocation, allEvents, fakeAccountsId }) => {
     }
   }
 
-
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
@@ -171,124 +169,128 @@ const SingleEvent = ({ user, userGeoLocation, allEvents, fakeAccountsId }) => {
       <section>
         {event && updatedEventLocation ? (
           <Container className='mt-5 mx-9000'>
-            <Row className='my-5'>
-              {/* EVENT IMAGE AND EVENT NAME*/}
-              <div>
-                <Image
-                  className='img-fluid shadow-2-strong'
-                  src={event.image}
-                  alt='event image'
-                />
-              </div>
-            </Row>
-            {event.owner ? (
-              <Row className='justify-content-md-center'>
-                <Col>
-                  {/*  HOSTED BY */}
-                  <div>
+            <Row className='justify-content-center'>
+              <Col md={8}>
+                <Row>
+                  <Col md={12}>
+                    {/* EVENT IMAGE AND EVENT NAME*/}
                     <Image
-                      src={event.owner.profilePhoto}
-                      alt="host's profile image"
-                      className='rounded-circle my-2 mx-5'
+                      className='img-fluid shadow-2-strong'
+                      src={event.image}
+                      alt='event image'
                     />
-                  </div>
-                </Col>
-
-                <Col className='mt-5'>
-                  <p> Hosted by: {event.owner.name} </p>
-                </Col>
-                <Col xs lg='6' className='mt-9'>
-                  <div>
+                  </Col>
+                  <Col md={12}>
                     <h1> {event.eventName} </h1>
-                    {/* Types */}
-                    {event.eventType.map((type) => {
-                      // maybe have each type srounded in a light colored box of sorts?
-                      return (
-                        <span key={type} className='mx-2'>
-                          {type}
-                        </span>
-                      )
-                    })}
-                  </div>
-
-                  <Row>
-                    <Col>
-                      {/* LIKE BUTTON */}
-                      {likedBy && user ? (
-                        likedBy.some((like) => {
-                          return user._id === like.owner.id
-                        }) ? (
-                          <Button
-                            variant='primary'
-                            className='my-3'
-                            onClick={handleLikes}
-                          >
-                            <Heart /> Unlike
-                          </Button>
-                        ) : (
-                          <Button
-                            variant='danger'
-                            className='m-2'
-                            onClick={handleLikes}
-                          >
-                            <Heart /> Like
-                          </Button>
-                        )
-                      ) : (
-                        ''
-                      )}
+                  </Col>
+                  {event.owner ? (
+                    // Col for all info of event owner and event info
+                    <Col md={12}>
+                      <Row>
+                        <Col md={6}>
+                          {/*  HOSTED BY */}
+                          <Row className='justify-content-center'>
+                            <Col md={12}>
+                              <Image
+                                style={{ height: '8rem' }}
+                                src={event.owner.profilePhoto}
+                                alt="host's profile image"
+                                className='rounded-circle my-2 mx-5'
+                              />
+                            </Col>
+                            <Col md={12}>
+                              <p> Hosted by: {event.owner.name} </p>
+                            </Col>
+                            {/* Button and attendies */}
+                            <Col md={12}>
+                              {/* LIKE BUTTON */}
+                              {likedBy && user ? (
+                                likedBy.some((like) => {
+                                  return user._id === like.owner.id
+                                }) ? (
+                                  <Button
+                                    className='px-5'
+                                    variant='primary'
+                                    onClick={handleLikes}
+                                  >
+                                    Cancel
+                                  </Button>
+                                ) : (
+                                  <Button
+                                    className='px-5'
+                                    variant='danger'
+                                    onClick={handleLikes}
+                                  >
+                                    RSVP
+                                  </Button>
+                                )
+                              ) : (
+                                ''
+                              )}
+                            </Col>
+                            <Col md={12}>
+                              <Row>
+                                {likedBy &&
+                                  likedBy
+                                    .sort(
+                                      (a, b) =>
+                                        new Date(b.createdAt) -
+                                        new Date(a.createdAt)
+                                    )
+                                    .map((like) => {
+                                      return (
+                                        <Col md={2}>
+                                          <img
+                                            style={{ height: '2rem' }}
+                                            key={like.owner._id}
+                                            src={like.owner.profilePhoto}
+                                            alt={like.owner.name}
+                                          />
+                                        </Col>
+                                      )
+                                    })}
+                              </Row>
+                            </Col>
+                          </Row>
+                        </Col>
+                        <Col md={6}>
+                          {/* Event Info */}
+                          <Row>
+                            {event.eventType.map((type) => {
+                              // maybe have each type srounded in a light colored box of sorts?
+                              return (
+                                <Col>
+                                  <p key={type}>{type}</p>
+                                </Col>
+                              )
+                            })}
+                          </Row>
+                          <p>
+                            Date:<span> {event.eventDate}</span>
+                          </p>
+                          <p>
+                            Time: <span>{event.eventTime}</span>
+                          </p>
+                          <p>
+                            Event Location:
+                            <span>{updatedEventLocation.locationName}</span>
+                          </p>
+                        </Col>
+                      </Row>
                     </Col>
-                    <Col>
-                      {likedBy &&
-                        likedBy.map((like) => {
-                          return (
-                            <img
-                              key={like.owner._id}
-                              src={like.owner.profilePhoto}
-                              alt={like.owner.name}
-                            />
-                          )
-                        })}
-                    </Col>
-                  </Row>
-                </Col>
-              </Row>
-            ) : (
-              <Spinner animation='border'></Spinner>
-            )}
-
-            {/* description + date and time */}
-            <Row>
-              <Col className='mt-8'>
-                <div>
-                  <p>{event.description}</p>
-                </div>
-              </Col>
-              <Col>
-                <div>
-                  <div>
-                    <p>
-                      Event Location:
-                      {updatedEventLocation.locationName}
-                    </p>
-                  </div>
-                  <div>
-                    <p>Date: {event.eventDate}</p>
-                  </div>
-                  <div>
-                    <p>Time: {event.eventTime}</p>
-                  </div>
-                </div>
-                {userGeoLocation && (
-                  <>
-                    <div>
+                  ) : (
+                    <Spinner animation='border'></Spinner>
+                  )}
+                  {/* Map */}
+                  <Col md={12}>
+                    {userGeoLocation && (
                       <Map
                         initialViewState={{
                           longitude: updatedEventLocation.longitude,
                           latitude: updatedEventLocation.latitude,
                           zoom: 13,
                         }}
-                        style={{ height: 300 }}
+                        style={{ height: 200 }}
                         mapStyle='mapbox://styles/mapbox/streets-v11'
                         mapboxAccessToken={mapToken}
                       >
@@ -298,71 +300,88 @@ const SingleEvent = ({ user, userGeoLocation, allEvents, fakeAccountsId }) => {
                           latitude={updatedEventLocation.latitude}
                         ></Marker>
                       </Map>
-                    </div>
-                  </>
-                )}
-              </Col>
-            </Row>
-
-            <Row>
-              <Col>
-                <div>
-                  <Form onSubmit={handleSubmit}>
-                    <Form.Group>
-                      <Form.Label>Comment</Form.Label>
-                      <Form.Control
-                        name='text'
-                        as='textarea'
-                        onChange={handleChange}
-                        placeholder='Add Comment Here'
-                        value={comments.text}
-                      />
-                    </Form.Group>
-                    <Form.Group className='mt-4 text-center'>
-                      <Button name='text' type='submit'>
-                        Post Comment
-                      </Button>
-                    </Form.Group>
-                  </Form>
-                </div>
-              </Col>
-            </Row>
-            <hr />
-            {/* COMMENTS DISPLAY */}
-            <Row>
-              <Col className='my-4'>
-                <h2> Comments </h2>
-              </Col>
-            </Row>
-
-            {!event.comments.length ? (
-              <></>
-            ) : (
-              <Row>
-                {event.comments
-                  .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-                  .map((comment) => {
-                    return (
-                      <Col key={comment._id}>
-                        <Card border='light' style={{ width: '60rem' }}>
-                          <Card.Header>
-                            <Image
-                              src={comment.owner.profilePhoto}
-                              className='comment-profilePhoto rounded-circle my-2 mx-3'
+                    )}
+                  </Col>
+                  {/* Description */}
+                  <p>{event.description}</p>
+                  {/* Comment Submit */}
+                  <Col md={12}>
+                    <Form onSubmit={handleSubmit}>
+                      <Row>
+                        <Col>
+                          <Form.Group>
+                            <Form.Label>Comment</Form.Label>
+                            <Form.Control
+                              name='text'
+                              as='textarea'
+                              onChange={handleChange}
+                              placeholder='Add Comment Here'
+                              value={comments.text}
                             />
-                            {comment.owner.username}
-                          </Card.Header>
-                          <Card.Body>
-                            <Card.Text>{comment.text}</Card.Text>
-                          </Card.Body>
-                        </Card>
-                      </Col>
-                    )
-                  })}
-              </Row>
-            )}
-
-            {/* ADD COMMENT */}
+                          </Form.Group>
+                        </Col>
+                        <Col>
+                          <Form.Group>
+                            <Button name='text' type='submit'>
+                              Post Comment
+                            </Button>
+                          </Form.Group>
+                        </Col>
+                      </Row>
+                    </Form>
+                  </Col>
+                  {/* Comments */}
+                  <Col md={12}>
+                    <Row>
+                      {!event.comments.length ? (
+                        <></>
+                      ) : (
+                        <>
+                          {event.comments
+                            .sort(
+                              (a, b) =>
+                                new Date(b.createdAt) - new Date(a.createdAt)
+                            )
+                            .map((comment) => {
+                              return (
+                                <Col md={6} key={comment._id}>
+                                  <Card
+                                    border='light'
+                                    style={{ width: '60rem' }}
+                                  >
+                                    <Card.Header>
+                                      <Image
+                                        src={comment.owner.profilePhoto}
+                                        className='comment-profilePhoto rounded-circle my-2 mx-3'
+                                      />
+                                      {comment.owner.username}
+                                    </Card.Header>
+                                    <Card.Body>
+                                      <Card.Text>{comment.text}</Card.Text>
+                                    </Card.Body>
+                                  </Card>
+                                </Col>
+                              )
+                            })}
+                        </>
+                      )}
+                    </Row>
+                  </Col>
+                  <Row>
+                    <Col>
+                      <div></div>
+                    </Col>
+                  </Row>
+                  {/* COMMENTS DISPLAY */}
+                  <Row>
+                    <Col className='my-4'>
+                      <h2> Comments </h2>
+                    </Col>
+                  </Row>
+                  {/* ADD COMMENT */}
+                </Row>
+              </Col>
+            </Row>
           </Container>
         ) : (
           <div>loading</div>
