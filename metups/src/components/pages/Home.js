@@ -6,15 +6,16 @@ import Row from 'react-bootstrap/Row'
 import Container from 'react-bootstrap/Container'
 import Image from 'react-bootstrap/Image'
 
+// import { Box, Container } from '@chakra-ui/react'
+
 import { userIsAuthenticated } from '../../auth/helpers'
 
 
 const Home = ({ options, events, user }) => {
   return (
-    <section>
-      <Container>
+    <section className='mainHome'>
+      <Container className='pt-5'>
         <Row className='justify-content-around'>
-
           <Col md={6}>
             <div>
               <h4>Welcome {user && user.username} to Metups</h4>
@@ -31,9 +32,6 @@ const Home = ({ options, events, user }) => {
           </Col>
           <Col md={12} className='py-5'>
             <Row>
-              
-            
-
               {events.map((item, i) => {
                 if (userIsAuthenticated()) {
                   return (

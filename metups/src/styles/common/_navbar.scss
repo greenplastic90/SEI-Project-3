@@ -10,15 +10,15 @@
     cursor: pointer;
     color: #000;
     &:hover {
-      zoom: 105%;
+      color: linear-gradient(90deg, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
     }
   }
   a, .clickable {
+    cursor: pointer;
     text-decoration: none;
     color: #000;
     &:hover {
-      zoom: 105%;
-      color: #000;
+      color: linear-gradient(90deg, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
     }
   }
 }

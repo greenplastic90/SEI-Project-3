@@ -12,6 +12,7 @@ import Button from 'react-bootstrap/Button'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Spinner from 'react-bootstrap/Spinner'
+import { userIsAuthenticated } from '../../auth/helpers.js'
 
 const EventIndex = ({ options, events, userGeoLocation }) => {
   const navigate = useNavigate()
@@ -52,9 +53,11 @@ const EventIndex = ({ options, events, userGeoLocation }) => {
     }
   }
 
+  if (!userIsAuthenticated) return
+
   return (
     <section>
-      <Container className='mt-5'>
+      <Container className='py-5'>
         {userGeoLocation && (
           <>
             <h2 className='text-center'>Events Near You</h2>

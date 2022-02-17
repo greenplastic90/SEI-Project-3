@@ -113,7 +113,7 @@ const EventCreate = ({ options, userGeoLocation }) => {
 
   return (
     <section>
-      <Container className='mt-5'>
+      <Container className='pt-5'>
         <Form onSubmit={handleSubmit}>
           {/* eventName */}
           <Form.Group className='mb-3'>
@@ -254,7 +254,7 @@ const EventCreate = ({ options, userGeoLocation }) => {
 
 
           <Form.Group className='mt-4 text-center'>
-            <Button type='submit'>Create Event</Button>
+            <Button type='submit' onClick={handleSubmit}>Create Event</Button>
           </Form.Group>
         </Form>
       </Container>
