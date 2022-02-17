@@ -102,7 +102,7 @@ const Signup = () => {
 
   return (
     <section>
-      <Container className='mt-5'>
+      <Container className='pt-5'>
         <Form onSubmit={handleSubmit}>
           {/* name */}
           <Form.Group className='mb-3'>

@@ -46,7 +46,7 @@ const Login = () => {
 
   return (
     <section className='form-page'>
-      <Container className='mt-5'>
+      <Container className='pt-5'>
         <Form onSubmit={handleSubmit} className='mt-4'>
           <Row className='justify-content-center'>
             <Col md={6}>

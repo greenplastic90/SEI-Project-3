@@ -3,15 +3,14 @@ import React from 'react'
 
 const Boxes = ({ item }) => {
   return (
-    <Box maxW={'sm'} borderWidth='1px' borderRadius={'lg'} overflow='hidden'>
+    <Box maxW={'sm'} borderWidth='1px' borderRadius={'lg'} overflow='hidden' bg={'#174C4F'} mb={2}>
       <Image src={item.image} alt="" />
-      <Box p={6}>
+      <Box p={6} color={'white'}>
         <Box display={'flex'} alignItems={'baseline'}>
           <Badge borderRadius={'full'} px={2}>
             {item.eventType}
           </Badge>
           <Box 
-            color='gray.500'
             fontWeight='semibold'
             letterSpacing='wide'
             fontSize='xs'
@@ -29,11 +28,11 @@ const Boxes = ({ item }) => {
             lineHeight='tight'
             isTruncated
             pb={4}
+            color={'white'}
           >
             {item.eventName}
           </Box>
       </Box>
-      {}
     </Box>
   )
 }

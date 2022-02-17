@@ -7,5 +7,6 @@
     "titleBar.inactiveForeground": "#000",
     "titleBar.activeForeground": "#000"
   },
-  "window.title": "FRONTEND"
+  "window.title": "FRONTEND",
+  "compile-hero.disable-compile-files-on-did-save-code": true
 }
