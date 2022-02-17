@@ -119,7 +119,7 @@ const Profile = ({ user, setUser }) => {
                 boxSize='inherit'
                 src={user.profilePhoto ? user.profilePhoto : ProfilePicture}
                 alt='profile'
-                borderRadius='100%'
+                borderRadius='full'
                 rounded={'100%'}
                 objectFit={'cover'}
               />
