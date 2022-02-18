@@ -104,7 +104,7 @@ export default [
     locationName: ' ',
     eventType: 'Outdoor',
     description:
-      'Over the years, Comic-Con has become the focal point for the world of comics conventions. The event continues to offer the complete convention experience: a giant Exhibit Hall (topping over 460,000 square feet in its current incarnation); a massive programming schedule (close to 700 separate events in 2014), featuring comics and all aspects of the popular arts, including hands-on workshops and educational and academic programming such as the Comics Arts Conference; anime and film screenings (including a separate film festival); games; the Will Eisner Comic Industry Awards, the “Oscars” of the comics industry; a Masquerade costume competition with prizes and trophies; an Autograph Area; an Art Show; and Portfolio Reviews, bringing together aspiring artists with major companies.',
+      'Over the years, Comic-Con has become the focal point for the world of comics conventions. The event continues to offer the complete convention experience: a giant Exhibit Hall (topping over 460,000 square feet in its current incarnation); a massive programming schedule (close to 700 separate events in 2014), featuring comics and all aspects of the popular arts, including hands-on workshops and educational and academic programming such as the Comics Arts Conference; anime and film screenings (including a separate film festival); games.',
     eventDate: '21/07/2022',
     image:
       'https://res.cloudinary.com/dhpy1llxc/image/upload/v1645101517/SEI_61_PROJECT_3/Seeds%20Folder/san-diego-Comic-Con-Logo-1200x600_c34zip.jpg',
@@ -124,7 +124,7 @@ export default [
     locationName: ' ',
     eventType: 'Culture',
     description:
-      'Chinese New Year is the festival that celebrates the beginning of a new year on the traditional lunisolar and solar Chinese calendar. In Chinese and other East and Southeast Asian cultures, the festival is commonly referred to as the Spring Festival (Chinese: 春節 / 春节; pinyin: Chūnjié)[3] as the spring season in the lunisolar calendar traditionally starts with lichun, the first of the twenty-four solar terms which the festival celebrates around the time of the Chinese New Year.[4] Marking the end of winter and the beginning of the spring season, observances traditionally take place from New Year’s Eve, the evening preceding the first day of the year to the Lantern Festival, held on the 15th day of the year. The first day of Chinese New Year begins on the new moon that appears between 21 January and 20 February',
+      'Chinese New Year is the festival that celebrates the beginning of a new year on the traditional lunisolar and solar Chinese calendar. In Chinese and other East and Southeast Asian cultures, the festival is commonly referred to as the Spring Festival (Chinese: 春節 / 春节; pinyin: Chūnjié) as the spring season in the lunisolar calendar traditionally starts with lichun, the first of the twenty-four solar terms which the festival celebrates around the time of the Chinese New Year.',
     eventDate: '01/02/2023',
     image:
       'https://res.cloudinary.com/dhpy1llxc/image/upload/v1645101609/SEI_61_PROJECT_3/Seeds%20Folder/chinese-new-year--mobile_awgnob.png',
