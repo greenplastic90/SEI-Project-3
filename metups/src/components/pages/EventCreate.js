@@ -12,6 +12,8 @@ import Image from 'react-bootstrap/Image'
 import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import { Heading } from '@chakra-ui/react'
+
 
 const EventCreate = ({ options, userGeoLocation }) => {
   const navigate = useNavigate()
@@ -113,6 +115,7 @@ const EventCreate = ({ options, userGeoLocation }) => {
   return (
     <section>
       <Container className='pt-5'>
+        <Heading className='text-center mb-3'> Create Your Event </Heading>
         <Form onSubmit={handleSubmit}>
           {/* eventName */}
           <Form.Group className='mb-3'>
