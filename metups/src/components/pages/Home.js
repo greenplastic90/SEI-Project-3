@@ -15,7 +15,7 @@ const Home = ({ options, events, user }) => {
       <Container className='pt-5'>
         <Row className='justify-content-around'>
           <Heading className='text-center mb-5' as='h1' size='3xl'>
-            Welcome {user && user.name} to MetUps
+            Welcome to MetUps
           </Heading>
           <Col md={6} sm={8}>
             <div>
