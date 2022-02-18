@@ -190,6 +190,7 @@ const Profile = ({ user, setUser }) => {
                         bg={'red'}
                         rounded={'md'}
                         size={'24px'}
+                        mb={2}
                       >
                         Delete Event
                       </Button>

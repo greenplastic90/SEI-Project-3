@@ -13,7 +13,7 @@ export default [
     locationName: 'New York',
     eventType: 'Food', 
     description:
-      'Vegan Recipe Club is part of the UK’s leading vegan charity, Viva!. We have hundreds of delicious vegan recipes; from easy weeknight dinners to showstopper desserts, and everything in-between! Keep your eyes peeled for new recipes each month developed by our expert team (Essi Karjalainen and Sam Harris) of foodies and from guest chefs too.',
+      'Vegan Recipe Club is part of the UKs leading vegan charity, Viva!. We have hundreds of delicious vegan recipes; from easy weeknight dinners to showstopper desserts, and everything in-between! Keep your eyes peeled for new recipes each month developed by our expert team (Essi Karjalainen and Sam Harris) of foodies and from guest chefs too.',
     eventDate: '06/07/2022',
     image: 'https://res.cloudinary.com/dhpy1llxc/image/upload/v1645098719/SEI_61_PROJECT_3/Seeds%20Folder/Screenshot_2022-02-17_at_11.51.25_am_yjwusa.png',
   },
