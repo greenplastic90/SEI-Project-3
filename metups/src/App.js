@@ -19,6 +19,8 @@ import EventIndex from './components/pages/EventIndex'
 import Profile from './components/pages/Profile'
 import Footer from './components/pages/common/Footer'
 import ResetPassword from './components/pages/auth/ResetPassword.js'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 function App() {
   const [allEvents, setAllEvents] = useState([])
@@ -28,19 +30,20 @@ function App() {
 
   useEffect(() => {
     setFakeAccountsId([
-      "620e580649b0d3c4631a70e6",
-      "620e580649b0d3c4631a70ea",
-      "620e580649b0d3c4631a70ec",
-      "620e580649b0d3c4631a70f0",
-      "620e580649b0d3c4631a70f2",
-      "620e580649b0d3c4631a70ee",
-      "620e580649b0d3c4631a70f4",
-      "620e580649b0d3c4631a70f6",
-      "620e580649b0d3c4631a70f8",
-      "620e580649b0d3c4631a70fa",
-      "620e580649b0d3c4631a70fc",
-      "620e580649b0d3c4631a70fe"
-  ])
+      '620e94d6bc376fa1796b568b',
+      '620e94d6bc376fa1796b569b',
+      '620e94d6bc376fa1796b569f',
+      '620e94d6bc376fa1796b568d',
+      '620e94d6bc376fa1796b5693',
+      '620e94d6bc376fa1796b5697',
+      '620e94d6bc376fa1796b5699',
+      '620e94d6bc376fa1796b5691',
+      '620e94d6bc376fa1796b56a1',
+      '620e94d6bc376fa1796b568f',
+      '620e94d6bc376fa1796b5695',
+      '620e94d6bc376fa1796b569d',
+      '620e94d6bc376fa1796b56a3',
+    ])
   }, [])
 
   const getRandomInRange = (from, to) => {
@@ -132,50 +135,56 @@ function App() {
     <Router>
       <PageNavbar />
       <div className='site-wrapper'>
-        <Routes>
-          <Route
-            path='/'
-            element={<Home options={options} events={allEvents} user={user} />}
-          />
-          <Route path='/register' element={<Signup />} />
-          <Route path='/login' element={<Login />} />
-          <Route
-            path='/events/:id'
-            element={
-              <SingleEvent
-                user={user}
-                userGeoLocation={userGeoLocation}
-                allEvents={allEvents}
-                fakeAccountsId={fakeAccountsId}
+        <Row className='justify-content-center'>
+          <Col md={8}>
+            <Routes>
+              <Route
+                path='/'
+                element={
+                  <Home options={options} events={allEvents} user={user} />
+                }
               />
-            }
-          />
-          <Route
-            path='/eventCreate'
-            element={
-              <EventCreate
-                options={options}
-                userGeoLocation={userGeoLocation}
+              <Route path='/register' element={<Signup />} />
+              <Route path='/login' element={<Login />} />
+              <Route
+                path='/events/:id'
+                element={
+                  <SingleEvent
+                    user={user}
+                    userGeoLocation={userGeoLocation}
+                    allEvents={allEvents}
+                    fakeAccountsId={fakeAccountsId}
+                  />
+                }
               />
-            }
-          />
-          <Route
-            path='/events'
-            element={
-              <EventIndex
-                options={options}
-                events={allEvents}
-                userGeoLocation={userGeoLocation}
+              <Route
+                path='/eventCreate'
+                element={
+                  <EventCreate
+                    options={options}
+                    userGeoLocation={userGeoLocation}
+                  />
+                }
               />
-            }
-          />
-          <Route
-            path='/profile'
-            element={<Profile user={user} setUser={setUser} />}
-          />
+              <Route
+                path='/events'
+                element={
+                  <EventIndex
+                    options={options}
+                    events={allEvents}
+                    userGeoLocation={userGeoLocation}
+                  />
+                }
+              />
+              <Route
+                path='/profile'
+                element={<Profile user={user} setUser={setUser} />}
+              />
 
-          {/* <Route path='/resetPassword' element={<ResetPassword />} /> */}
-        </Routes>
+              {/* <Route path='/resetPassword' element={<ResetPassword />} /> */}
+            </Routes>
+          </Col>
+        </Row>
       </div>
       <Footer />
     </Router>

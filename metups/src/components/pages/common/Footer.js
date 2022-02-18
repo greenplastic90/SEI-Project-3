@@ -5,8 +5,7 @@ import { Container, Box, Text, Image, Divider } from '@chakra-ui/react'
 const Footer = () => {
 
   return (
-    <> 
-      <Divider />
+    <>
       <Container className='footer' as={'footer'} bg={'#FFE195'} padding={'1.5rem'} minW={'100%'} display={'flex'} justifyContent={'center'}>
         <Box w={'100%'}>
           <Text textAlign={'center'}>
