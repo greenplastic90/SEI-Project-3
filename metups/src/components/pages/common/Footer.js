@@ -6,7 +6,7 @@ const Footer = () => {
 
   return (
     <>
-      <Container className='footer' as={'footer'} bg={'#FFE195'} padding={'1.5rem'} minW={'100%'} display={'flex'} justifyContent={'center'}>
+      <Container className='footer' as={'footer'} bg={'#ffe4a0'} padding={'1.5rem'} minW={'100%'} display={'flex'} justifyContent={'center'}>
         <Box w={'100%'}>
           <Text textAlign={'center'}>
             <p>Made by:</p>

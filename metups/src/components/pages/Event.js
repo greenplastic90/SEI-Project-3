@@ -29,7 +29,7 @@ import {
   FormHelperText,
 } from '@chakra-ui/react'
 
-const SingleEvent = ({ user, userGeoLocation, allEvents, fakeAccountsId }) => {
+const SingleEvent = ({ user, userGeoLocation, allEvents }) => {
   const [event, setEvent] = useState(null)
   const [updatedEventLocation, setUpdatedEventLocation] = useState(null)
   const [hasError, setHasError] = useState({ error: false, message: '' })
@@ -61,7 +61,7 @@ const SingleEvent = ({ user, userGeoLocation, allEvents, fakeAccountsId }) => {
   // update event.locationName api
   useEffect(() => {
     // console.log('event ->', event)
-    if (event && !fakeAccountsId.includes(event._id)) {
+    if (event && !event.isDemo) {
       setUpdatedEventLocation({
         longitude: event.longitude,
         latitude: event.latitude,
@@ -94,7 +94,7 @@ const SingleEvent = ({ user, userGeoLocation, allEvents, fakeAccountsId }) => {
           }
         })
     }
-  }, [event, allEvents, fakeAccountsId])
+  }, [event, allEvents])
 
   // LIKES API
   const handleLikes = async (e) => {
@@ -181,7 +181,7 @@ const SingleEvent = ({ user, userGeoLocation, allEvents, fakeAccountsId }) => {
         {event && updatedEventLocation ? (
           <Container className='pt-5 mx-9000'>
             <Row>
-              <Col md={12}>
+              <Col md={12} className='imgWidth'>
                 {/* EVENT IMAGE AND EVENT NAME*/}
                 <Image
                   className='img-fluid shadow-2-strong'
@@ -201,6 +201,7 @@ const SingleEvent = ({ user, userGeoLocation, allEvents, fakeAccountsId }) => {
                       <Row className='justify-content-center'>
                         <Col md={12} className='mb-3'>
                           <Image
+                            width={'50%'}
                             borderRadius='full'
                             src={event.owner.profilePhoto}
                             alt="host's profile image"
@@ -343,7 +344,7 @@ const SingleEvent = ({ user, userGeoLocation, allEvents, fakeAccountsId }) => {
                         />
                       </Form.Group>
                     </Col>
-                    <Col>
+                    <Col style={{alignSelf: 'flex-end'}}>
                       <Form.Group>
                         <Button name='text' type='submit'>
                           Post Comment
@@ -367,17 +368,17 @@ const SingleEvent = ({ user, userGeoLocation, allEvents, fakeAccountsId }) => {
                         )
                         .map((comment) => {
                           return (
-                            <Col md={6} key={comment._id}>
+                            <Col md={12} key={comment._id}>
                               <Box border='1px solid grey' className='mb-2'>
                                 <Row
                                   className='p-2'
-                                  style={{ backgroundColor: 'white' }}
+                                  style={{ backgroundColor: 'white', minWidth: '100%' }}
                                 >
                                   <Col>
-                                    <Avatar src={comment.owner.profilePhoto} />
-                                  </Col>
-                                  <Col>
-                                    <Text>{comment.owner.username}</Text>
+                                    <Box display={'inline-block'}>
+                                      <Text text>{comment.owner.username}</Text>
+                                      <Avatar src={comment.owner.profilePhoto} />
+                                    </Box>
                                   </Col>
                                   <Row>
                                     <Col>

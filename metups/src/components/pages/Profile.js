@@ -108,7 +108,7 @@ const Profile = ({ user, setUser }) => {
             color={'white'}
           >
             <Box
-              boxSize={['100', '150']}
+              boxSize={['100','120', '150']}
               display={'flex'}
               flexDirection={'column'}
               justifyContent={'center'}
@@ -116,12 +116,11 @@ const Profile = ({ user, setUser }) => {
               pb={'2rem'}
             >
               <Image
-                boxSize='inherit'
+                boxSize='120'
                 src={user.profilePhoto ? user.profilePhoto : ProfilePicture}
                 alt='profile'
-                borderRadius='full'
-                rounded={'100%'}
-                objectFit={'cover'}
+                rounded={'full'}
+                objectFit={'fill'}
               />
               <Text fontSize={{ base: 'sm', md: 'xl' }} textAlign={'center'}>
                 {user.name}

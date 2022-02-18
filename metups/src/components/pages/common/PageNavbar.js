@@ -45,9 +45,9 @@ const PageNavbar = () => {
           >
             {userIsAuthenticated() ? (
               <>
-                <Button onClick={toggleColorMode}>
+                {/* <Button onClick={toggleColorMode}>
                   Toggle {colorMode === 'light' ? 'light' : 'dark'}
-                </Button>
+                </Button> */}
                 <Nav.Item>
                   <Link className='blockEffect' to='/events'>
                     Events

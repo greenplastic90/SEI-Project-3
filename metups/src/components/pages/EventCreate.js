@@ -27,13 +27,12 @@ const EventCreate = ({ options, userGeoLocation }) => {
     eventDate: '',
     eventTime: '',
     image: '',
+    isDemo: false, // always false if we want the event to not change its location.
   })
 
   const [formErrors, setFormErrors] = useState('')
   const [searchQueryData, setSearchQueryData] = useState([])
   const [addressPicked, setAddressPicked] = useState({})
-
-
 
   useEffect(() => {
     const forwardQuery = async () => {
@@ -247,14 +246,14 @@ const EventCreate = ({ options, userGeoLocation }) => {
           </Form.Group>
           {formData.image && (
             <>
-            <Image src={formData.image} alt="event image" />
+              <Image src={formData.image} alt='event image' />
             </>
           )}
-          
-
 
           <Form.Group className='mt-4 text-center'>
-            <Button type='submit' onClick={handleSubmit}>Create Event</Button>
+            <Button type='submit' onClick={handleSubmit}>
+              Create Event
+            </Button>
           </Form.Group>
         </Form>
       </Container>
