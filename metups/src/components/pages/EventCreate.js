@@ -97,7 +97,7 @@ const EventCreate = ({ options, userGeoLocation }) => {
       formDataUpdated = {
         ...formData,
         image:
-          'https://png.pngtree.com/thumb_back/fh260/background/20200714/pngtree-modern-double-color-futuristic-neon-background-image_351866.jpg',
+          'https://res.cloudinary.com/dhpy1llxc/image/upload/v1645190000/SEI_61_PROJECT_3/Seeds%20Folder/My_project_3_iwqobs.jpg',
       }
     }
 
