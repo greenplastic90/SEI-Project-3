@@ -37,9 +37,9 @@ const PageNavbar = () => {
           <Navbar.Collapse id='basic-navbar-basic' className='justify-content-end gap-4 mx-4'>
             { userIsAuthenticated() ?
               <>
-                <Button onClick={toggleColorMode}>
+                {/* <Button onClick={toggleColorMode}>
                   Toggle {colorMode === 'light' ? 'light' : 'dark'}
-                </Button>
+                </Button> */}
                 <Nav.Item>
                   <Link className='blockEffect' to='/events'>Events</Link>
                 </Nav.Item>

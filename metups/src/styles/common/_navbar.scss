@@ -1,5 +1,5 @@
 @import './variables';
-
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap');
 
 .show {
   .nav-item {
@@ -12,6 +12,7 @@
 .nav-item {
   position: relative;
   padding-inline: 0.5rem;
+  font-family: 'Oswald', sans-serif;
   .clickable {
     cursor: pointer;
     color: #000;
