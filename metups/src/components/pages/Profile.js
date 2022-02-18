@@ -13,6 +13,7 @@ import {
   Tr,
   Td,
 } from '@chakra-ui/react'
+import { CloseIcon } from '@chakra-ui/icons'
 import { useNavigate } from 'react-router-dom'
 import { getTokenFromLocalStorage } from '../../auth/helpers'
 import axios from 'axios'
@@ -82,9 +83,9 @@ const Profile = ({ user, setUser }) => {
   return (
     <Container
       display={'flex'}
-      flexDirection={{ base: 'column', xl: 'row' }}
+      flexDirection={{ base: 'column'}}
       justifyContent={'center'}
-      alignItems={{ base: 'center', xl: 'flex-end' }}
+      alignItems={{ base: 'center'}}
       width={'100%'}
       height={'100%'}
       maxW={'full'}
@@ -181,17 +182,47 @@ const Profile = ({ user, setUser }) => {
                     //   <Text fontSize={'lg'}>{eventName}</Text>
                     //   <Text isTruncated>{description}</Text>
                     <>
-                      <Boxes item={items} />
-                      <Button
-                        onClick={() => deleteEvent(items._id)}
-                        color={'white'}
-                        p={1}
-                        bg={'red'}
-                        rounded={'md'}
-                        size={'24px'}
+                      <Box
+                        maxW={'sm'}
+                        borderWidth='1px'
+                        borderRadius={'lg'}
+                        overflow='hidden'
+                        bg={'#174C4F'}
+                        mb={2}
                       >
-                        Delete Event
-                      </Button>
+                      <Image onClick={() => navigate(`/events/${items._id}`)} src={items.image} alt='' />
+                      <Box p={6} color={'white'} width={'full'}>
+                        <Box display={'flex'} justifyContent={'space-between'} alignItems={'baseline'}>
+                          <Box
+                            display={'flex'}
+                            alignItems={'center'}
+                            width={'full'}
+                            justifyContent={'space-between'}
+                            fontWeight='semibold'
+                            letterSpacing='wide'
+                            fontSize='xs'
+                            textTransform='uppercase'
+                            ml='2'
+                          >
+                            <span>{items.eventDate}</span>
+                            <CloseIcon className='closeIcon' onClick={() => deleteEvent(items._id)} />
+                          </Box>
+                        </Box>
+                      </Box>
+                      <Box display={'flex'} paddingInline={'6'}>
+                        <Box
+                          mt='1'
+                          fontWeight='semibold'
+                          as='h4'
+                          lineHeight='tight'
+                          isTruncated
+                          pb={4}
+                          color={'white'}
+                        >
+                          {items.eventName}
+                        </Box>
+                      </Box>
+                    </Box>
                     </>
                     // </Box>
                   )
