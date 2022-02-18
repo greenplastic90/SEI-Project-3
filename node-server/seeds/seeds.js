@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 import eventData from './data/events.js'
 import userData from './data/users.js'
-import eventTypes from './data/eventTypes.js'
+// import eventTypes from './data/eventTypes.js'
 import userLocation from './data/userlocation.js'
 import { dbURI } from '../config/environment.js'
 import Event from '../models/event.js'
@@ -20,7 +20,7 @@ const seedDatabase = async () => {
     const users = await User.create(userData)
     const eventsWithEverythingAdded = eventData.map((event, i) => {
       const randomUserIndex = Math.floor(Math.random() * users.length)
-      const randomTypeIndex = Math.floor(Math.random() * eventTypes.length)
+      // const randomTypeIndex = Math.floor(Math.random() * eventTypes.length)
       const randomLat = getRandomInRange(-0.02, 0.02) + userLocation.latitude
       const randomLong = getRandomInRange(-0.04, 0.04) + userLocation.longitude
       return {
