@@ -6,7 +6,7 @@ export default [
     password: '12345678',
     passwordConfirmation: '12345678',
     profilePhoto: 'https://res.cloudinary.com/dhpy1llxc/image/upload/v1645096591/SEI_61_PROJECT_3/Seeds%20Folder/T0351JZQ0-U02KSCEKX9Q-2b6573596636-512_udjyqj.jpg',
-    profileDescription: 'The king of Jordan! I love to be outgoing, eat nuts and drink tea. I love my big chunky headphones and enjoy working to instrumental music so join my events for some fun boogey time! 🕺🏼',
+    profileDescription: 'Star of Jordan! I love to be outgoing, eat nuts and drink tea. I love my big chunky headphones and enjoy working to instrumental music so join my events for some fun boogey time! 🕺🏼',
   },
   {
     username: 'MehtaabMasood',
@@ -14,7 +14,7 @@ export default [
     email: 'Meh@email.com',
     password: '12345678',
     passwordConfirmation: '12345678',
-    profileDescription: 'Want to join an event filled with jam-packed fun activities??? Well youve come to the wrong profile. If you wanna meet someone who looks 40% better with a moustache then im your girl! 🥸 lets meet up so we can pretend we have social lives and then never contact each other again',
+    profileDescription: 'Want to join an event filled with jam-packed fun activities?? Well youve come to the wrong profile. If you wanna meet someone who looks 40% better with a moustache then im your girl! 🥸 lets meet up so we can pretend we have social lives and then never contact each other again',
     profilePhoto: 'https://res.cloudinary.com/dhpy1llxc/image/upload/v1645096744/SEI_61_PROJECT_3/Seeds%20Folder/Screenshot_2022-02-17_at_11.18.53_am_xldx7q.png',
   },
   {
@@ -24,7 +24,7 @@ export default [
     password: '12345678',
     passwordConfirmation: '12345678',
     profileDescription: 'the name is Florent, Flo like Flo-rider and rent like I-live-in-your-mind-rent-free! I live on the wild side of life, im talking pot-noodle for breakfast kind of wild. Join me in our events to get a little crazy, a little dangerous, a little INSANE 🚨',
-    profilePhoto: 'https://res.cloudinary.com/dhpy1llxc/image/upload/v1645096822/SEI_61_PROJECT_3/Seeds%20Folder/Screenshot_2022-02-17_at_11.20.09_am_fiqvfu.png',
+    profilePhoto: 'https://res.cloudinary.com/dhpy1llxc/image/upload/v1645179097/SEI_61_PROJECT_3/Seeds%20Folder/128180D6-44CA-408A-AA10-5EE0FD78835E_ps1yur.jpg',
   },
   {
     username: 'SamHarris',
@@ -32,7 +32,7 @@ export default [
     email: 'sam@email.com',
     password: '12345678',
     passwordConfirmation: '12345678',
-    profileDescription: 'I love me a challenge, was a recent victim of covid but you know what I am? im a fighter! #FoughtNotFallen #NeverRIP🪦 I watch rock climbing documentaries for the GRIT and strong MENTALITY. come to my events to me more like me',
+    profileDescription: 'I love me a challenge, was a recent victim of covid but you know what I am? im a fighter! #FoughtNotFallen #NeverRIP🪦 I watch rock climbing documentaries for the GRIT and strong MENTALITY. come to my events to be more like me',
     profilePhoto: 'https://res.cloudinary.com/dhpy1llxc/image/upload/v1645096040/SEI_61_PROJECT_3/Seeds%20Folder/T0351JZQ0-U024T08FALF-6957a7773b4c-512_rqmjuk.jpg',
   },
   {
