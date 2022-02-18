@@ -31,7 +31,7 @@ const seedDatabase = async () => {
         latitude: randomLat,
         eventTime: '12:30pm',
         // image: `https://picsum.photos/2000/500?random=${i}`,
-        likedBy: [{ owner: users[randomUserIndex] }],
+        isDemo: true,
       }
 
       // console.log(updatedEvent)

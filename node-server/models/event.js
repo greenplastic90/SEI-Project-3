@@ -31,6 +31,7 @@ const eventSchema = new Schema(
     likedBy: [userLikesSchema],
     eventType: [{ type: String }],
     comments: [commentSchema],
+    isDemo: { type: Boolean, required: true },
   },
   { timestamps: true }
 )
