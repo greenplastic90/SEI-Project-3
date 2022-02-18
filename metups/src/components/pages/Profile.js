@@ -234,12 +234,46 @@ const Profile = ({ user, setUser }) => {
                 </Heading>
                 {user.likedEvents.map((items, i) => {
                   return (
-                    <Boxes item={items} key={i} />
-                    // <Box key={i} py={2}>
-                    //   <Image width={'fit-content'} objectFit={'fill'} maxH={'64px'} src={image} alt='event' onClick={() => nav(_id)} className='Pointer-Cur' />
-                    //   <Text fontSize={'lg'}>{eventName}</Text>
-                    //   <Text isTruncated>{description}</Text>
-                    // </Box>
+                    <Box
+                        maxW={'sm'}
+                        borderWidth='1px'
+                        borderRadius={'lg'}
+                        overflow='hidden'
+                        bg={'#174C4F'}
+                        mb={2}
+                      >
+                      <Image onClick={() => navigate(`/events/${items._id}`)} src={items.image} alt='' />
+                      <Box p={6} color={'white'} width={'full'}>
+                        <Box display={'flex'} justifyContent={'space-between'} alignItems={'baseline'}>
+                          <Box
+                            display={'flex'}
+                            alignItems={'center'}
+                            width={'full'}
+                            justifyContent={'space-between'}
+                            fontWeight='semibold'
+                            letterSpacing='wide'
+                            fontSize='xs'
+                            textTransform='uppercase'
+                            ml='2'
+                          >
+                            <span>{items.eventDate}</span>
+                          </Box>
+                        </Box>
+                      </Box>
+                      <Box display={'flex'} paddingInline={'6'}>
+                        <Box
+                          mt='1'
+                          fontWeight='semibold'
+                          as='h4'
+                          lineHeight='tight'
+                          isTruncated
+                          pb={4}
+                          color={'white'}
+                        >
+                          {items.eventName}
+                        </Box>
+                      </Box>
+                    </Box>
                   )
                 })}
               </Box>

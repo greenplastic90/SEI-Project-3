@@ -43,7 +43,7 @@ const Home = ({ options, events, user }) => {
                   return (
                     i < 6 && (
                       <Col key={item._id} md={4}>
-                        <Boxes item={item} />
+                        <Boxes className='homepage-boxes' item={item} />
                       </Col>
                     )
                   )
@@ -51,18 +51,7 @@ const Home = ({ options, events, user }) => {
                   return (
                     i < 6 && (
                       <Col key={item._id} md={4}>
-                        <div className='homepage-events text-center'>
-                          <Link to='/login'>
-                            <Image
-                              className='homeImg'
-                              src={item.image}
-                              alt='event images'
-                            />
-                            <Text className='text-center mb-3' fontSize='2xl'>
-                              {item.eventName}
-                            </Text>
-                          </Link>
-                        </div>
+                        <Boxes className='homepage-boxes' item={item} />
                       </Col>
                     )
                   )

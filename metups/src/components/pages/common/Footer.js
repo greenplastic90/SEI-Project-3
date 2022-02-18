@@ -13,13 +13,13 @@ const Footer = () => {
           </Text>
           <Box lineHeight={'2rem'} gap={4} display={'flex'} justifyContent={'center'} w={'100%'}>
             <Box>
-              <a href='https://github.com/greenplastic90'>Bashar</a>            
+              <a href='https://github.com/greenplastic90' target={'_blank'} rel="noreferrer">Bashar</a>            
             </Box>
             <Box>
-              <a href='https://github.com/florent-haxhiu'>Florent</a>
+              <a href='https://github.com/florent-haxhiu' target={'_blank'} rel="noreferrer">Florent</a>
             </Box>
             <Box>
-              <a href='https://github.com/mmay95'>Mehtaab</a>
+              <a href='https://github.com/mmay95' target={'_blank'} rel="noreferrer">Mehtaab</a>
             </Box>
           </Box>
         </Box>

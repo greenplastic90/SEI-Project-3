@@ -29,7 +29,7 @@ import {
   FormHelperText,
 } from '@chakra-ui/react'
 
-const SingleEvent = ({ user, userGeoLocation, allEvents, fakeAccountsId }) => {
+const SingleEvent = ({ user, userGeoLocation, allEvents }) => {
   const [event, setEvent] = useState(null)
   const [updatedEventLocation, setUpdatedEventLocation] = useState(null)
   const [hasError, setHasError] = useState({ error: false, message: '' })
@@ -61,7 +61,7 @@ const SingleEvent = ({ user, userGeoLocation, allEvents, fakeAccountsId }) => {
   // update event.locationName api
   useEffect(() => {
     // console.log('event ->', event)
-    if (event && !fakeAccountsId.includes(event._id)) {
+    if (event && !event.isDemo) {
       setUpdatedEventLocation({
         longitude: event.longitude,
         latitude: event.latitude,
@@ -94,7 +94,7 @@ const SingleEvent = ({ user, userGeoLocation, allEvents, fakeAccountsId }) => {
           }
         })
     }
-  }, [event, allEvents, fakeAccountsId])
+  }, [event, allEvents])
 
   // LIKES API
   const handleLikes = async (e) => {

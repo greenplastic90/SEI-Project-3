@@ -26,25 +26,6 @@ function App() {
   const [allEvents, setAllEvents] = useState([])
   const [user, setUser] = useState(null)
   const [userGeoLocation, setUserGeoLocation] = useState(null)
-  const [fakeAccountsId, setFakeAccountsId] = useState([])
-
-  useEffect(() => {
-    setFakeAccountsId([
-      '620e94d6bc376fa1796b568b',
-      '620e94d6bc376fa1796b569b',
-      '620e94d6bc376fa1796b569f',
-      '620e94d6bc376fa1796b568d',
-      '620e94d6bc376fa1796b5693',
-      '620e94d6bc376fa1796b5697',
-      '620e94d6bc376fa1796b5699',
-      '620e94d6bc376fa1796b5691',
-      '620e94d6bc376fa1796b56a1',
-      '620e94d6bc376fa1796b568f',
-      '620e94d6bc376fa1796b5695',
-      '620e94d6bc376fa1796b569d',
-      '620e94d6bc376fa1796b56a3',
-    ])
-  }, [])
 
   const getRandomInRange = (from, to) => {
     return (Math.random() * (to - from) + from).toFixed(2) * 1
@@ -75,7 +56,7 @@ function App() {
         console.log('All IDs ->', allEventIds)
 
         const eventsWithUpdatedLocations = data.map((event) => {
-          if (userGeoLocation && fakeAccountsId.includes(event._id)) {
+          if (userGeoLocation && event.isDemo) {
             return {
               ...event,
               longitude:
@@ -94,7 +75,7 @@ function App() {
       }
     }
     getAllEvents()
-  }, [fakeAccountsId, userGeoLocation])
+  }, [userGeoLocation])
 
   useEffect(() => {
     try {
@@ -153,7 +134,6 @@ function App() {
                     user={user}
                     userGeoLocation={userGeoLocation}
                     allEvents={allEvents}
-                    fakeAccountsId={fakeAccountsId}
                   />
                 }
               />
