@@ -10,6 +10,7 @@
 @import './home';
 @import './profile';
 @import './footer';
+@import './login';
 
 * {
   box-sizing: border-box;
@@ -20,3 +21,4 @@
   min-height: 100vh;
   background: linear-gradient(#F8F4F2, #ffebb0, #ffe4a0);
 }
+

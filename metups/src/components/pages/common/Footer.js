@@ -6,20 +6,20 @@ const Footer = () => {
 
   return (
     <>
-      <Container className='footer' as={'footer'} bg={'#ffe4a0'} padding={'1.5rem'} minW={'100%'} display={'flex'} justifyContent={'center'}>
+      <Container className='footer' as={'footer'} bg={'#ffe4a0'} fontFamily={'Oswald'} padding={'2.5rem'} minW={'100%'} display={'flex'} justifyContent={'center'}>
         <Box w={'100%'}>
           <Text textAlign={'center'}>
             <p>Made by:</p>
           </Text>
-          <Box gap={4} display={'flex'} justifyContent={'center'} w={'100%'}>
+          <Box lineHeight={'2rem'} gap={4} display={'flex'} justifyContent={'center'} w={'100%'}>
             <Box>
-              <Image display={'initial'} boxSize={'24px'} src={image} alt="github logo" /> <a href='https://github.com/greenplastic90'>Bashar</a>            
+              <a href='https://github.com/greenplastic90' target={'_blank'} rel="noreferrer">Bashar</a>            
             </Box>
             <Box>
-              <Image display={'initial'} boxSize={'24px'} src={image} alt="github logo" /> <a href='https://github.com/florent-haxhiu'>Florent</a>
+              <a href='https://github.com/florent-haxhiu' target={'_blank'} rel="noreferrer">Florent</a>
             </Box>
             <Box>
-              <Image display={'initial'} boxSize={'24px'} src={image} alt="github logo" /> <a href='https://github.com/mmay95'>Mehtaab</a>
+              <a href='https://github.com/mmay95' target={'_blank'} rel="noreferrer">Mehtaab</a>
             </Box>
           </Box>
         </Box>

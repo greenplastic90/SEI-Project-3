@@ -221,6 +221,7 @@ const SingleEvent = ({ user, userGeoLocation, allEvents }) => {
                                 className='px-5'
                                 colorScheme='blue'
                                 onClick={handleLikes}
+                                size={'sm'}
                               >
                                 Cancel
                               </Button>
@@ -229,6 +230,7 @@ const SingleEvent = ({ user, userGeoLocation, allEvents }) => {
                                 className='px-5'
                                 colorScheme='red'
                                 onClick={handleLikes}
+                                size={'sm'}
                               >
                                 RSVP
                               </Button>
@@ -368,27 +370,38 @@ const SingleEvent = ({ user, userGeoLocation, allEvents }) => {
                         )
                         .map((comment) => {
                           return (
-                            <Col md={12} key={comment._id}>
-                              <Box border='1px solid grey' className='mb-2'>
-                                <Row
-                                  className='p-2'
-                                  style={{ backgroundColor: 'white', minWidth: '100%' }}
-                                >
-                                  <Col>
-                                    <Box display={'inline-block'}>
-                                      <Text text>{comment.owner.username}</Text>
-                                      <Avatar src={comment.owner.profilePhoto} />
-                                    </Box>
-                                  </Col>
-                                  <Row>
-                                    <Col>
-                                      <Text>{comment.text}</Text>
-                                    </Col>
-                                  </Row>
-                                </Row>
+                            // <Col md={12} key={comment._id}>
+                            //   <Box border='1px solid grey' className='mb-2'>
+                            //     <Row
+                            //       className='p-2'
+                            //       style={{ backgroundColor: 'white', minWidth: '100%' }}
+                            //     >
+                            //       <Col>
+                            //         <Box display={'inline-block'}>
+                            //           <Text text>{comment.owner.username}</Text>
+                            //           <Avatar src={comment.owner.profilePhoto} />
+                            //         </Box>
+                            //       </Col>
+                            //       <Row>
+                            //         <Col>
+                            //           <Text>{comment.text}</Text>
+                            //         </Col>
+                            //       </Row>
+                            //     </Row>
+                            //   </Box>
+                            // </Col>
+                            <Box border={'1px solid grey'} mb={2} key={comment._id}>
+                              <Box display={'flex'} flexDirection={'column'}>
+                                <Box>
+                                  <Text >{comment.owner.username}</Text>
+                                  <Box>
+                                    <Avatar src={comment.owner.profilePhoto} />
+                                    <Text>{comment.text}</Text>
+                                  </Box>
+                                </Box>
                               </Box>
-                            </Col>
-                          )
+                            </Box>
+                            )
                         })}
                     </>
                   )}
