@@ -88,7 +88,7 @@ const PageNavbar = () => {
                 </Button>
                 <Nav.Item>
                   <Link to='/register' className='blockEffect'>
-                    <Button>Register</Button>
+                    <Button>Sign up</Button>
                   </Link>
                 </Nav.Item>
                 <Nav.Item className='blockEffect'>
