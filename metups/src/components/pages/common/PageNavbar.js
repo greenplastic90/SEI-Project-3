@@ -22,66 +22,82 @@ const PageNavbar = () => {
     navigate('/')
   }
 
-
-
   return (
     <>
       <Box display={'flex'} bg={'#F8F4F2'}>
         <Navbar variant='light' expand='md' className='w-100'>
           <Navbar.Brand>
             <Nav.Item>
-              <Link to='/'> <Image src="https://res.cloudinary.com/dhpy1llxc/image/upload/v1645109533/SEI_61_PROJECT_3/Seeds%20Folder/LOGO.jpg" alt='MetUps Logo' boxSize={'150px'} /> </Link>
+              <Link to='/'>
+                {' '}
+                <Image
+                  src='https://res.cloudinary.com/dhpy1llxc/image/upload/v1645109533/SEI_61_PROJECT_3/Seeds%20Folder/LOGO.jpg'
+                  alt='MetUps Logo'
+                  boxSize={'150px'}
+                />{' '}
+              </Link>
             </Nav.Item>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
-          <Navbar.Collapse id='basic-navbar-basic' className='justify-content-end gap-4 mx-4'>
-            { userIsAuthenticated() ?
+          <Navbar.Collapse
+            id='basic-navbar-basic'
+            className='justify-content-end gap-4 mx-4'
+          >
+            {userIsAuthenticated() ? (
               <>
                 {/* <Button onClick={toggleColorMode}>
                   Toggle {colorMode === 'light' ? 'light' : 'dark'}
                 </Button> */}
                 <Nav.Item>
-                  <Link className='blockEffect' to='/events'>Events</Link>
+                  <Link className='blockEffect' to='/events'>
+                    Events
+                  </Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Link className='blockEffect' to='/eventCreate'>Create Event</Link>
+                  <Link className='blockEffect' to='/eventCreate'>
+                    Create Event
+                  </Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Link className='blockEffect' to='/profile'>Profile</Link>
+                  <Link className='blockEffect' to='/profile'>
+                    Profile
+                  </Link>
                 </Nav.Item>
                 <Nav.Item onClick={handleLogout}>
-                  <Link onClick={() => {
-                    toast({
-                      title: "Successfully Logged Out",
-                      desc: "You clicked log out",
-                      status: "success",
-                      duration: "2000",
-                      isClosable: true
-                    })
-                  }} to='/' className='blockEffect'>Logout</Link>
+                  <Link
+                    onClick={() => {
+                      toast({
+                        title: 'Successfully Logged Out',
+                        desc: 'You clicked log out',
+                        status: 'success',
+                        duration: '2000',
+                        isClosable: true,
+                      })
+                    }}
+                    to='/'
+                    className='blockEffect'
+                  >
+                    Logout
+                  </Link>
                 </Nav.Item>
               </>
-              :
+            ) : (
               <>
                 <Button onClick={toggleColorMode}>
                   Toggle {colorMode === 'light' ? 'light' : 'dark'}
                 </Button>
                 <Nav.Item>
                   <Link to='/register' className='blockEffect'>
-                    <Button>
-                      Register
-                    </Button>
+                    <Button>Register</Button>
                   </Link>
                 </Nav.Item>
                 <Nav.Item className='blockEffect'>
                   <Link to='/login' className='blockEffect'>
-                    <Button>
-                      Login
-                    </Button>
+                    <Button>Login</Button>
                   </Link>
                 </Nav.Item>
               </>
-            }
+            )}
           </Navbar.Collapse>
         </Navbar>
       </Box>

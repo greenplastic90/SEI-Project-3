@@ -11,7 +11,7 @@ import {
   Table,
   Tbody,
   Tr,
-  Td
+  Td,
 } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
 import { getTokenFromLocalStorage } from '../../auth/helpers'
@@ -47,7 +47,7 @@ const Profile = ({ user, setUser }) => {
       console.log(error)
     }
   }, [setUser])
-  
+
   // const resetPass = () => {
   //   navigate('/resetPassword')
   // }
@@ -82,9 +82,9 @@ const Profile = ({ user, setUser }) => {
   return (
     <Container
       display={'flex'}
-      flexDirection={{ base: 'column', xl: 'row'}}
+      flexDirection={{ base: 'column', xl: 'row' }}
       justifyContent={'center'}
-      alignItems={{ base: 'center', xl: 'flex-end'}}
+      alignItems={{ base: 'center', xl: 'flex-end' }}
       width={'100%'}
       height={'100%'}
       maxW={'full'}
@@ -122,7 +122,7 @@ const Profile = ({ user, setUser }) => {
                 rounded={'full'}
                 objectFit={'fill'}
               />
-              <Text fontSize={{ base: 'sm', md: 'xl'}} textAlign={'center'}>
+              <Text fontSize={{ base: 'sm', md: 'xl' }} textAlign={'center'}>
                 {user.name}
               </Text>
             </Box>
@@ -135,23 +135,29 @@ const Profile = ({ user, setUser }) => {
                     <Td>Username</Td>
                     <Td>{user.username}</Td>
                   </Tr>
-                  {user.profileDescription && 
+                  {user.profileDescription && (
                     <Tr>
                       <Td>Desc</Td>
                       <Td>{user.profileDescription}</Td>
                     </Tr>
-                  }
+                  )}
                   <Tr>
                     <Td>Email</Td>
                     <Td>{user.email}</Td>
                   </Tr>
                   <Tr>
                     <Td>Create Event</Td>
-                    <Td><Button color={'#BF4040'} onClick={createEvent}>Create Event</Button></Td>
+                    <Td>
+                      <Button color={'#BF4040'} onClick={createEvent}>
+                        Create Event
+                      </Button>
+                    </Td>
                   </Tr>
                   <Tr>
                     <Td>Password</Td>
-                    <Td><ResetPassword/></Td>
+                    <Td>
+                      <ResetPassword />
+                    </Td>
                   </Tr>
                 </Tbody>
               </Table>
@@ -168,47 +174,43 @@ const Profile = ({ user, setUser }) => {
                 <Heading fontSize={'2rem'} textAlign={'center'} pb={2}>
                   Events Created
                 </Heading>
-                {user.ownedEvents.map(
-                  (items, i) => {
-                    return (
-                      // <Box key={i} id={_id} px={2}>
-                      //   <Image maxH={'64px'} width={'fit-content'} src={image} alt='event' />
-                      //   <Text fontSize={'lg'}>{eventName}</Text>
-                      //   <Text isTruncated>{description}</Text>
-                      <>
+                {user.ownedEvents.map((items, i) => {
+                  return (
+                    // <Box key={i} id={_id} px={2}>
+                    //   <Image maxH={'64px'} width={'fit-content'} src={image} alt='event' />
+                    //   <Text fontSize={'lg'}>{eventName}</Text>
+                    //   <Text isTruncated>{description}</Text>
+                    <>
                       <Boxes item={items} />
-                        <Button
-                          onClick={() => deleteEvent(items._id)}
-                          color={'white'}
-                          p={1}
-                          bg={'red'}
-                          rounded={'md'}
-                          size={'24px'}
-                        >
-                          Delete Event
-                        </Button>
-                      </>
-                      // </Box>
-                    )
-                  }
-                )}
+                      <Button
+                        onClick={() => deleteEvent(items._id)}
+                        color={'white'}
+                        p={1}
+                        bg={'red'}
+                        rounded={'md'}
+                        size={'24px'}
+                      >
+                        Delete Event
+                      </Button>
+                    </>
+                    // </Box>
+                  )
+                })}
               </Box>
               <Box maxW={250} alignSelf={{ base: 'center', md: 'flex-start' }}>
                 <Heading fontSize={'2rem'} textAlign={'center'} pb={2}>
-                  Events Attended
+                  Events Attending
                 </Heading>
-                {user.likedEvents.map(
-                  (items, i) => {
-                    return (
-                      <Boxes item={items} key={i} />
-                      // <Box key={i} py={2}>
-                      //   <Image width={'fit-content'} objectFit={'fill'} maxH={'64px'} src={image} alt='event' onClick={() => nav(_id)} className='Pointer-Cur' />
-                      //   <Text fontSize={'lg'}>{eventName}</Text>
-                      //   <Text isTruncated>{description}</Text>
-                      // </Box>
-                    )
-                  }
-                )}
+                {user.likedEvents.map((items, i) => {
+                  return (
+                    <Boxes item={items} key={i} />
+                    // <Box key={i} py={2}>
+                    //   <Image width={'fit-content'} objectFit={'fill'} maxH={'64px'} src={image} alt='event' onClick={() => nav(_id)} className='Pointer-Cur' />
+                    //   <Text fontSize={'lg'}>{eventName}</Text>
+                    //   <Text isTruncated>{description}</Text>
+                    // </Box>
+                  )
+                })}
               </Box>
             </Stack>
           </Stack>
