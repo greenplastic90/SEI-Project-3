@@ -9,12 +9,13 @@ import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 
 // import Container from 'react-bootstrap/Container'
-import { Box, Button, Container, Divider, Image } from '@chakra-ui/react'
-import { useToast } from '@chakra-ui/react'
+import { Box, Button, Image, useToast, useColorMode } from '@chakra-ui/react'
 
 const PageNavbar = () => {
   const navigate = useNavigate()
   const toast = useToast()
+
+  const { colorMode, toggleColorMode } = useColorMode()
   // This just gets rid of the token, logs the user out and directs them to the homepage
   const handleLogout = () => {
     window.localStorage.removeItem('metups-login-token')
@@ -23,38 +24,47 @@ const PageNavbar = () => {
 
   return (
     <>
-      <Box minW={'100%'} display={'flex'} bg={'#F8F4F2'} flexGrow={1}>
+      <Box display={'flex'} bg={'#F8F4F2'}>
         <Navbar variant='light' expand='md' className='w-100'>
           <Navbar.Brand>
             <Nav.Item>
               <Link to='/'>
+                {' '}
                 <Image
                   src='https://res.cloudinary.com/dhpy1llxc/image/upload/v1645109533/SEI_61_PROJECT_3/Seeds%20Folder/LOGO.jpg'
                   alt='MetUps Logo'
-                  maxH={'30%'}
-                  maxW={'30%'}
-                />
+                  boxSize={'150px'}
+                />{' '}
               </Link>
             </Nav.Item>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse
             id='basic-navbar-basic'
-            className='justify-content-end gap-4'
+            className='justify-content-end gap-4 mx-4'
           >
             {userIsAuthenticated() ? (
               <>
+                <Button onClick={toggleColorMode}>
+                  Toggle {colorMode === 'light' ? 'light' : 'dark'}
+                </Button>
                 <Nav.Item>
-                  <Link to='/events'>Events</Link>
+                  <Link className='blockEffect' to='/events'>
+                    Events
+                  </Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Link to='/eventCreate'>Create Event</Link>
+                  <Link className='blockEffect' to='/eventCreate'>
+                    Create Event
+                  </Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Link to='/profile'>Profile</Link>
+                  <Link className='blockEffect' to='/profile'>
+                    Profile
+                  </Link>
                 </Nav.Item>
                 <Nav.Item onClick={handleLogout}>
-                  <Button
+                  <Link
                     onClick={() => {
                       toast({
                         title: 'Successfully Logged Out',
@@ -64,21 +74,25 @@ const PageNavbar = () => {
                         isClosable: true,
                       })
                     }}
-                    className='clickable'
+                    to='/'
+                    className='blockEffect'
                   >
                     Logout
-                  </Button>
+                  </Link>
                 </Nav.Item>
               </>
             ) : (
               <>
+                <Button onClick={toggleColorMode}>
+                  Toggle {colorMode === 'light' ? 'light' : 'dark'}
+                </Button>
                 <Nav.Item>
-                  <Link to='/register'>
+                  <Link to='/register' className='blockEffect'>
                     <Button>Register</Button>
                   </Link>
                 </Nav.Item>
-                <Nav.Item>
-                  <Link to='/login'>
+                <Nav.Item className='blockEffect'>
+                  <Link to='/login' className='blockEffect'>
                     <Button>Login</Button>
                   </Link>
                 </Nav.Item>
@@ -87,7 +101,6 @@ const PageNavbar = () => {
           </Navbar.Collapse>
         </Navbar>
       </Box>
-      <Divider />
     </>
   )
 }

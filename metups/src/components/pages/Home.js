@@ -5,12 +5,9 @@ import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import Container from 'react-bootstrap/Container'
 import Image from 'react-bootstrap/Image'
-import { Text } from '@chakra-ui/react'
-import { Heading } from '@chakra-ui/react'
-// import { Box, Container } from '@chakra-ui/react'
-
 import { userIsAuthenticated } from '../../auth/helpers'
 import Boxes from './common/Boxes'
+import { Box, Heading, Text } from '@chakra-ui/react'
 
 const Home = ({ options, events, user }) => {
   return (
