@@ -5,11 +5,11 @@ import { Link, useNavigate } from 'react-router-dom'
 // BOOTSTRAP COMPONENTS
 import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
 import { Text, Heading } from '@chakra-ui/react'
+import { Button } from '@chakra-ui/react'
 
 const Login = () => {
   const navigate = useNavigate()
@@ -51,7 +51,9 @@ const Login = () => {
           <Row className='justify-content-center'>
             <Col md={6}>
               <Row>
-                <Heading as='h1' size='4xl' className='text-center mb-5'>Login</Heading>
+                <Heading as='h1' size='4xl' className='text-center mb-5'>
+                  Login
+                </Heading>
                 <Col md={6}>
                   <Form.Group className='mb-2'>
                     <Form.Label htmlFor='username'>Username</Form.Label>
@@ -87,7 +89,12 @@ const Login = () => {
             <Button type='submit'>Log in</Button>
           </Form.Group>
         </Form>
-        <Text textAlign={'center'} mt='5'>If you aren't already signed up, <Link className='signup-link' to='/register'>sign up here</Link></Text>
+        <Text textAlign={'center'} mt='5'>
+          If you aren't already signed up,{' '}
+          <Link className='signup-link' to='/register'>
+            sign up here
+          </Link>
+        </Text>
       </Container>
     </section>
   )

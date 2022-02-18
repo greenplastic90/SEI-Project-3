@@ -347,7 +347,7 @@ const SingleEvent = ({ user, userGeoLocation, allEvents }) => {
                         />
                       </Form.Group>
                     </Col>
-                    <Col style={{alignSelf: 'flex-end'}}>
+                    <Col style={{ alignSelf: 'flex-end' }}>
                       <Form.Group>
                         <Button name='text' type='submit'>
                           Post Comment
@@ -402,7 +402,7 @@ const SingleEvent = ({ user, userGeoLocation, allEvents }) => {
                                 </Box>
                               </Box>
                             </Box>
-                            )
+                          )
                         })}
                     </>
                   )}

@@ -41,7 +41,7 @@ const PageNavbar = () => {
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse
             id='basic-navbar-basic'
-            className='justify-content-end gap-4 mx-4'
+            className='justify-content-end gap-3 mx-4'
           >
             {userIsAuthenticated() ? (
               <>
