@@ -15,6 +15,7 @@ import Spinner from 'react-bootstrap/Spinner'
 import { Text } from '@chakra-ui/react'
 import { Heading } from '@chakra-ui/react'
 import { userIsAuthenticated } from '../../auth/helpers.js'
+import Boxes from './common/Boxes.js'
 
 const EventIndex = ({ options, events, userGeoLocation }) => {
   const navigate = useNavigate()
@@ -62,7 +63,9 @@ const EventIndex = ({ options, events, userGeoLocation }) => {
       <Container className='py-5'>
         {userGeoLocation && (
           <>
-            <Heading className='text-center mb-5' as='h1' size='3xl'>Events Near You</Heading>
+            <Heading className='text-center mb-5' as='h1' size='3xl'>
+              Events Near You
+            </Heading>
             <Map
               initialViewState={{
                 longitude: userGeoLocation.longitude,
@@ -77,19 +80,7 @@ const EventIndex = ({ options, events, userGeoLocation }) => {
               maxZoom={13}
             >
               <NavigationControl visualizePitch={true} />
-              {/* {filteredEvents.map((event) => {
-                return (
-                  <Popup
-                    key={event._id}
-                    longitude={event.longitude}
-                    latitude={event.latitude}
-                    onClose={() => setShowPopup(false)}
-                    closeOnClick={false}
-                  >
-                    popup
-                  </Popup>
-                )
-              })} */}
+
               {filteredEvents.map((event) => {
                 return (
                   <Marker
@@ -110,45 +101,53 @@ const EventIndex = ({ options, events, userGeoLocation }) => {
           </>
         )}
 
-        <Text className='mt-2 text-center' fontSize='3xl'>Search for an event</Text>
+        <Text className='mt-2 text-center' fontSize='3xl'>
+          Search for an event
+        </Text>
         <Form>
-          <Form.Group>
-            <Form.Label htmlFor='search bar'> <Text className='mt-2 text-center' fontSize='2xl'>Search</Text> </Form.Label>
-            <Form.Control
-              type='text'
-              name='searchBar'
-              defaultValue={searchParams.searchBar}
-              onChange={handleChange}
-            />
-          </Form.Group>
-          <Form.Group className='mb-3'>
-            <Form.Label htmlFor='event type'> <Text className='mt-2 text-center' fontSize='2xl'>Serach by type</Text></Form.Label>
-            <Select
-              closeMenuOnSelect={false}
-              isMulti
-              options={options}
-              name='eventType'
-              onChange={handleChange}
-            />
-          </Form.Group>
+          <Row>
+            <Col md={6}>
+              <Form.Group>
+                <Form.Label htmlFor='search bar'>
+                  {' '}
+                  <Text className='mt-2 text-center' fontSize='2xl'>
+                    Search
+                  </Text>{' '}
+                </Form.Label>
+                <Form.Control
+                  type='text'
+                  name='searchBar'
+                  defaultValue={searchParams.searchBar}
+                  onChange={handleChange}
+                  placeholder='Search by title'
+                />
+              </Form.Group>
+            </Col>
+            <Col md={6}>
+              <Form.Group className='mb-3'>
+                <Form.Label htmlFor='event type'>
+                  {' '}
+                  <Text className='mt-2 text-center' fontSize='2xl'>
+                    Serach by type
+                  </Text>
+                </Form.Label>
+                <Select
+                  closeMenuOnSelect={false}
+                  isMulti
+                  options={options}
+                  name='eventType'
+                  onChange={handleChange}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
         </Form>
-        <Row>
+        <Row className='justify-content-center'>
           {events.length > 0 ? (
             filteredEvents.map((event) => {
               return (
-                <Col md={4} className='mb-3' key={event._id}>
-                  <Card>
-                    <Card.Img variant='top' src={event.image} />
-                    <Card.Body>
-                      <Card.Title>{event.eventName}</Card.Title>
-                      <Button
-                        variant='primary'
-                        onClick={() => navigate(`/events/${event._id}`)}
-                      >
-                        More Info
-                      </Button>
-                    </Card.Body>
-                  </Card>
+                <Col md={4} sm={12} key={event._id}>
+                  <Boxes item={event} />
                 </Col>
               )
             })
