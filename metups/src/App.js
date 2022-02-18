@@ -50,10 +50,6 @@ function App() {
     const getAllEvents = async () => {
       try {
         const { data } = await axios.get('/api/events/')
-        // uncommnet below an save all the IDs in fake AccountsId after you seed
-
-        const allEventIds = data.map((event) => event._id)
-        console.log('All IDs ->', allEventIds)
 
         const eventsWithUpdatedLocations = data.map((event) => {
           if (userGeoLocation && event.isDemo) {

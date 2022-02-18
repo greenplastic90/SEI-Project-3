@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Select from 'react-select'
+import AsyncSelect from 'react-select/async'
 import axios from 'axios'
 import { getTokenFromLocalStorage } from '../../auth/helpers'
 
@@ -34,6 +35,25 @@ const EventCreate = ({ options, userGeoLocation }) => {
   const [searchQueryData, setSearchQueryData] = useState([])
   const [addressPicked, setAddressPicked] = useState({})
 
+  // Test React Async
+  const forwardQuery = async (inputValue) => {
+    try {
+      const { data } = await axios.get(
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${inputValue}.json?access_token=${mapToken}`
+      )
+      // console.log(data)
+      return data.features.map((feature) => {
+        return {
+          ...feature,
+          value: feature.place_name,
+          label: feature.place_name,
+        }
+      })
+    } catch (err) {
+      console.log(err.response)
+    }
+  }
+
   useEffect(() => {
     const forwardQuery = async () => {
       try {
@@ -51,6 +71,7 @@ const EventCreate = ({ options, userGeoLocation }) => {
   }, [formData.map])
 
   const handleChange = (e) => {
+    console.log('e ->', e)
     if (e.target) {
       const newObj = { ...formData, [e.target.name]: e.target.value }
       setFormData(newObj)
@@ -181,25 +202,25 @@ const EventCreate = ({ options, userGeoLocation }) => {
           )}
           <Form.Group className='mb-3'>
             <Form.Label htmlFor='map'>Address</Form.Label>
-            <Form.Control
+            {/* <AsyncSelect
+              cacheOptions
+              defaultOptions
+              loadOptions={forwardQuery}
+            /> */}
+            <AsyncSelect
+              loadOptions={forwardQuery}
+              name='map'
+              onChange={(e) => handelLocationChange(e)}
+            />
+            {/* <Form.Control
               required
               type='text'
               placeholder='Address'
               name='map'
               onChange={handleChange}
-            />
+            /> */}
           </Form.Group>
-          {searchQueryData.map((feature) => {
-            return (
-              <h4
-                key={feature.id}
-                defaultValue={feature}
-                onClick={() => handelLocationChange(feature)}
-              >
-                {feature.place_name}
-              </h4>
-            )
-          })}
+
           {/* eventDate */}
           <Form.Group className='mb-3'>
             <Form.Label htmlFor='eventDate'>Date</Form.Label>
