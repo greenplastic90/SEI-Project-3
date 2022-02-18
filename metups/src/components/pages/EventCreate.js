@@ -98,7 +98,7 @@ const EventCreate = ({ options, userGeoLocation }) => {
       formDataUpdated = {
         ...formData,
         image:
-          'https://res.cloudinary.com/dhpy1llxc/image/upload/v1645190000/SEI_61_PROJECT_3/Seeds%20Folder/My_project_3_iwqobs.jpg',
+          'https://res.cloudinary.com/dhpy1llxc/image/upload/v1645192539/SEI_61_PROJECT_3/Seeds%20Folder/My_project_4_dgx58l.jpg',
       }
     }
 

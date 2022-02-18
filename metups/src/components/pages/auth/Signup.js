@@ -51,7 +51,7 @@ const Signup = () => {
       formDataUpdated = {
         ...formDataUpdated,
         profilePhoto:
-          'https://prospectdirect.com/wpstagemct/wp-content/uploads/2017/05/generic-profile-photo-3.jpg',
+          'https://www.pngitem.com/pimgs/m/272-2720607_this-icon-for-gender-neutral-user-circle-hd.png',
       }
     }
     try {
