@@ -12,6 +12,8 @@
 @import './footer';
 @import './login';
 
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&family=Oswald:wght@700&display=swap');
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -20,5 +22,6 @@
 .site-wrapper {
   min-height: 100vh;
   background: linear-gradient(#F8F4F2, #ffebb0, #ffe4a0);
+  font-family: 'Comfortaa', cursive;
 }
 

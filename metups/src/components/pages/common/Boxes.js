@@ -8,7 +8,6 @@ const Boxes = ({ item }) => {
   return (
     <Box
       onClick={() => navigate(`/events/${item._id}`)}
-      
       maxW={'sm'}
       borderWidth='1px'
       borderRadius={'lg'}

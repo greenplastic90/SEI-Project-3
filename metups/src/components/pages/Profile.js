@@ -190,7 +190,7 @@ const Profile = ({ user, setUser }) => {
                         bg={'#174C4F'}
                         mb={2}
                       >
-                      <Image onClick={() => navigate(`/events/${items._id}`)} src={items.image} alt='' />
+                      <Image cursor={'pointer'} onClick={() => navigate(`/events/${items._id}`)} src={items.image} alt='' />
                       <Box p={6} color={'white'} width={'full'}>
                         <Box display={'flex'} justifyContent={'space-between'} alignItems={'baseline'}>
                           <Box
@@ -205,7 +205,7 @@ const Profile = ({ user, setUser }) => {
                             ml='2'
                           >
                             <span>{items.eventDate}</span>
-                            <CloseIcon className='closeIcon' onClick={() => deleteEvent(items._id)} />
+                            <CloseIcon cursor={'pointer'} className='closeIcon' onClick={() => deleteEvent(items._id)} />
                           </Box>
                         </Box>
                       </Box>
@@ -242,7 +242,7 @@ const Profile = ({ user, setUser }) => {
                         bg={'#174C4F'}
                         mb={2}
                       >
-                      <Image onClick={() => navigate(`/events/${items._id}`)} src={items.image} alt='' />
+                      <Image cursor={'pointer'} onClick={() => navigate(`/events/${items._id}`)} src={items.image} alt='' />
                       <Box p={6} color={'white'} width={'full'}>
                         <Box display={'flex'} justifyContent={'space-between'} alignItems={'baseline'}>
                           <Box

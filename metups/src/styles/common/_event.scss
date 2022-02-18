@@ -4,3 +4,11 @@
   height: 70px;
   width: 70px;
 }
+
+.imgWidth {
+  img {
+    object-fit: cover;
+    max-height: 500px;
+    width: fit-content;
+  }
+}

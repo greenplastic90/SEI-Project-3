@@ -45,9 +45,6 @@ const PageNavbar = () => {
           >
             {userIsAuthenticated() ? (
               <>
-                {/* <Button onClick={toggleColorMode}>
-                  Toggle {colorMode === 'light' ? 'light' : 'dark'}
-                </Button> */}
                 <Nav.Item>
                   <Link className='blockEffect' to='/events'>
                     Events
@@ -83,17 +80,14 @@ const PageNavbar = () => {
               </>
             ) : (
               <>
-                <Button onClick={toggleColorMode}>
-                  Toggle {colorMode === 'light' ? 'light' : 'dark'}
-                </Button>
                 <Nav.Item>
                   <Link to='/register' className='blockEffect'>
-                    <Button>Sign up</Button>
+                    Sign up
                   </Link>
                 </Nav.Item>
                 <Nav.Item className='blockEffect'>
                   <Link to='/login' className='blockEffect'>
-                    <Button>Login</Button>
+                    Login
                   </Link>
                 </Nav.Item>
               </>

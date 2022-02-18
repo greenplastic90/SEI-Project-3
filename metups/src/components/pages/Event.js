@@ -187,32 +187,40 @@ const SingleEvent = ({ user, userGeoLocation, allEvents }) => {
                   className='img-fluid shadow-2-strong'
                   src={event.image}
                   alt='event image'
+                  width={'full'}
                 />
               </Col>
               <Col md={12} className='my-3'>
-                <Heading>{event.eventName}</Heading>
+                <Heading textAlign={'center'} mb={3}>{event.eventName}</Heading>
               </Col>
               {event.owner ? (
                 // Col for all info of event owner and event info
                 <Col md={12} className='mb-3'>
                   <Row>
                     <Col md={6}>
-                      {/*  HOSTED BY */}
+                      {/* Description */}
                       <Row className='justify-content-center'>
                         <Col md={12} className='mb-3'>
-                          <Image
-                            width={'50%'}
-                            borderRadius='full'
-                            src={event.owner.profilePhoto}
-                            alt="host's profile image"
+                          <Box display={'flex'} flexDir={'column'} height={'400px'} justifyContent={'space-evenly'}>
+                            <Heading textAlign={'center'} mb={3}>Event Details</Heading>
+                            <Text fontSize={'1.2rem'} lineHeight={'8'} textAlign={'center'}>{event.description}</Text>
+                          </Box>
+                        </Col>
+                        <Col md={12}>
+                        </Col>
+                      </Row>
+                    </Col>
+                    <Col md={6}>
+                      {/* Event Info */}
+                      <Box display={'flex'} mb={2}>
+                        <Image
+                          width={'25%'}
+                          borderRadius='full'
+                          src={event.owner.profilePhoto}
+                          alt="host's profile image"
                           />
-                        </Col>
-                        <Col md={12} className='mb-3'>
-                          <p> Hosted by: {event.owner.name} </p>
-                        </Col>
-                        {/* Button and attendies */}
-                        <Col md={12} className='mb-2'>
-                          {/* LIKE BUTTON */}
+                        <Box display={'flex'} flexDir={'column'} ml={3} justifyContent={'space-evenly'} mr={2}>
+                          <Text fontWeight={500} fontSize={'1.5rem'}>Hosted by {event.owner.name}</Text>
                           {likedBy && user ? (
                             likedBy.some((like) => {
                               return user._id === like.owner.id
@@ -238,8 +246,8 @@ const SingleEvent = ({ user, userGeoLocation, allEvents }) => {
                           ) : (
                             ''
                           )}
-                        </Col>
-                        <Col md={12}>
+                        </Box>
+                        <Box display={'flex'} flexDir={'column'} justifyContent={'flex-end'} mb={4}>
                           <Wrap>
                             {likedBy &&
                               likedBy
@@ -258,12 +266,9 @@ const SingleEvent = ({ user, userGeoLocation, allEvents }) => {
                                     </WrapItem>
                                   )
                                 })}
-                          </Wrap>
-                        </Col>
-                      </Row>
-                    </Col>
-                    <Col md={6}>
-                      {/* Event Info */}
+                            </Wrap>
+                        </Box>
+                      </Box>
                       <Box border='1px solid grey' borderRadius='xl'>
                         <Table variant='simple'>
                           <Tbody>
@@ -326,10 +331,6 @@ const SingleEvent = ({ user, userGeoLocation, allEvents }) => {
                   </Map>
                 )}
               </Col>
-              {/* Description */}
-              <Col mb={12} className='mb-3'>
-                <Text>{event.description}</Text>
-              </Col>
               {/* Comment Submit */}
               <Col md={12} className='mb-3'>
                 <Form onSubmit={handleSubmit}>
@@ -390,13 +391,13 @@ const SingleEvent = ({ user, userGeoLocation, allEvents }) => {
                             //     </Row>
                             //   </Box>
                             // </Col>
-                            <Box border={'1px solid grey'} mb={2} key={comment._id}>
+                            <Box border={'1px solid white'} bg={'whitesmoke'} mb={2} key={comment._id}>
                               <Box display={'flex'} flexDirection={'column'}>
                                 <Box>
-                                  <Text >{comment.owner.username}</Text>
-                                  <Box>
+                                  <Box display={'flex'} alignItems={'center'} my={2}>
                                     <Avatar src={comment.owner.profilePhoto} />
-                                    <Text>{comment.text}</Text>
+                                    <Text my={3} pl={'1rem'} textColor={'grey'}>{comment.owner.username}</Text>
+                                    <Text pl={'0.5rem'}>{comment.text}</Text>
                                   </Box>
                                 </Box>
                               </Box>

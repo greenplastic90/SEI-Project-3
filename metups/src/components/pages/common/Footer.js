@@ -6,10 +6,10 @@ const Footer = () => {
 
   return (
     <>
-      <Container className='footer' as={'footer'} bg={'#ffe4a0'} fontFamily={'Oswald'} padding={'2.5rem'} minW={'100%'} display={'flex'} justifyContent={'center'}>
+      <Container className='footer' as={'footer'} bg={'#ffe4a0'} padding={'2.5rem'} minW={'100%'} display={'flex'} justifyContent={'center'}>
         <Box w={'100%'}>
           <Text textAlign={'center'}>
-            <p>Made by:</p>
+            Made by:
           </Text>
           <Box lineHeight={'2rem'} gap={4} display={'flex'} justifyContent={'center'} w={'100%'}>
             <Box>

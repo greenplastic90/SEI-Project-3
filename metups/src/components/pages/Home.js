@@ -19,7 +19,7 @@ const Home = ({ options, events, user }) => {
           </Heading>
           <Col md={6} sm={8}>
             <div>
-              <Text className='mt-5' fontSize='2xl' lineHeight='240%'>
+              <Text className='mt-5' fontSize='2xl' lineHeight='200%'>
                 MetUps is the perfect place for everything you're looking to do
                 this year! For 0 days, people have been turning to MetUp to
                 organise, host and arrange events. Through MetUp, people have
