@@ -346,7 +346,7 @@ const SingleEvent = ({ user, userGeoLocation, allEvents }) => {
                         />
                       </Form.Group>
                     </Col>
-                    <Col style={{alignSelf: 'flex-end'}}>
+                    <Col style={{ alignSelf: 'flex-end' }}>
                       <Form.Group>
                         <Button name='text' type='submit'>
                           Post Comment
@@ -390,10 +390,14 @@ const SingleEvent = ({ user, userGeoLocation, allEvents }) => {
                             //     </Row>
                             //   </Box>
                             // </Col>
-                            <Box border={'1px solid grey'} mb={2} key={comment._id}>
+                            <Box
+                              border={'1px solid grey'}
+                              mb={2}
+                              key={comment._id}
+                            >
                               <Box display={'flex'} flexDirection={'column'}>
                                 <Box>
-                                  <Text >{comment.owner.username}</Text>
+                                  <Text>{comment.owner.username}</Text>
                                   <Box>
                                     <Avatar src={comment.owner.profilePhoto} />
                                     <Text>{comment.text}</Text>
@@ -401,7 +405,7 @@ const SingleEvent = ({ user, userGeoLocation, allEvents }) => {
                                 </Box>
                               </Box>
                             </Box>
-                            )
+                          )
                         })}
                     </>
                   )}

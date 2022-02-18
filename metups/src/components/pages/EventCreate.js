@@ -12,7 +12,8 @@ import { cloudinaryURL, uploadPreset } from '../../config/enviroments.js'
 import Image from 'react-bootstrap/Image'
 import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
+
+import { Button } from '@chakra-ui/react'
 
 const EventCreate = ({ options, userGeoLocation }) => {
   const navigate = useNavigate()
