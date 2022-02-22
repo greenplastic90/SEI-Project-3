@@ -1,0 +1,21 @@
+@import '../../node_modules/bootstrap/scss/variables';
+
+.footer {
+  .css-0 {
+    position: relative;
+    &::before, .clickable {
+      content: '';
+      position: absolute;
+      display: block;
+      height: 5px;
+      width: 100%;
+      background-color: $tealGreen;
+      bottom: 0;
+      width: 0%;
+      transition: all ease-in-out 250ms;
+    }
+    &:hover::before {
+      width: 100%;
+    }
+  }
+}
