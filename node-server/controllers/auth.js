@@ -1,6 +1,8 @@
 import User from '../models/user.js'
 import jwt from 'jsonwebtoken'
-import { secret } from '../config/environment.js'
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 export const registerUser = async (req, res) => {
   try {
@@ -28,7 +30,7 @@ export const loginUser = async (req, res) => {
         sub: userToLogin._id,
         username: userToLogin.username,
       },
-      secret,
+      process.env.SECRET,
       { expiresIn: '7 days' }
     )
     return res

@@ -61,5 +61,5 @@ export default [
     passwordConfirmation: '12345678',
     profileDescription: 'if your music doesnt go oontz oontz oontz then simply dont play it! this is a bangers only club. if you got bangers, join in!',
     profilePhoto: 'https://res.cloudinary.com/dhpy1llxc/image/upload/v1645096937/SEI_61_PROJECT_3/Seeds%20Folder/T0351JZQ0-U027DNTEYHK-a68aeb9bb29d-512_tsbkxs.jpg',
-  },
+  }
 ]
