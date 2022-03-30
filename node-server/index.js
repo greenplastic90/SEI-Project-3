@@ -1,13 +1,15 @@
 import express from 'express'
 import mongoose from 'mongoose'
-import { port, dbURI } from './config/environment.js'
+import dotenv from 'dotenv'
 import router from './config/routes.js'
+
+dotenv.config()
 
 const app = express()
 
 const startServer = async () => {
   try {
-    await mongoose.connect(dbURI)
+    await mongoose.connect(process.env.DBURI)
     console.log('Database Connected')
 
     app.use(express.json())
@@ -21,7 +23,7 @@ const startServer = async () => {
 
     app.use((_req, res) => res.status(404).json({ message: 'Route Not Found' }))
 
-    app.listen(port, () => console.log(`🚀 Server running on port: ${port}`))
+    app.listen(process.env.PORT, () => console.log(`🚀 Server running on port: ${process.env.PORT}`))
   } catch (err) {
     console.log(err)
   }
