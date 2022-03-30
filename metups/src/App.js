@@ -23,148 +23,132 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
 function App() {
-  const [allEvents, setAllEvents] = useState([])
-  const [user, setUser] = useState(null)
-  const [userGeoLocation, setUserGeoLocation] = useState(null)
+	const [allEvents, setAllEvents] = useState([])
+	const [user, setUser] = useState(null)
+	const [userGeoLocation, setUserGeoLocation] = useState(null)
 
-  const getRandomInRange = (from, to) => {
-    return (Math.random() * (to - from) + from).toFixed(2) * 1
-  }
-  // get users location
-  useEffect(() => {
-    try {
-      window.navigator.geolocation.getCurrentPosition((position) => {
-        // console.log(position.coords)
-        console.log('user geoLocation')
-        setUserGeoLocation({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-        })
-      })
-    } catch (err) {
-      console.log(err)
-    }
-  }, [])
+	const getRandomInRange = (from, to) => {
+		return (Math.random() * (to - from) + from).toFixed(2) * 1
+	}
+	// get users location
+	useEffect(() => {
+		try {
+			window.navigator.geolocation.getCurrentPosition((position) => {
+				// console.log(position.coords)
+				console.log('user geoLocation')
+				setUserGeoLocation({
+					latitude: position.coords.latitude,
+					longitude: position.coords.longitude,
+				})
+			})
+		} catch (err) {
+			console.log(err)
+		}
+	}, [])
 
-  useEffect(() => {
-    const getAllEvents = async () => {
-      try {
-        const { data } = await axios.get('/api/events/')
+	useEffect(() => {
+		const getAllEvents = async () => {
+			try {
+				const { data } = await axios.get('/api/events/')
+				const eventsWithUpdatedLocations = data.map((event) => {
+					if (userGeoLocation && event.isDemo) {
+						return {
+							...event,
+							longitude: getRandomInRange(-0.12, 0.12) + userGeoLocation.longitude,
+							latitude: getRandomInRange(-0.08, 0.08) + userGeoLocation.latitude,
+						}
+					}
 
-        const eventsWithUpdatedLocations = data.map((event) => {
-          if (userGeoLocation && event.isDemo) {
-            return {
-              ...event,
-              longitude:
-                getRandomInRange(-0.12, 0.12) + userGeoLocation.longitude,
-              latitude:
-                getRandomInRange(-0.08, 0.08) + userGeoLocation.latitude,
-            }
-          }
+					return event
+				})
 
-          return event
-        })
+				setAllEvents(eventsWithUpdatedLocations)
+			} catch (err) {
+				console.log(err.response)
+			}
+		}
+		getAllEvents()
+	}, [userGeoLocation])
 
-        setAllEvents(eventsWithUpdatedLocations)
-      } catch (err) {
-        console.log(err.response)
-      }
-    }
-    getAllEvents()
-  }, [userGeoLocation])
+	useEffect(() => {
+		try {
+			const getUserProfile = async () => {
+				const { data } = await axios.get('/api/profile', {
+					headers: {
+						Authorization: `Bearer ${getTokenFromLocalStorage()}`,
+					},
+				})
+				//console.log('App.js Profile')
+				setUser(data)
+			}
+			getUserProfile()
+		} catch (error) {
+			console.log(error)
+		}
+	}, [])
 
-  useEffect(() => {
-    try {
-      const getUserProfile = async () => {
-        const { data } = await axios.get('/api/profile', {
-          headers: {
-            Authorization: `Bearer ${getTokenFromLocalStorage()}`,
-          },
-        })
-        //console.log('App.js Profile')
-        setUser(data)
-      }
-      getUserProfile()
-    } catch (error) {
-      console.log(error)
-    }
-  }, [])
+	// --- Event Types ----
+	const options = [
+		{ value: 'music', label: 'Music' },
+		{ value: 'sports', label: 'Sports' },
+		{ value: 'outdoor', label: 'Outdoor' },
+		{ value: 'workshop', label: 'Workshop' },
+		{ value: 'class', label: 'Class' },
+		{ value: 'tech', label: 'Tech' },
+		{ value: 'craft', label: 'Craft' },
+		{ value: 'art', label: 'Art' },
+		{ value: 'party', label: 'Party' },
+		{ value: 'culture', label: 'Culture' },
+		{ value: 'food', label: 'Food' },
+		{ value: 'history', label: 'History' },
+		{ value: 'philosophy', label: 'Philosophy' },
+	]
+	// --------------------
 
-  // --- Event Types ----
-  const options = [
-    { value: 'music', label: 'Music' },
-    { value: 'sports', label: 'Sports' },
-    { value: 'outdoor', label: 'Outdoor' },
-    { value: 'workshop', label: 'Workshop' },
-    { value: 'class', label: 'Class' },
-    { value: 'tech', label: 'Tech' },
-    { value: 'craft', label: 'Craft' },
-    { value: 'art', label: 'Art' },
-    { value: 'party', label: 'Party' },
-    { value: 'culture', label: 'Culture' },
-    { value: 'food', label: 'Food' },
-    { value: 'history', label: 'History' },
-    { value: 'philosophy', label: 'Philosophy' },
-  ]
-  // --------------------
+	return (
+		<Router>
+			<PageNavbar />
+			<div className='site-wrapper'>
+				<Row className='justify-content-center'>
+					<Col md={8}>
+						<Routes>
+							<Route path='/' element={<Home options={options} events={allEvents} user={user} />} />
+							<Route path='/register' element={<Signup />} />
+							<Route path='/login' element={<Login />} />
+							<Route
+								path='/events/:id'
+								element={
+									<SingleEvent
+										user={user}
+										userGeoLocation={userGeoLocation}
+										allEvents={allEvents}
+									/>
+								}
+							/>
+							<Route
+								path='/eventCreate'
+								element={<EventCreate options={options} userGeoLocation={userGeoLocation} />}
+							/>
+							<Route
+								path='/events'
+								element={
+									<EventIndex
+										options={options}
+										events={allEvents}
+										userGeoLocation={userGeoLocation}
+									/>
+								}
+							/>
+							<Route path='/profile' element={<Profile user={user} setUser={setUser} />} />
 
-  return (
-    <Router>
-      <PageNavbar />
-      <div className='site-wrapper'>
-        <Row className='justify-content-center'>
-          <Col md={8}>
-            <Routes>
-              <Route
-                path='/'
-                element={
-                  <Home options={options} events={allEvents} user={user} />
-                }
-              />
-              <Route path='/register' element={<Signup />} />
-              <Route path='/login' element={<Login />} />
-              <Route
-                path='/events/:id'
-                element={
-                  <SingleEvent
-                    user={user}
-                    userGeoLocation={userGeoLocation}
-                    allEvents={allEvents}
-                  />
-                }
-              />
-              <Route
-                path='/eventCreate'
-                element={
-                  <EventCreate
-                    options={options}
-                    userGeoLocation={userGeoLocation}
-                  />
-                }
-              />
-              <Route
-                path='/events'
-                element={
-                  <EventIndex
-                    options={options}
-                    events={allEvents}
-                    userGeoLocation={userGeoLocation}
-                  />
-                }
-              />
-              <Route
-                path='/profile'
-                element={<Profile user={user} setUser={setUser} />}
-              />
-
-              {/* <Route path='/resetPassword' element={<ResetPassword />} /> */}
-            </Routes>
-          </Col>
-        </Row>
-      </div>
-      <Footer />
-    </Router>
-  )
+							{/* <Route path='/resetPassword' element={<ResetPassword />} /> */}
+						</Routes>
+					</Col>
+				</Row>
+			</div>
+			<Footer />
+		</Router>
+	)
 }
 
 export default App
