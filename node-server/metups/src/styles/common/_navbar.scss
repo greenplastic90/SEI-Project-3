@@ -33,7 +33,7 @@
   .blockEffect:hover::before {
     width: 100%;
   }
-  a {
+  a, .clickable {
     cursor: pointer;
     text-decoration: none;
     color: #000;

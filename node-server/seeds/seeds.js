@@ -1,12 +1,12 @@
 import mongoose from 'mongoose'
-import dotenv from 'dotenv'
 import eventData from './data/events.js'
 import userData from './data/users.js'
 // import eventTypes from './data/eventTypes.js'
 import userLocation from './data/userlocation.js'
+import { dbURI } from '../config/environment.js'
 import Event from '../models/event.js'
 import User from '../models/user.js'
-
+import dotenv from 'dotenv'
 dotenv.config()
 
 const getRandomInRange = (from, to) => {
@@ -15,12 +15,12 @@ const getRandomInRange = (from, to) => {
 
 const seedDatabase = async () => {
   try {
-    await mongoose.connect(process.env.DBURI)
+    await mongoose.connect(process.env.DB_URI)
     console.log('🚀 Database Connected')
     await mongoose.connection.db.dropDatabase()
     console.log('👌 Database dropped')
     const users = await User.create(userData)
-    const eventsWithEverythingAdded = eventData.map((event) => {
+    const eventsWithEverythingAdded = eventData.map((event, i) => {
       const randomUserIndex = Math.floor(Math.random() * users.length)
       // const randomTypeIndex = Math.floor(Math.random() * eventTypes.length)
       const randomLat = getRandomInRange(-0.02, 0.02) + userLocation.latitude

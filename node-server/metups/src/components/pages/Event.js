@@ -269,32 +269,32 @@ const SingleEvent = ({ user, userGeoLocation, allEvents }) => {
                             </Wrap>
                         </Box>
                       </Box>
-                      {/* <Box border='1px solid grey' borderRadius='xl'> */}
-                        <Table variant='simple' bgColor={'#174C4F'} color={'#fff'} borderRadius={'xl'}>
+                      <Box border='1px solid grey' borderRadius='xl'>
+                        <Table variant='simple'>
                           <Tbody>
                             <Tr>
-                              <Th color={'#fff'}>Type</Th>
+                              <Th>Type</Th>
                               <Td>
                                 {event.eventType.map((type) => {
                                   // maybe have each type srounded in a light colored box of sorts?
-                                  return <Badge bgColor={'#174C4F'} color={'#fff'} key={type}>{type}</Badge>
+                                  return <Badge key={type}>{type}</Badge>
                                 })}
                               </Td>
                             </Tr>
                             <Tr>
-                              <Th color={'#fff'}>Date:</Th>
+                              <Th>Date:</Th>
                               <Td>
                                 <Badge>{event.eventDate}</Badge>
                               </Td>
                             </Tr>
                             <Tr>
-                              <Th color={'#fff'}>Time:</Th>
+                              <Th>Time:</Th>
                               <Td>
                                 <Badge>{event.eventTime}</Badge>
                               </Td>
                             </Tr>
                             <Tr>
-                              <Th color={'#fff'}>Event Location:</Th>
+                              <Th>Event Location:</Th>
                               <Td>
                                 <Text fontSize='sm' fontStyle='bold'>
                                   {updatedEventLocation.locationName}
@@ -303,7 +303,7 @@ const SingleEvent = ({ user, userGeoLocation, allEvents }) => {
                             </Tr>
                           </Tbody>
                         </Table>
-                      {/* </Box> */}
+                      </Box>
                     </Col>
                   </Row>
                 </Col>

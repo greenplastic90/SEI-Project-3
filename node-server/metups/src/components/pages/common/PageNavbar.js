@@ -33,7 +33,7 @@ const PageNavbar = () => {
                 <Image
                   src='https://res.cloudinary.com/dhpy1llxc/image/upload/v1645109533/SEI_61_PROJECT_3/Seeds%20Folder/LOGO.jpg'
                   alt='MetUps Logo'
-                  boxSize={'120px'}
+                  boxSize={'150px'}
                 />{' '}
               </Link>
             </Nav.Item>
@@ -85,7 +85,7 @@ const PageNavbar = () => {
                     Sign up
                   </Link>
                 </Nav.Item>
-                <Nav.Item>
+                <Nav.Item className='blockEffect'>
                   <Link to='/login' className='blockEffect'>
                     Login
                   </Link>
