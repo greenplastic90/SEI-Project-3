@@ -33,8 +33,6 @@ function App() {
   useEffect(() => {
     try {
       window.navigator.geolocation.getCurrentPosition((position) => {
-        // console.log(position.coords)
-        console.log('user geoLocation')
         setUserGeoLocation({
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
@@ -78,7 +76,6 @@ function App() {
             Authorization: `Bearer ${getTokenFromLocalStorage()}`,
           },
         })
-        //console.log('App.js Profile')
         setUser(data)
       }
       getUserProfile()

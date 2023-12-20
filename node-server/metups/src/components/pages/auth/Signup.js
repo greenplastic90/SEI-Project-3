@@ -37,7 +37,6 @@ const Signup = () => {
   })
 
   const handleChange = (e) => {
-    console.log('name ->', e.target.name)
     const newObj = { ...formData, [e.target.name]: e.target.value }
     setFormData(newObj)
     setFormErrors({ ...formErrors, [e.target.name]: '' })
@@ -55,11 +54,9 @@ const Signup = () => {
     }
     try {
       const { data } = await axios.post('/api/register/', formDataUpdated)
-      console.log(data)
+
       navigate('/login')
     } catch (err) {
-      //console.log(err.response)
-      // console.log('keys ->', Object.keys(err.response.data.errors))
       const obj = {}
       Object.keys(err.response.data.errors).forEach((key) => {
         if (
@@ -92,7 +89,6 @@ const Signup = () => {
       data.append('file', e.target.files[0])
       data.append('upload_preset', process.env.REACT_APP_UPLOAD_PRESET)
       const res = await axios.post(process.env.REACT_APP_CLOUDINARY_URL, data)
-      console.log(res.data.url)
       setFormData({ ...formData, profilePhoto: res.data.url })
     } catch (err) {
       console.log(err)

@@ -35,8 +35,6 @@ const seedDatabase = async () => {
         // image: `https://picsum.photos/2000/500?random=${i}`,
         isDemo: true,
       }
-
-      // console.log(updatedEvent)
     })
 
     await Event.create(eventsWithEverythingAdded)

@@ -45,7 +45,6 @@ const SingleEvent = ({ user, userGeoLocation, allEvents }) => {
         setLikedBy(data.likedBy)
         setEvent(data)
       } catch (err) {
-        console.log(err)
         setHasError({ error: true, message: err.message })
       }
     }
@@ -54,7 +53,6 @@ const SingleEvent = ({ user, userGeoLocation, allEvents }) => {
 
   // update event.locationName api
   useEffect(() => {
-    // console.log('event ->', event)
     if (event && !event.isDemo) {
       setUpdatedEventLocation({
         longitude: event.longitude,
@@ -64,14 +62,11 @@ const SingleEvent = ({ user, userGeoLocation, allEvents }) => {
     } else {
       event &&
         allEvents.forEach((item) => {
-          console.log('item ->', item._id, event._id)
           const getRealAddress = async (long, lat) => {
             try {
               const { data } = await axios.get(
                 `https://api.mapbox.com/geocoding/v5/mapbox.places/${long},${lat}.json?access_token=${process.env.REACT_APP_MAP_TOKEN}`
               )
-              // console.log(data.features[0].place_name)
-              console.log('get real address')
               setUpdatedEventLocation({
                 longitude: item.longitude,
                 latitude: item.latitude,
@@ -83,7 +78,6 @@ const SingleEvent = ({ user, userGeoLocation, allEvents }) => {
           }
 
           if (item._id === event._id) {
-            console.log('IDS match')
             getRealAddress(item.longitude, item.latitude)
           }
         })
@@ -94,19 +88,17 @@ const SingleEvent = ({ user, userGeoLocation, allEvents }) => {
   const handleLikes = async (e) => {
     e.preventDefault()
     const hasLiked = likedBy.some((like) => user._id === like.owner._id)
-    console.log(hasLiked)
+
     const updatedLikedByArray = likedBy
     if (hasLiked) {
       updatedLikedByArray.forEach((like, i) => {
         if (user._id === like.owner._id) {
           updatedLikedByArray.splice(i, 1)
-          console.log('REMOVED FROM ARRAY ->', updatedLikedByArray)
         }
       })
     }
     if (!hasLiked) {
       updatedLikedByArray.push({ owner: user })
-      console.log('ADDED TO ARRAY ->', updatedLikedByArray)
     }
     try {
       await axios.put(
@@ -136,11 +128,9 @@ const SingleEvent = ({ user, userGeoLocation, allEvents }) => {
       const newObj = { ...comments, [e.target.name]: e.target.value }
       setComments(newObj)
     } else {
-      console.log(e)
       const arrayOfValues = e.map((comments) => {
         return comments.owner.username
       })
-      console.log(arrayOfValues)
       const newValue = { ...comments, text: arrayOfValues }
       setComments(newValue)
     }

@@ -3,13 +3,11 @@ import jwt from 'jsonwebtoken'
 
 export const registerUser = async (req, res) => {
   try {
-    // console.log(req.body)
     const newUser = await User.create(req.body)
-    console.log(newUser)
+
     // accepted 202
     return res.status(202).json(newUser)
   } catch (err) {
-    console.log(err)
     // unprocessable entity 422
     return res.status(422).json(err)
   }
@@ -31,7 +29,6 @@ export const loginUser = async (req, res) => {
     )
     return res.status(200).json({ message: `Welcome back ${username}`, token: token })
   } catch (err) {
-    console.log(err)
     return res.status(401).json({ message: err.message })
   }
 }

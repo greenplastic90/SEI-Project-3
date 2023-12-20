@@ -43,7 +43,7 @@ const EventCreate = ({ options, userGeoLocation }) => {
       const { data } = await axios.get(
         `https://api.mapbox.com/geocoding/v5/mapbox.places/${inputValue}.json?access_token=${process.env.REACT_APP_MAP_TOKEN}`
       )
-      // console.log(data)
+
       return data.features.map((feature) => {
         return {
           ...feature,
@@ -62,7 +62,6 @@ const EventCreate = ({ options, userGeoLocation }) => {
         const { data } = await axios.get(
           `https://api.mapbox.com/geocoding/v5/mapbox.places/${formData.map}.json?access_token=${process.env.REACT_APP_MAP_TOKEN}`
         )
-        // console.log(data)
 
         setSearchQueryData(data.features)
       } catch (err) {
@@ -73,17 +72,15 @@ const EventCreate = ({ options, userGeoLocation }) => {
   }, [formData.map])
 
   const handleChange = (e) => {
-    console.log('e ->', e)
     if (e.target) {
       const newObj = { ...formData, [e.target.name]: e.target.value }
       setFormData(newObj)
       setFormErrors({ ...formErrors, [e.target.name]: '' })
     } else {
-      console.log(e)
       const arrayOfValues = e.map((obj) => {
         return obj.label
       })
-      console.log(arrayOfValues)
+
       const newValue = { ...formData, eventType: arrayOfValues }
       setFormData(newValue)
     }
@@ -118,7 +115,7 @@ const EventCreate = ({ options, userGeoLocation }) => {
       data.append('file', e.target.files[0])
       data.append('upload_preset', process.env.REACT_APP_UPLOAD_PRESET)
       const res = await axios.post(process.env.REACT_APP_CLOUDINARY_URL, data)
-      // console.log(res.data.url)
+
       setFormData({ ...formData, image: res.data.url })
     } catch (err) {
       console.log(err)
