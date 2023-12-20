@@ -17,7 +17,6 @@ import SingleEvent from './components/pages/Event'
 import EventIndex from './components/pages/EventIndex'
 import Profile from './components/pages/Profile'
 import Footer from './components/pages/common/Footer'
-import ResetPassword from './components/pages/auth/ResetPassword.js'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 

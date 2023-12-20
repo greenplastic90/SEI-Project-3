@@ -13,21 +13,18 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Spinner from 'react-bootstrap/Spinner'
 // Import Chakra Components
-import { Box, Divider, Image, Input, Wrap, WrapItem } from '@chakra-ui/react'
+import { Box, Image, Wrap, WrapItem } from '@chakra-ui/react'
 import { Heading } from '@chakra-ui/react'
 import { Table, Tbody, Tr, Th, Td } from '@chakra-ui/react'
 import { Badge } from '@chakra-ui/react'
 import { Text } from '@chakra-ui/react'
 import { Button } from '@chakra-ui/react'
 import { Avatar } from '@chakra-ui/react'
-import { Textarea } from '@chakra-ui/react'
-import { FormControl, FormLabel, FormErrorMessage, FormHelperText } from '@chakra-ui/react'
 
 const SingleEvent = ({ user, userGeoLocation, allEvents }) => {
   const [event, setEvent] = useState(null)
   const [updatedEventLocation, setUpdatedEventLocation] = useState(null)
   const [hasError, setHasError] = useState({ error: false, message: '' })
-  const [hasLiked, setHasLiked] = useState(null)
   const [comments, setComments] = useState({
     owner: '',
     text: '',

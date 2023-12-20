@@ -7,12 +7,9 @@ import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import Image from 'react-bootstrap/Image'
 import Figure from 'react-bootstrap/Figure'
 
 import { Button } from '@chakra-ui/react'
-
-// evnviroment.js imports for uploading images
 
 const Signup = () => {
   const navigate = useNavigate()
@@ -53,7 +50,7 @@ const Signup = () => {
       }
     }
     try {
-      const { data } = await axios.post('/api/register/', formDataUpdated)
+      await axios.post('/api/register/', formDataUpdated)
 
       navigate('/login')
     } catch (err) {

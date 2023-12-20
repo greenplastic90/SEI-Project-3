@@ -19,7 +19,6 @@ import { getTokenFromLocalStorage } from '../../auth/helpers'
 import axios from 'axios'
 import ProfilePicture from '../../images/genericProfilePic.png'
 import ResetPassword from './auth/ResetPassword'
-import Boxes from './common/Boxes'
 
 const Profile = ({ user, setUser }) => {
   const navigate = useNavigate()

@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import Select from 'react-select'
-import { useNavigate } from 'react-router-dom'
-import Map, { Marker, NavigationControl, Popup } from 'react-map-gl'
+
+import Map, { Marker, NavigationControl } from 'react-map-gl'
 
 import Form from 'react-bootstrap/Form'
 import Container from 'react-bootstrap/Container'
-import Card from 'react-bootstrap/Card'
-import Button from 'react-bootstrap/Button'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Spinner from 'react-bootstrap/Spinner'
@@ -16,8 +14,6 @@ import { userIsAuthenticated } from '../../auth/helpers.js'
 import Boxes from './common/Boxes.js'
 
 const EventIndex = ({ options, events, userGeoLocation }) => {
-  const navigate = useNavigate()
-
   const [searchParams, setSearchParams] = useState({
     type: [],
     searchBar: '',

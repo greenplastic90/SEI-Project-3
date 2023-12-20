@@ -9,13 +9,13 @@ import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 
 // import Container from 'react-bootstrap/Container'
-import { Box, Button, Image, useToast, useColorMode } from '@chakra-ui/react'
+import { Box, Image, useToast } from '@chakra-ui/react'
 
 const PageNavbar = () => {
   const navigate = useNavigate()
   const toast = useToast()
 
-  const { colorMode, toggleColorMode } = useColorMode()
+  // const { colorMode, toggleColorMode } = useColorMode()
   // This just gets rid of the token, logs the user out and directs them to the homepage
   const handleLogout = () => {
     window.localStorage.removeItem('metups-login-token')
@@ -39,10 +39,7 @@ const PageNavbar = () => {
             </Nav.Item>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
-          <Navbar.Collapse
-            id='basic-navbar-basic'
-            className='justify-content-end gap-3 mx-4'
-          >
+          <Navbar.Collapse id='basic-navbar-basic' className='justify-content-end gap-3 mx-4'>
             {userIsAuthenticated() ? (
               <>
                 <Nav.Item>
@@ -72,8 +69,7 @@ const PageNavbar = () => {
                       })
                     }}
                     to='/'
-                    className='blockEffect'
-                  >
+                    className='blockEffect'>
                     Logout
                   </Link>
                 </Nav.Item>

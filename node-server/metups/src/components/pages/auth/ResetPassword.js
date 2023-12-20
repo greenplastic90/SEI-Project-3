@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 import {
-  Heading,
   FormControl,
   FormLabel,
   Input,
-  Container,
   Button,
   Center,
   Text,
@@ -22,7 +20,7 @@ import {
 import { getTokenFromLocalStorage } from '../../../auth/helpers'
 import { useNavigate } from 'react-router-dom'
 
-const ResetPassword = ({ pass }) => {
+const ResetPassword = () => {
   const toast = useToast()
   const navigate = useNavigate()
   const { isOpen, onOpen, onClose } = useDisclosure()

@@ -4,7 +4,7 @@ import AsyncSelect from 'react-select/async'
 import axios from 'axios'
 import { getTokenFromLocalStorage } from '../../auth/helpers'
 
-import Map, { Marker, NavigationControl, Popup } from 'react-map-gl'
+import Map, { Marker } from 'react-map-gl'
 
 import { useNavigate } from 'react-router-dom'
 
@@ -35,7 +35,6 @@ const EventCreate = ({ options, userGeoLocation }) => {
 
   const [formErrors, setFormErrors] = useState('')
   const [searchQueryData, setSearchQueryData] = useState([])
-  const [addressPicked, setAddressPicked] = useState({})
 
   // Test React Async
   const forwardQuery = async (inputValue) => {
