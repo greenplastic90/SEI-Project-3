@@ -13,7 +13,6 @@ import Figure from 'react-bootstrap/Figure'
 import { Button } from '@chakra-ui/react'
 
 // evnviroment.js imports for uploading images
-import { cloudinaryURL, uploadPreset } from '../../../config/enviroments.js'
 
 const Signup = () => {
   const navigate = useNavigate()
@@ -74,8 +73,7 @@ const Signup = () => {
             'is longer than the maximum allowed length (280).'
           )
         ) {
-          obj[key] =
-            'Profile description is longer than the maximum allowed length (280).'
+          obj[key] = 'Profile description is longer than the maximum allowed length (280).'
         } else {
           obj[key] = err.response.data.errors[key].message
         }
@@ -92,8 +90,8 @@ const Signup = () => {
     try {
       const data = new FormData()
       data.append('file', e.target.files[0])
-      data.append('upload_preset', uploadPreset)
-      const res = await axios.post(cloudinaryURL, data)
+      data.append('upload_preset', process.env.REACT_APP_UPLOAD_PRESET)
+      const res = await axios.post(process.env.REACT_APP_CLOUDINARY_URL, data)
       console.log(res.data.url)
       setFormData({ ...formData, profilePhoto: res.data.url })
     } catch (err) {
@@ -115,9 +113,7 @@ const Signup = () => {
               placeholder='Full Name'
               onChange={handleChange}
             />
-            {formErrors.name && (
-              <Form.Text className='text-muted'>{formErrors.name}</Form.Text>
-            )}
+            {formErrors.name && <Form.Text className='text-muted'>{formErrors.name}</Form.Text>}
           </Form.Group>
 
           {/* username */}
@@ -131,9 +127,7 @@ const Signup = () => {
               onChange={handleChange}
             />
             {formErrors.username && (
-              <Form.Text className='text-muted'>
-                {formErrors.username}
-              </Form.Text>
+              <Form.Text className='text-muted'>{formErrors.username}</Form.Text>
             )}
           </Form.Group>
 
@@ -147,9 +141,7 @@ const Signup = () => {
               placeholder='Email'
               onChange={handleChange}
             />
-            {formErrors.email && (
-              <Form.Text className='text-muted'>{formErrors.email}</Form.Text>
-            )}
+            {formErrors.email && <Form.Text className='text-muted'>{formErrors.email}</Form.Text>}
           </Form.Group>
           {/* password */}
           <Form.Group className='mb-3'>
@@ -162,9 +154,7 @@ const Signup = () => {
               onChange={handleChange}
             />
             {formErrors.password && (
-              <Form.Text className='text-muted'>
-                {formErrors.password}
-              </Form.Text>
+              <Form.Text className='text-muted'>{formErrors.password}</Form.Text>
             )}
           </Form.Group>
           {/* password conformation */}
@@ -178,17 +168,13 @@ const Signup = () => {
               onChange={handleChange}
             />
             {formErrors.passwordConfirmation && (
-              <Form.Text className='text-muted'>
-                {formErrors.passwordConfirmation}
-              </Form.Text>
+              <Form.Text className='text-muted'>{formErrors.passwordConfirmation}</Form.Text>
             )}
           </Form.Group>
 
           <hr />
           <Form.Group className='mb-3'>
-            <Form.Label htmlFor='profileDescription'>
-              Profile Description
-            </Form.Label>
+            <Form.Label htmlFor='profileDescription'>Profile Description</Form.Label>
             <Form.Text className='text-muted'>- optional -</Form.Text>
             <Form.Control
               onChange={handleChange}
@@ -198,9 +184,7 @@ const Signup = () => {
             />
 
             {formErrors.profileDescription && (
-              <Form.Text className='text-muted'>
-                {formErrors.profileDescription}
-              </Form.Text>
+              <Form.Text className='text-muted'>{formErrors.profileDescription}</Form.Text>
             )}
           </Form.Group>
 
@@ -229,9 +213,7 @@ const Signup = () => {
                 )}
               </Col>
               {formErrors.profilePhoto && (
-                <Form.Text className='text-muted'>
-                  {formErrors.profilePhoto}
-                </Form.Text>
+                <Form.Text className='text-muted'>{formErrors.profilePhoto}</Form.Text>
               )}
             </Row>
           </Form.Group>

@@ -4,11 +4,10 @@ import AsyncSelect from 'react-select/async'
 import axios from 'axios'
 import { getTokenFromLocalStorage } from '../../auth/helpers'
 
-import { mapToken } from '../../config/enviroments.js'
 import Map, { Marker, NavigationControl, Popup } from 'react-map-gl'
 
 import { useNavigate } from 'react-router-dom'
-import { cloudinaryURL, uploadPreset } from '../../config/enviroments.js'
+
 import Image from 'react-bootstrap/Image'
 import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
@@ -42,7 +41,7 @@ const EventCreate = ({ options, userGeoLocation }) => {
   const forwardQuery = async (inputValue) => {
     try {
       const { data } = await axios.get(
-        `https://api.mapbox.com/geocoding/v5/mapbox.places/${inputValue}.json?access_token=${mapToken}`
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${inputValue}.json?access_token=${process.env.REACT_APP_MAP_TOKEN}`
       )
       // console.log(data)
       return data.features.map((feature) => {
@@ -61,7 +60,7 @@ const EventCreate = ({ options, userGeoLocation }) => {
     const forwardQuery = async () => {
       try {
         const { data } = await axios.get(
-          `https://api.mapbox.com/geocoding/v5/mapbox.places/${formData.map}.json?access_token=${mapToken}`
+          `https://api.mapbox.com/geocoding/v5/mapbox.places/${formData.map}.json?access_token=${process.env.REACT_APP_MAP_TOKEN}`
         )
         // console.log(data)
 
@@ -117,8 +116,8 @@ const EventCreate = ({ options, userGeoLocation }) => {
     try {
       const data = new FormData()
       data.append('file', e.target.files[0])
-      data.append('upload_preset', uploadPreset)
-      const res = await axios.post(cloudinaryURL, data)
+      data.append('upload_preset', process.env.REACT_APP_UPLOAD_PRESET)
+      const res = await axios.post(process.env.REACT_APP_CLOUDINARY_URL, data)
       // console.log(res.data.url)
       setFormData({ ...formData, image: res.data.url })
     } catch (err) {
@@ -149,9 +148,7 @@ const EventCreate = ({ options, userGeoLocation }) => {
               placeholder='Event Name'
               onChange={handleChange}
             />
-            <Form.Text className='text-muted'>
-              Add the name of your event here
-            </Form.Text>
+            <Form.Text className='text-muted'>Add the name of your event here</Form.Text>
           </Form.Group>
 
           {/* type  */}
@@ -165,23 +162,14 @@ const EventCreate = ({ options, userGeoLocation }) => {
               name='eventType'
               onChange={handleChange}
             />
-            <Form.Text className='text-muted'>
-              Add the type of event you're hosting
-            </Form.Text>
+            <Form.Text className='text-muted'>Add the type of event you're hosting</Form.Text>
           </Form.Group>
 
           {/* description */}
           <Form.Group className='mb-3'>
             <Form.Label htmlFor='description'>Description</Form.Label>
-            <Form.Control
-              required
-              as='textarea'
-              name='description'
-              onChange={handleChange}
-            />
-            <Form.Text className='text-muted'>
-              Add a description for your event
-            </Form.Text>
+            <Form.Control required as='textarea' name='description' onChange={handleChange} />
+            <Form.Text className='text-muted'>Add a description for your event</Form.Text>
           </Form.Group>
 
           {/* map */}
@@ -193,14 +181,10 @@ const EventCreate = ({ options, userGeoLocation }) => {
                   latitude: formData.latitude,
                   zoom: 13,
                 }}
-                mapboxAccessToken={mapToken}
+                mapboxAccessToken={process.env.REACT_APP_MAP_TOKEN}
                 style={{ height: 100 }}
-                mapStyle='mapbox://styles/mapbox/streets-v11'
-              >
-                <Marker
-                  longitude={formData.longitude}
-                  latitude={formData.latitude}
-                ></Marker>
+                mapStyle='mapbox://styles/mapbox/streets-v11'>
+                <Marker longitude={formData.longitude} latitude={formData.latitude}></Marker>
               </Map>
             </>
           )}
@@ -265,9 +249,7 @@ const EventCreate = ({ options, userGeoLocation }) => {
               name='image'
               defaultValue={formData.image}
             />
-            <Form.Text className='text-muted'>
-              Add an image banner for your event!{' '}
-            </Form.Text>
+            <Form.Text className='text-muted'>Add an image banner for your event! </Form.Text>
           </Form.Group>
           {formData.image && (
             <>

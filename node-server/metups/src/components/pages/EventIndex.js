@@ -3,8 +3,6 @@ import Select from 'react-select'
 import { useNavigate } from 'react-router-dom'
 import Map, { Marker, NavigationControl, Popup } from 'react-map-gl'
 
-import { mapToken } from '../../config/enviroments.js'
-
 import Form from 'react-bootstrap/Form'
 import Container from 'react-bootstrap/Container'
 import Card from 'react-bootstrap/Card'
@@ -31,14 +29,10 @@ const EventIndex = ({ options, events, userGeoLocation }) => {
     const filtered = []
     events.forEach((event) =>
       searchParams.type.length === 0
-        ? event.eventName
-            .toLowerCase()
-            .includes(searchParams.searchBar.toLowerCase()) &&
+        ? event.eventName.toLowerCase().includes(searchParams.searchBar.toLowerCase()) &&
           filtered.push(event)
         : searchParams.type.some((type) => event.eventType.includes(type)) &&
-          event.eventName
-            .toLowerCase()
-            .includes(searchParams.searchBar.toLowerCase()) &&
+          event.eventName.toLowerCase().includes(searchParams.searchBar.toLowerCase()) &&
           filtered.push(event)
     )
 
@@ -74,11 +68,10 @@ const EventIndex = ({ options, events, userGeoLocation }) => {
               }}
               style={{ height: 500 }}
               mapStyle='mapbox://styles/mapbox/streets-v11'
-              mapboxAccessToken={mapToken}
+              mapboxAccessToken={process.env.REACT_APP_MAP_TOKEN}
               pitch={50}
               minZoom={11}
-              maxZoom={13}
-            >
+              maxZoom={13}>
               <NavigationControl visualizePitch={true} />
 
               {filteredEvents.map((event) => {
@@ -87,16 +80,14 @@ const EventIndex = ({ options, events, userGeoLocation }) => {
                     key={event._id}
                     longitude={event.longitude}
                     latitude={event.latitude}
-                    onClick={() => setShowPopup()}
-                  ></Marker>
+                    onClick={() => setShowPopup()}></Marker>
                 )
               })}
 
               <Marker
                 color='green'
                 longitude={userGeoLocation.longitude}
-                latitude={userGeoLocation.latitude}
-              ></Marker>
+                latitude={userGeoLocation.latitude}></Marker>
             </Map>
           </>
         )}

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import Map, { Marker } from 'react-map-gl'
-import { mapToken } from '../../config/enviroments.js'
 
 // Import helpers
 import { getTokenFromLocalStorage } from '../../auth/helpers'
@@ -22,12 +21,7 @@ import { Text } from '@chakra-ui/react'
 import { Button } from '@chakra-ui/react'
 import { Avatar } from '@chakra-ui/react'
 import { Textarea } from '@chakra-ui/react'
-import {
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  FormHelperText,
-} from '@chakra-ui/react'
+import { FormControl, FormLabel, FormErrorMessage, FormHelperText } from '@chakra-ui/react'
 
 const SingleEvent = ({ user, userGeoLocation, allEvents }) => {
   const [event, setEvent] = useState(null)
@@ -74,7 +68,7 @@ const SingleEvent = ({ user, userGeoLocation, allEvents }) => {
           const getRealAddress = async (long, lat) => {
             try {
               const { data } = await axios.get(
-                `https://api.mapbox.com/geocoding/v5/mapbox.places/${long},${lat}.json?access_token=${mapToken}`
+                `https://api.mapbox.com/geocoding/v5/mapbox.places/${long},${lat}.json?access_token=${process.env.REACT_APP_MAP_TOKEN}`
               )
               // console.log(data.features[0].place_name)
               console.log('get real address')
@@ -191,7 +185,9 @@ const SingleEvent = ({ user, userGeoLocation, allEvents }) => {
                 />
               </Col>
               <Col md={12} className='my-3'>
-                <Heading textAlign={'center'} mb={3}>{event.eventName}</Heading>
+                <Heading textAlign={'center'} mb={3}>
+                  {event.eventName}
+                </Heading>
               </Col>
               {event.owner ? (
                 // Col for all info of event owner and event info
@@ -201,13 +197,20 @@ const SingleEvent = ({ user, userGeoLocation, allEvents }) => {
                       {/* Description */}
                       <Row className='justify-content-center'>
                         <Col md={12} className='mb-3'>
-                          <Box display={'flex'} flexDir={'column'} height={'400px'} justifyContent={'space-evenly'}>
-                            <Heading textAlign={'center'} mb={3}>Event Details</Heading>
-                            <Text fontSize={'1.2rem'} lineHeight={'8'} textAlign={'center'}>{event.description}</Text>
+                          <Box
+                            display={'flex'}
+                            flexDir={'column'}
+                            height={'400px'}
+                            justifyContent={'space-evenly'}>
+                            <Heading textAlign={'center'} mb={3}>
+                              Event Details
+                            </Heading>
+                            <Text fontSize={'1.2rem'} lineHeight={'8'} textAlign={'center'}>
+                              {event.description}
+                            </Text>
                           </Box>
                         </Col>
-                        <Col md={12}>
-                        </Col>
+                        <Col md={12}></Col>
                       </Row>
                     </Col>
                     <Col md={6}>
@@ -218,9 +221,16 @@ const SingleEvent = ({ user, userGeoLocation, allEvents }) => {
                           borderRadius='full'
                           src={event.owner.profilePhoto}
                           alt="host's profile image"
-                          />
-                        <Box display={'flex'} flexDir={'column'} ml={3} justifyContent={'space-evenly'} mr={2}>
-                          <Text fontWeight={500} fontSize={'1.5rem'}>Hosted by {event.owner.name}</Text>
+                        />
+                        <Box
+                          display={'flex'}
+                          flexDir={'column'}
+                          ml={3}
+                          justifyContent={'space-evenly'}
+                          mr={2}>
+                          <Text fontWeight={500} fontSize={'1.5rem'}>
+                            Hosted by {event.owner.name}
+                          </Text>
                           {likedBy && user ? (
                             likedBy.some((like) => {
                               return user._id === like.owner.id
@@ -229,8 +239,7 @@ const SingleEvent = ({ user, userGeoLocation, allEvents }) => {
                                 className='px-5'
                                 colorScheme='blue'
                                 onClick={handleLikes}
-                                size={'sm'}
-                              >
+                                size={'sm'}>
                                 Cancel
                               </Button>
                             ) : (
@@ -238,8 +247,7 @@ const SingleEvent = ({ user, userGeoLocation, allEvents }) => {
                                 className='px-5'
                                 colorScheme='red'
                                 onClick={handleLikes}
-                                size={'sm'}
-                              >
+                                size={'sm'}>
                                 RSVP
                               </Button>
                             )
@@ -251,11 +259,7 @@ const SingleEvent = ({ user, userGeoLocation, allEvents }) => {
                           <Wrap>
                             {likedBy &&
                               likedBy
-                                .sort(
-                                  (a, b) =>
-                                    new Date(b.createdAt) -
-                                    new Date(a.createdAt)
-                                )
+                                .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
                                 .map((like) => {
                                   return (
                                     <WrapItem key={like.owner._id}>
@@ -266,7 +270,7 @@ const SingleEvent = ({ user, userGeoLocation, allEvents }) => {
                                     </WrapItem>
                                   )
                                 })}
-                            </Wrap>
+                          </Wrap>
                         </Box>
                       </Box>
                       <Box border='1px solid grey' borderRadius='xl'>
@@ -321,13 +325,11 @@ const SingleEvent = ({ user, userGeoLocation, allEvents }) => {
                     }}
                     style={{ height: 200 }}
                     mapStyle='mapbox://styles/mapbox/streets-v11'
-                    mapboxAccessToken={mapToken}
-                  >
+                    mapboxAccessToken={process.env.REACT_APP_MAP_TOKEN}>
                     <Marker
                       color='green'
                       longitude={updatedEventLocation.longitude}
-                      latitude={updatedEventLocation.latitude}
-                    ></Marker>
+                      latitude={updatedEventLocation.latitude}></Marker>
                   </Map>
                 )}
               </Col>
@@ -365,10 +367,7 @@ const SingleEvent = ({ user, userGeoLocation, allEvents }) => {
                   ) : (
                     <>
                       {event.comments
-                        .sort(
-                          (a, b) =>
-                            new Date(b.createdAt) - new Date(a.createdAt)
-                        )
+                        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
                         .map((comment) => {
                           return (
                             // <Col md={12} key={comment._id}>
@@ -391,12 +390,18 @@ const SingleEvent = ({ user, userGeoLocation, allEvents }) => {
                             //     </Row>
                             //   </Box>
                             // </Col>
-                            <Box border={'1px solid white'} bg={'whitesmoke'} mb={2} key={comment._id}>
+                            <Box
+                              border={'1px solid white'}
+                              bg={'whitesmoke'}
+                              mb={2}
+                              key={comment._id}>
                               <Box display={'flex'} flexDirection={'column'}>
                                 <Box>
                                   <Box display={'flex'} alignItems={'center'} my={2}>
                                     <Avatar src={comment.owner.profilePhoto} />
-                                    <Text my={3} pl={'1rem'} textColor={'grey'}>{comment.owner.username}</Text>
+                                    <Text my={3} pl={'1rem'} textColor={'grey'}>
+                                      {comment.owner.username}
+                                    </Text>
                                     <Text pl={'0.5rem'}>{comment.text}</Text>
                                   </Box>
                                 </Box>

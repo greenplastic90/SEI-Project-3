@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 
 import axios from 'axios'
 import { getTokenFromLocalStorage } from './auth/helpers.js'
-import { mapToken } from './config/enviroments.js'
 
 // Importing
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
@@ -55,10 +54,8 @@ function App() {
           if (userGeoLocation && event.isDemo) {
             return {
               ...event,
-              longitude:
-                getRandomInRange(-0.12, 0.12) + userGeoLocation.longitude,
-              latitude:
-                getRandomInRange(-0.08, 0.08) + userGeoLocation.latitude,
+              longitude: getRandomInRange(-0.12, 0.12) + userGeoLocation.longitude,
+              latitude: getRandomInRange(-0.08, 0.08) + userGeoLocation.latitude,
             }
           }
 
@@ -115,12 +112,7 @@ function App() {
         <Row className='justify-content-center'>
           <Col md={8}>
             <Routes>
-              <Route
-                path='/'
-                element={
-                  <Home options={options} events={allEvents} user={user} />
-                }
-              />
+              <Route path='/' element={<Home options={options} events={allEvents} user={user} />} />
               <Route path='/register' element={<Signup />} />
               <Route path='/login' element={<Login />} />
               <Route
@@ -135,12 +127,7 @@ function App() {
               />
               <Route
                 path='/eventCreate'
-                element={
-                  <EventCreate
-                    options={options}
-                    userGeoLocation={userGeoLocation}
-                  />
-                }
+                element={<EventCreate options={options} userGeoLocation={userGeoLocation} />}
               />
               <Route
                 path='/events'
@@ -152,10 +139,7 @@ function App() {
                   />
                 }
               />
-              <Route
-                path='/profile'
-                element={<Profile user={user} setUser={setUser} />}
-              />
+              <Route path='/profile' element={<Profile user={user} setUser={setUser} />} />
 
               {/* <Route path='/resetPassword' element={<ResetPassword />} /> */}
             </Routes>
