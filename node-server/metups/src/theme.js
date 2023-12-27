@@ -45,7 +45,20 @@ const colors = {
     },
   },
 }
+const components = {
+  Text: {
+    variants: {
+      navLink: {
+        cursor: 'pointer',
+        fontWeight: 'bold',
+        _hover: {
+          color: colors.brand.primary[500],
+        },
+      },
+    },
+  },
+}
 
-const theme = extendTheme({ fonts, colors })
+const theme = extendTheme({ fonts, colors, components })
 
 export default theme

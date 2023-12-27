@@ -4,19 +4,12 @@ import { Link, useNavigate } from 'react-router-dom'
 // Importing authentication
 import { userIsAuthenticated } from '../../../auth/helpers'
 
-// Importing Bootstrap
-import Navbar from 'react-bootstrap/Navbar'
-import Nav from 'react-bootstrap/Nav'
-
 // import Container from 'react-bootstrap/Container'
-import { Box, Button, HStack, Image, Text, useToast } from '@chakra-ui/react'
+import { Button, HStack, Text } from '@chakra-ui/react'
 
 const PageNavbar = () => {
   const navigate = useNavigate()
-  const toast = useToast()
 
-  // const { colorMode, toggleColorMode } = useColorMode()
-  // This just gets rid of the token, logs the user out and directs them to the homepage
   const handleLogout = () => {
     window.localStorage.removeItem('metups-login-token')
     navigate('/')
@@ -27,7 +20,7 @@ const PageNavbar = () => {
       <Link to='/'>METUPS</Link>
       <HStack>
         {userIsAuthenticated() ? (
-          <>
+          <HStack spacing={4}>
             <Link className='blockEffect' to='/events'>
               Events
             </Link>
@@ -48,13 +41,17 @@ const PageNavbar = () => {
               className='blockEffect'>
               Logout
             </Link>
-          </>
+          </HStack>
         ) : (
-          <>
-            <Link to='/login'>Log in</Link>
+          <HStack spacing={4}>
+            <Text variant='navLink' onClick={() => navigate('/login')}>
+              Log in
+            </Text>
 
-            <Button onClick={() => navigate('/register')}>Sign up</Button>
-          </>
+            <Button colorScheme='brand.primary' onClick={() => navigate('/register')}>
+              Sign up
+            </Button>
+          </HStack>
         )}
       </HStack>
     </HStack>
