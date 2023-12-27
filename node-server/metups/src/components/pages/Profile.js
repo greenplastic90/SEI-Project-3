@@ -31,6 +31,11 @@ const Profile = ({ user, setUser }) => {
     navigate(`/events/${id}`)
   }
 
+  const handleLogout = () => {
+    window.localStorage.removeItem('metups-login-token')
+    navigate('/')
+  }
+
   useEffect(() => {
     try {
       const getUserProfile = async () => {
