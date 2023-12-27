@@ -9,7 +9,7 @@ import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 
 // import Container from 'react-bootstrap/Container'
-import { Box, Image, useToast } from '@chakra-ui/react'
+import { Box, Button, HStack, Image, Text, useToast } from '@chakra-ui/react'
 
 const PageNavbar = () => {
   const navigate = useNavigate()
@@ -23,75 +23,41 @@ const PageNavbar = () => {
   }
 
   return (
-    <>
-      <Box display={'flex'} bg={'#F8F4F2'}>
-        <Navbar variant='light' expand='md' className='w-100'>
-          <Navbar.Brand>
-            <Nav.Item>
-              <Link to='/'>
-                {' '}
-                <Image
-                  src='https://res.cloudinary.com/dhpy1llxc/image/upload/v1645109533/SEI_61_PROJECT_3/Seeds%20Folder/LOGO.jpg'
-                  alt='MetUps Logo'
-                  boxSize={'150px'}
-                />{' '}
-              </Link>
-            </Nav.Item>
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls='basic-navbar-nav' />
-          <Navbar.Collapse id='basic-navbar-basic' className='justify-content-end gap-3 mx-4'>
-            {userIsAuthenticated() ? (
-              <>
-                <Nav.Item>
-                  <Link className='blockEffect' to='/events'>
-                    Events
-                  </Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Link className='blockEffect' to='/eventCreate'>
-                    Create Event
-                  </Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Link className='blockEffect' to='/profile'>
-                    Profile
-                  </Link>
-                </Nav.Item>
-                <Nav.Item onClick={handleLogout}>
-                  <Link
-                    onClick={() => {
-                      toast({
-                        title: 'Successfully Logged Out',
-                        desc: 'You clicked log out',
-                        status: 'success',
-                        duration: '2000',
-                        isClosable: true,
-                      })
-                    }}
-                    to='/'
-                    className='blockEffect'>
-                    Logout
-                  </Link>
-                </Nav.Item>
-              </>
-            ) : (
-              <>
-                <Nav.Item>
-                  <Link to='/register' className='blockEffect'>
-                    Sign up
-                  </Link>
-                </Nav.Item>
-                <Nav.Item className='blockEffect'>
-                  <Link to='/login' className='blockEffect'>
-                    Login
-                  </Link>
-                </Nav.Item>
-              </>
-            )}
-          </Navbar.Collapse>
-        </Navbar>
-      </Box>
-    </>
+    <HStack justify={'space-between'}>
+      <Link to='/'>METUPS</Link>
+      <HStack>
+        {userIsAuthenticated() ? (
+          <>
+            <Link className='blockEffect' to='/events'>
+              Events
+            </Link>
+
+            <Link className='blockEffect' to='/eventCreate'>
+              Create Event
+            </Link>
+
+            <Link className='blockEffect' to='/profile'>
+              Profile
+            </Link>
+
+            <Link
+              onClick={() => {
+                handleLogout()
+              }}
+              to='/'
+              className='blockEffect'>
+              Logout
+            </Link>
+          </>
+        ) : (
+          <>
+            <Link to='/login'>Log in</Link>
+
+            <Button onClick={() => navigate('/register')}>Sign up</Button>
+          </>
+        )}
+      </HStack>
+    </HStack>
   )
 }
 

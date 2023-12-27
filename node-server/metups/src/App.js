@@ -104,7 +104,7 @@ function App() {
   return (
     <Router>
       <PageNavbar />
-      <div className='site-wrapper'>
+      <div>
         <Row className='justify-content-center'>
           <Col md={8}>
             <Routes>

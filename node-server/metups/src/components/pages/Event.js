@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import Map, { Marker } from 'react-map-gl'
 
 // Import helpers
-import { getTokenFromLocalStorage } from '../../auth/helpers'
+import { getTokenFromLocalStorage, userIsAuthenticated } from '../../auth/helpers'
 
 // Import Bootstrap Components
 import Container from 'react-bootstrap/Container'
@@ -321,31 +321,33 @@ const SingleEvent = ({ user, userGeoLocation, allEvents }) => {
                 )}
               </Col>
               {/* Comment Submit */}
-              <Col md={12} className='mb-3'>
-                <Form onSubmit={handleSubmit}>
-                  <Row>
-                    <Col>
-                      <Form.Group>
-                        <Form.Label>Comment</Form.Label>
-                        <Form.Control
-                          name='text'
-                          as='textarea'
-                          onChange={handleChange}
-                          placeholder='Add Comment Here'
-                          value={comments.text}
-                        />
-                      </Form.Group>
-                    </Col>
-                    <Col style={{ alignSelf: 'flex-end' }}>
-                      <Form.Group>
-                        <Button name='text' type='submit'>
-                          Post Comment
-                        </Button>
-                      </Form.Group>
-                    </Col>
-                  </Row>
-                </Form>
-              </Col>
+              {userIsAuthenticated() && (
+                <Col md={12} className='mb-3'>
+                  <Form onSubmit={handleSubmit}>
+                    <Row>
+                      <Col>
+                        <Form.Group>
+                          <Form.Label>Comment</Form.Label>
+                          <Form.Control
+                            name='text'
+                            as='textarea'
+                            onChange={handleChange}
+                            placeholder='Add Comment Here'
+                            value={comments.text}
+                          />
+                        </Form.Group>
+                      </Col>
+                      <Col style={{ alignSelf: 'flex-end' }}>
+                        <Form.Group>
+                          <Button name='text' type='submit'>
+                            Post Comment
+                          </Button>
+                        </Form.Group>
+                      </Col>
+                    </Row>
+                  </Form>
+                </Col>
+              )}
               {/* Comments */}
               <Col md={12}>
                 <Row>
