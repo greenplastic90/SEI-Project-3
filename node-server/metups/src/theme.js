@@ -55,6 +55,11 @@ const components = {
           color: colors.brand.primary[500],
         },
       },
+      createEventNavLink: {
+        cursor: 'pointer',
+        fontWeight: 'bold',
+        color: colors.brand.primary[500],
+      },
     },
   },
 }

@@ -105,7 +105,7 @@ function App() {
   return (
     <Box p={4}>
       <Router>
-        <PageNavbar />
+        <PageNavbar user={user} />
         <div>
           <Row className='justify-content-center'>
             <Col md={8}>
