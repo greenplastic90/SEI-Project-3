@@ -6,7 +6,7 @@ import AuthenticatedLinks from './components/AuthenticatedLinks'
 import UnauthenticatedLinks from './components/UnauthenticatedLinks'
 import BurgerMenu from './components/BurgerMenu'
 
-const PageNavbar = ({ user }) => {
+const PageNavbar = ({ user, handleLogout }) => {
   const breakpointValue = useBreakpointValue({ base: 'base', md: 'md', lg: 'lg' })
 
   return (
@@ -14,9 +14,15 @@ const PageNavbar = ({ user }) => {
       <Logo />
 
       {breakpointValue !== 'base' ? (
-        <>{userIsAuthenticated() ? <AuthenticatedLinks user={user} /> : <UnauthenticatedLinks />}</>
+        <>
+          {userIsAuthenticated() ? (
+            <AuthenticatedLinks user={user} handleLogout={handleLogout} />
+          ) : (
+            <UnauthenticatedLinks />
+          )}
+        </>
       ) : (
-        <BurgerMenu user={user} />
+        <BurgerMenu user={user} handleLogout={handleLogout} />
       )}
     </HStack>
   )

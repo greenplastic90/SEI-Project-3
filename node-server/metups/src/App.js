@@ -84,6 +84,11 @@ function App() {
     }
   }, [])
 
+  function handleLogout() {
+    setUser(null)
+    window.localStorage.removeItem('metups-login-token')
+  }
+
   // --- Event Types ----
   const options = [
     { value: 'music', label: 'Music' },
@@ -105,7 +110,7 @@ function App() {
   return (
     <Box p={4}>
       <Router>
-        <PageNavbar user={user} />
+        <PageNavbar user={user} handleLogout={handleLogout} />
         <div>
           <Row className='justify-content-center'>
             <Col md={8}>

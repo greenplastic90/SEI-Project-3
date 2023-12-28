@@ -20,7 +20,7 @@ import BurgerItems from './BurgerItems'
 import { userIsAuthenticated } from '../../../../../auth/helpers'
 import BurgerFooter from './BurgerFooter'
 
-function BurgerMenu({ user }) {
+function BurgerMenu({ user, handleLogout }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const iconRef = useRef()
   const navigate = useNavigate()
@@ -41,8 +41,8 @@ function BurgerMenu({ user }) {
     onClose()
     navigate(path)
   }
-  const handleLogout = () => {
-    window.localStorage.removeItem('metups-login-token')
+  const logout = () => {
+    handleLogout()
     navigate('/')
     onClose()
   }
@@ -86,7 +86,7 @@ function BurgerMenu({ user }) {
               <BurgerFooter
                 user={user}
                 profilePath={() => navigateToPath('/profile')}
-                handleLogout={handleLogout}
+                handleLogout={logout}
               />
             )}
           </DrawerFooter>
