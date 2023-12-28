@@ -8,7 +8,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 // Mapbox styles
 
 // Importing made elements
-import PageNavbar from './components/pages/common/PageNavbar'
+import PageNavbar from './components/pages/common/navbar/PageNavbar.js'
 import Home from './components/pages/Home'
 import Signup from './components/pages/auth/Signup'
 import Login from './components/pages/auth/Login'
