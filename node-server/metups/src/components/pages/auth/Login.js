@@ -11,7 +11,7 @@ import Col from 'react-bootstrap/Col'
 import { Text, Heading } from '@chakra-ui/react'
 import { Button } from '@chakra-ui/react'
 
-const Login = () => {
+const Login = ({ setUser }) => {
   const navigate = useNavigate()
 
   const [formData, setFormData] = useState({
@@ -36,6 +36,7 @@ const Login = () => {
     try {
       const { data } = await axios.post('/api/login/', formData)
       setTokenToLocalStorage(data.token)
+      setUser(data.user)
       navigate('/')
     } catch (err) {
       console.log(err.response)
@@ -78,9 +79,7 @@ const Login = () => {
                     />
                   </Form.Group>
                 </Col>
-                {formError && (
-                  <Form.Text className='text-center'>{formError}</Form.Text>
-                )}
+                {formError && <Form.Text className='text-center'>{formError}</Form.Text>}
               </Row>
             </Col>
           </Row>

@@ -27,7 +27,9 @@ export const loginUser = async (req, res) => {
       process.env.SECRET,
       { expiresIn: '7 days' }
     )
-    return res.status(200).json({ message: `Welcome back ${username}`, token: token })
+    return res
+      .status(200)
+      .json({ message: `Welcome back ${username}`, token: token, user: userToLogin })
   } catch (err) {
     return res.status(401).json({ message: err.message })
   }
