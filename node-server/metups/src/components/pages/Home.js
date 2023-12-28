@@ -7,6 +7,7 @@ import Image from 'react-bootstrap/Image'
 import { userIsAuthenticated } from '../../auth/helpers'
 import Boxes from './common/Boxes'
 import { Heading, Text } from '@chakra-ui/react'
+import heroImage from '../../images/home.png'
 
 const Home = ({ events }) => {
   return (
@@ -27,10 +28,7 @@ const Home = ({ events }) => {
             </div>
           </Col>
           <Col md={6} sm={4}>
-            <Image
-              src='https://res.cloudinary.com/dhpy1llxc/image/upload/v1645114080/SEI_61_PROJECT_3/Seeds%20Folder/AdobeStock_315614892_ccexpress_ufxmhx.png'
-              alt='gathering image'
-            />
+            <Image src={heroImage} alt='gathering image' />
           </Col>
           <Col md={12} className='py-5'>
             <Row>
