@@ -6,6 +6,9 @@ function UnauthenticatedLinks() {
   const navigate = useNavigate()
   return (
     <HStack spacing={4}>
+      <Text variant='navLink' onClick={() => navigate('/events')}>
+        Events
+      </Text>
       <Text variant='navLink' onClick={() => navigate('/login')}>
         Log in
       </Text>

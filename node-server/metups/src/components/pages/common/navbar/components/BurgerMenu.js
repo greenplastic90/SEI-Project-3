@@ -1,5 +1,6 @@
 import { CloseIcon, HamburgerIcon, SearchIcon } from '@chakra-ui/icons'
 import {
+  Box,
   Button,
   Drawer,
   DrawerBody,
@@ -29,6 +30,8 @@ function BurgerMenu({ user, handleLogout }) {
     { name: 'Events', func: () => navigateToPath('/events'), icon: <RiGroupLine size={20} /> },
   ]
   const UnauthenticatedItems = [
+    { name: 'Home', func: () => navigateToPath('/'), icon: <RiHome3Line size={20} /> },
+    { name: 'Events', func: () => navigateToPath('/events'), icon: <RiGroupLine size={20} /> },
     { name: 'Log in', func: () => navigateToPath('/login'), icon: <RiLoginCircleLine size={20} /> },
     { name: 'Sign up', func: () => navigateToPath('/register'), icon: <RiUserAddLine size={20} /> },
   ]
@@ -60,7 +63,9 @@ function BurgerMenu({ user, handleLogout }) {
           <DrawerHeader>
             <HStack justify={'space-between'}>
               <CloseIcon onClick={onClose} cursor={'pointer'} />
-              <Logo />
+              <Box onClick={onClose}>
+                <Logo />
+              </Box>
               <SearchIcon boxSize={6} onClick={handleSearch} cursor={'pointer'} />
             </HStack>
           </DrawerHeader>
