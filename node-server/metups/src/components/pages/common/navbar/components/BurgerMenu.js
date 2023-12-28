@@ -1,5 +1,6 @@
 import { CloseIcon, HamburgerIcon, SearchIcon } from '@chakra-ui/icons'
 import {
+  Button,
   Drawer,
   DrawerBody,
   DrawerContent,
@@ -7,6 +8,7 @@ import {
   DrawerHeader,
   DrawerOverlay,
   HStack,
+  Stack,
   useDisclosure,
 } from '@chakra-ui/react'
 import React, { useRef } from 'react'
@@ -16,8 +18,9 @@ import { RiGroupLine, RiHome3Line, RiLoginCircleLine, RiUserAddLine } from 'reac
 import { useNavigate } from 'react-router-dom'
 import BurgerItems from './BurgerItems'
 import { userIsAuthenticated } from '../../../../../auth/helpers'
+import BurgerFooter from './BurgerFooter'
 
-function BurgerMenu() {
+function BurgerMenu({ user }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const iconRef = useRef()
   const navigate = useNavigate()
@@ -37,6 +40,11 @@ function BurgerMenu() {
   function navigateToPath(path) {
     onClose()
     navigate(path)
+  }
+  const handleLogout = () => {
+    window.localStorage.removeItem('metups-login-token')
+    navigate('/')
+    onClose()
   }
   return (
     <>
@@ -58,12 +66,30 @@ function BurgerMenu() {
           </DrawerHeader>
           <DrawerBody>
             {userIsAuthenticated() ? (
-              <BurgerItems items={authenticatedItems} />
+              <Stack spacing={8}>
+                <BurgerItems items={authenticatedItems} />
+
+                <Button
+                  onClick={() => navigateToPath('/eventCreate')}
+                  w={'full'}
+                  colorScheme={'brand.primary'}>
+                  Create a new event
+                </Button>
+              </Stack>
             ) : (
               <BurgerItems items={UnauthenticatedItems} />
             )}
           </DrawerBody>
-          <DrawerFooter></DrawerFooter>
+          <hr />
+          <DrawerFooter>
+            {user && (
+              <BurgerFooter
+                user={user}
+                profilePath={() => navigateToPath('/profile')}
+                handleLogout={handleLogout}
+              />
+            )}
+          </DrawerFooter>
         </DrawerContent>
       </Drawer>
     </>
