@@ -14,16 +14,14 @@ const Home = ({ events }) => {
     <section className='mainHome'>
       <Container className='pt-5'>
         <Row className='justify-content-around'>
-          <Heading className='text-center mb-5' as='h1' size='3xl'>
-            Welcome to MetUps
+          <Heading className='text-center mb-5' as='h1' size='3xl' textAlign={'start'}>
+            The platform for people—Connecting interests, creating friendships
           </Heading>
           <Col md={6} sm={8}>
             <div>
               <Text className='mt-5' fontSize='2xl' lineHeight='200%'>
-                MetUps is the perfect place for everything you're looking to do this year! For 0
-                days, people have been turning to MetUp to organise, host and arrange events.
-                Through MetUp, people have explored their intrerests, grown their community and
-                expanded their skill sets. Join the fun now and sign up to create your first event!
+                Find your passion, from outdoor adventures to book clubs, professional networking to
+                skill exchanges, on MetUps. Daily events await—dive in and enjoy the experience.
               </Text>
             </div>
           </Col>
