@@ -1,7 +1,7 @@
 import { extendTheme } from '@chakra-ui/react'
 
 const fonts = {
-  // heading: ,
+  heading: 'Rubik, sans-serif',
   body: 'Rubik, sans-serif',
 }
 

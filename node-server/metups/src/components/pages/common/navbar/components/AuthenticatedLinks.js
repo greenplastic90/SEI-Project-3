@@ -1,13 +1,13 @@
-import { Avatar, HStack, Text } from '@chakra-ui/react'
+import { Avatar, Button, HStack, Text } from '@chakra-ui/react'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
 function AuthenticatedLinks({ user }) {
   const navigate = useNavigate()
-  // const handleLogout = () => {
-  //   window.localStorage.removeItem('metups-login-token')
-  //   navigate('/')
-  // }
+  const handleLogout = () => {
+    window.localStorage.removeItem('metups-login-token')
+    navigate('/')
+  }
   return (
     <HStack spacing={4}>
       <Text variant='createEventNavLink' onClick={() => navigate('/eventCreate')}>
@@ -26,7 +26,7 @@ function AuthenticatedLinks({ user }) {
           onClick={() => navigate('/profile')}
         />
       )}
-      {/* <Button onClick={handleLogout}>Log out</Button> */}
+      <Button onClick={handleLogout}>Log out</Button>
     </HStack>
   )
 }

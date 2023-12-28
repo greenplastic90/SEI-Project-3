@@ -12,17 +12,22 @@ import {
 import React, { useRef } from 'react'
 import Logo from './Logo'
 
-import { RiGroupLine, RiHome3Line } from 'react-icons/ri'
+import { RiGroupLine, RiHome3Line, RiLoginCircleLine, RiUserAddLine } from 'react-icons/ri'
 import { useNavigate } from 'react-router-dom'
 import BurgerItems from './BurgerItems'
+import { userIsAuthenticated } from '../../../../../auth/helpers'
 
 function BurgerMenu() {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const iconRef = useRef()
   const navigate = useNavigate()
-  const burgerItems = [
+  const authenticatedItems = [
     { name: 'Home', func: () => navigateToPath('/'), icon: <RiHome3Line size={20} /> },
     { name: 'Events', func: () => navigateToPath('/events'), icon: <RiGroupLine size={20} /> },
+  ]
+  const UnauthenticatedItems = [
+    { name: 'Log in', func: () => navigateToPath('/login'), icon: <RiLoginCircleLine size={20} /> },
+    { name: 'Sign up', func: () => navigateToPath('/register'), icon: <RiUserAddLine size={20} /> },
   ]
 
   const handleSearch = () => {
@@ -52,7 +57,11 @@ function BurgerMenu() {
             </HStack>
           </DrawerHeader>
           <DrawerBody>
-            <BurgerItems items={burgerItems} />
+            {userIsAuthenticated() ? (
+              <BurgerItems items={authenticatedItems} />
+            ) : (
+              <BurgerItems items={UnauthenticatedItems} />
+            )}
           </DrawerBody>
           <DrawerFooter></DrawerFooter>
         </DrawerContent>
