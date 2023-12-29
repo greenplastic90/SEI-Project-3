@@ -106,10 +106,9 @@ function App() {
   // --------------------
 
   return (
-    <Box p={4}>
-      <Router>
-        <PageNavbar user={user} handleLogout={handleLogout} />
-
+    <Router>
+      <PageNavbar user={user} handleLogout={handleLogout} />
+      <Box p={[4, 8, 16, 64]}>
         <Routes>
           <Route path='/' element={<Home options={options} events={allEvents} user={user} />} />
           <Route path='/register' element={<Signup />} />
@@ -134,10 +133,9 @@ function App() {
 
           {/* <Route path='/resetPassword' element={<ResetPassword />} /> */}
         </Routes>
-
-        <Footer />
-      </Router>
-    </Box>
+      </Box>
+      {/* <Footer /> */}
+    </Router>
   )
 }
 

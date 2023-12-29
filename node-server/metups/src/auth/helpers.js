@@ -18,3 +18,17 @@ export const userIsAuthenticated = () => {
   const currentTime = Math.round(Date.now() / 1000)
   return currentTime < payload.exp
 }
+
+export function getDayOfWeek(dateString) {
+  // Split the date string and parse it to DD, MM, YYYY
+  const parts = dateString.split('/')
+  const day = parseInt(parts[0], 10)
+  const month = parseInt(parts[1], 10) - 1 // Month is 0-indexed in JavaScript Date
+  const year = parseInt(parts[2], 10)
+
+  // Create a new Date object
+  const date = new Date(year, month, day)
+
+  // Get the day of the week
+  return date.toLocaleDateString('en-US', { weekday: 'short' }).toUpperCase()
+}

@@ -23,7 +23,9 @@ function AuthenticatedLinks({ user, handleLogout }) {
           onClick={() => navigate('/profile')}
         />
       )}
-      <Button onClick={handleLogout}>Log out</Button>
+      <Button colorScheme='brand.primary' onClick={handleLogout}>
+        Log out
+      </Button>
     </HStack>
   )
 }
