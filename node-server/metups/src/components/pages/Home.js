@@ -8,6 +8,7 @@ import EventCards from './common/EventCards'
 
 const Home = ({ events }) => {
   const navigate = useNavigate()
+
   return (
     <PageWrapper>
       <Stack flexDir={{ base: 'column', md: 'row', lg: 'row' }}>
