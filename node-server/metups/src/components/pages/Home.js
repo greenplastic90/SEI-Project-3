@@ -5,6 +5,7 @@ import heroImage from '../../images/home.png'
 import PageWrapper from './common/PageWrapper'
 import { useNavigate } from 'react-router-dom'
 import EventCards from './common/EventCards'
+import { getRandomEvents } from '../../auth/helpers'
 
 const Home = ({ events }) => {
   const navigate = useNavigate()
@@ -31,7 +32,8 @@ const Home = ({ events }) => {
           <Image src={heroImage} alt='Hero' />
         </Stack>
       </Stack>
-      <EventCards events={events} />
+      {/* Display 8 random events */}
+      <EventCards events={getRandomEvents(events, 8)} />
     </PageWrapper>
   )
 }

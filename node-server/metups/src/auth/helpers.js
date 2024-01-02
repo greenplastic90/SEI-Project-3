@@ -32,3 +32,16 @@ export function getDayOfWeek(dateString) {
   // Get the day of the week
   return date.toLocaleDateString('en-US', { weekday: 'short' }).toUpperCase()
 }
+
+export function getRandomEvents(arr, numEvents) {
+  let result = []
+  let copiedArray = [...arr]
+
+  for (let i = 0; i < numEvents && copiedArray.length; i++) {
+    const randomIndex = Math.floor(Math.random() * copiedArray.length)
+    result.push(copiedArray[randomIndex])
+    copiedArray.splice(randomIndex, 1)
+  }
+
+  return result
+}

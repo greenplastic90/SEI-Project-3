@@ -32,16 +32,19 @@ function EventCards({ events }) {
         gap={4}>
         {events.map(({ _id, image, eventName, owner, eventTime, eventDate, likedBy }) => (
           <Stack key={_id}>
+            {/* Stack of info/image */}
             <Stack
               onClick={() => navigate(`/events/${_id}`)}
               cursor={'pointer'}
               flexDir={['row', null, 'column-reverse']}
               justify={['space-between', null, 'start']}>
+              {/* Info Stack */}
               <Stack>
                 <Heading fontSize={'xl'} fontWeight={'bold'} pt={2}>
                   {eventName}
                 </Heading>
                 <Stack spacing={1}>
+                  {/* Owner */}
                   <Text fontWeight={'black'} color={'blackAlpha.500'}>
                     Hosted by: {owner.name}
                   </Text>
@@ -59,6 +62,7 @@ function EventCards({ events }) {
                   </HStack>
                 </Stack>
               </Stack>
+              {/* Image Stack */}
               <Stack>
                 <AspectRatio w={['100px', null, '250px']} h={['100px', null, '150px']}>
                   <Image src={image} alt='Event Hero' borderRadius={'md'} />
