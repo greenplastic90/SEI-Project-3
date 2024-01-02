@@ -1,7 +1,6 @@
 import {
   Image,
   HStack,
-  VStack,
   Stack,
   AspectRatio,
   Heading,
@@ -21,7 +20,15 @@ function EventCards({ events }) {
     <Stack>
       <Heading>Events</Heading>
       <Grid
-        templateColumns={['repeat(1, 1fr)', null, 'repeat(3, 1fr)', null, null, 'repeat(4, 1fr)']}
+        templateColumns={[
+          'repeat(1, 1fr)',
+          null,
+          'repeat(2, 1fr)',
+          null,
+          'repeat(3, 1fr)',
+          'repeat(4, 1fr)',
+          null,
+        ]}
         gap={4}>
         {events.map(({ _id, image, eventName, owner, eventTime, eventDate, likedBy }) => (
           <Stack key={_id}>
