@@ -19,13 +19,14 @@ function EventsSearchInputs({ searchParams, onChange, options }) {
         />
       </InputGroup>
       <Select
-        name='eventType'
+        onChange={onChange}
+        name='type'
         borderLeftRadius={0}
         borderLeft={0}
-        placeholder='Event type'
+        placeholder='Type'
         color={'gray.400'}>
         {options.map(({ value, label }) => (
-          <option key={value} value={value}>
+          <option key={value} value={label}>
             {label}
           </option>
         ))}

@@ -7,7 +7,7 @@ import EventsSearchInputs from './EventsSearchInputs'
 function Events({ events, userGeoLocation, options }) {
   const [filteredEvents, setFilteredEvents] = useState([])
   const [searchParams, setSearchParams] = useState({
-    type: [],
+    type: '',
     searchBar: '',
   })
 
@@ -17,7 +17,9 @@ function Events({ events, userGeoLocation, options }) {
       searchParams.type.length === 0
         ? event.eventName.toLowerCase().includes(searchParams.searchBar.toLowerCase()) &&
           filtered.push(event)
-        : searchParams.type.some((type) => event.eventType.includes(type)) &&
+        : event.eventType.includes(searchParams.type) &&
+          //Below should replace above when using Reacr-Select again
+          // searchParams.type.some((type) => event.eventType.includes(type))
           event.eventName.toLowerCase().includes(searchParams.searchBar.toLowerCase()) &&
           filtered.push(event)
     )
@@ -29,12 +31,14 @@ function Events({ events, userGeoLocation, options }) {
 
   const handleChange = (e) => {
     console.log(e)
-    if (!e.target) {
-      const labels = e.map((obj) => obj.label)
-      setSearchParams({ ...searchParams, type: labels })
-    } else {
-      setSearchParams({ ...searchParams, [e.target.name]: e.target.value })
-    }
+    setSearchParams({ ...searchParams, [e.target.name]: e.target.value })
+    // Using React-Select
+    // if (!e.target) {
+    //   const labels = e.map((obj) => obj.label)
+    //   setSearchParams({ ...searchParams, type: labels })
+    // } else {
+    //   setSearchParams({ ...searchParams, [e.target.name]: e.target.value })
+    // }
   }
 
   return (
