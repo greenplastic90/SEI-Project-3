@@ -32,6 +32,7 @@ const Home = ({ events }) => {
           <Image src={heroImage} alt='Hero' />
         </Stack>
       </Stack>
+      <Heading>Events</Heading>
       {/* Display 8 random events */}
       <EventCards events={getRandomEvents(events, 8)} />
     </>

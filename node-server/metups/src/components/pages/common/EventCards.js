@@ -19,7 +19,6 @@ function EventCards({ events }) {
   const breakpointValue = useBreakpointValue({ base: 'base', md: 'md', lg: 'lg' })
   return (
     <Stack>
-      <Heading>Events</Heading>
       {events.length > 0 ? (
         <Grid
           templateColumns={[

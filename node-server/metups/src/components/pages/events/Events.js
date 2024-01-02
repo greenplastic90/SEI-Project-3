@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import EventCards from '../common/EventCards'
 import EventsMap from './EventsMap'
-import { Stack } from '@chakra-ui/react'
+import { Heading, Stack } from '@chakra-ui/react'
 import EventsSearchInputs from './EventsSearchInputs'
 
-function Events({ events, userGeoLocation }) {
+function Events({ events, userGeoLocation, options }) {
   const [filteredEvents, setFilteredEvents] = useState([])
   const [searchParams, setSearchParams] = useState({
     type: [],
@@ -38,9 +38,10 @@ function Events({ events, userGeoLocation }) {
 
   return (
     <Stack spacing={8}>
+      <Heading>Events</Heading>
       <EventsMap events={filteredEvents} userGeoLocation={userGeoLocation} />
-      <EventsSearchInputs searchParams={searchParams} />
-      <EventCards events={filteredEvents} onChange={handleChange} />
+      <EventsSearchInputs searchParams={searchParams} options={options} onChange={handleChange} />
+      <EventCards events={filteredEvents} />
     </Stack>
   )
 }
