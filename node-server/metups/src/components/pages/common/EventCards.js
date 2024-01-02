@@ -27,7 +27,6 @@ function EventCards({ events }) {
           null,
           'repeat(3, 1fr)',
           'repeat(4, 1fr)',
-          null,
         ]}
         gap={4}>
         {events.map(({ _id, image, eventName, owner, eventTime, eventDate, likedBy }) => (

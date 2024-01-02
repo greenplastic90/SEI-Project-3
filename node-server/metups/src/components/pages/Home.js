@@ -11,7 +11,7 @@ const Home = ({ events }) => {
   const navigate = useNavigate()
 
   return (
-    <PageWrapper>
+    <>
       <Stack flexDir={{ base: 'column', md: 'row', lg: 'row' }}>
         <Stack spacing={6} justify={'center'}>
           <Heading fontWeight={'bold'}>
@@ -34,7 +34,7 @@ const Home = ({ events }) => {
       </Stack>
       {/* Display 8 random events */}
       <EventCards events={getRandomEvents(events, 8)} />
-    </PageWrapper>
+    </>
   )
 }
 

@@ -18,6 +18,7 @@ import EventIndex from './components/pages/EventIndex'
 import Profile from './components/pages/Profile'
 import Footer from './components/pages/common/Footer'
 import { Box } from '@chakra-ui/react'
+import Events from './components/pages/events/Events.js'
 
 function App() {
   const [allEvents, setAllEvents] = useState([])
@@ -108,7 +109,7 @@ function App() {
   return (
     <Router>
       <PageNavbar user={user} handleLogout={handleLogout} />
-      <Box px={[4, 8, 32, 64]}>
+      <Box pt={20} px={[4, 8, 32, 64]}>
         <Routes>
           <Route path='/' element={<Home events={allEvents} />} />
           <Route path='/register' element={<Signup />} />
@@ -126,7 +127,7 @@ function App() {
           <Route
             path='/events'
             element={
-              <EventIndex options={options} events={allEvents} userGeoLocation={userGeoLocation} />
+              <Events options={options} events={allEvents} userGeoLocation={userGeoLocation} />
             }
           />
           <Route path='/profile' element={<Profile user={user} setUser={setUser} />} />
