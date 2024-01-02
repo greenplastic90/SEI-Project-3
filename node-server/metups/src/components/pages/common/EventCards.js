@@ -34,7 +34,7 @@ function EventCards({ events }) {
                 <Heading fontSize={'xl'} fontWeight={'bold'} pt={2}>
                   {eventName}
                 </Heading>
-                <Stack spacing={0}>
+                <Stack spacing={1}>
                   <Text fontWeight={'black'} color={'blackAlpha.500'}>
                     Hosted by: {owner.name}
                   </Text>
@@ -48,7 +48,7 @@ function EventCards({ events }) {
                   {/* Attending */}
                   <HStack>
                     <RiCheckboxCircleLine size={20} />
-                    <Text>{likedBy.length} going</Text>
+                    <Text fontSize={'lg'}>{likedBy.length} going</Text>
                   </HStack>
                 </Stack>
               </Stack>
