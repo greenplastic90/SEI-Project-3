@@ -28,6 +28,7 @@ function Events({ events, userGeoLocation, options }) {
   }, [events, searchParams])
 
   const handleChange = (e) => {
+    console.log(e)
     if (!e.target) {
       const labels = e.map((obj) => obj.label)
       setSearchParams({ ...searchParams, type: labels })

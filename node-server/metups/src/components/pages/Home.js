@@ -2,7 +2,6 @@ import React from 'react'
 
 import { Button, Heading, Image, Stack, Text } from '@chakra-ui/react'
 import heroImage from '../../images/home.png'
-import PageWrapper from './common/PageWrapper'
 import { useNavigate } from 'react-router-dom'
 import EventCards from './common/EventCards'
 import { getRandomEvents } from '../../auth/helpers'

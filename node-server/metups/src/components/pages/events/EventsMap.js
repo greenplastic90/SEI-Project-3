@@ -11,7 +11,7 @@ function EventsMap({ events, userGeoLocation }) {
             latitude: userGeoLocation.latitude,
             zoom: 12,
           }}
-          style={{ height: 500 }}
+          style={{ height: '50vh', borderRadius: '5px' }}
           mapStyle='mapbox://styles/mapbox/streets-v11'
           mapboxAccessToken={process.env.REACT_APP_MAP_TOKEN}
           // pitch={50}
