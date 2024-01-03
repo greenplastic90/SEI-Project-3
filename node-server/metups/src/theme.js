@@ -48,6 +48,7 @@ const colors = {
 const components = {
   Text: {
     variants: {
+      profile: { color: 'white' },
       navLink: {
         cursor: 'pointer',
         fontWeight: 'bold',

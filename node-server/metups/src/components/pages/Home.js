@@ -32,8 +32,8 @@ const Home = ({ events }) => {
         </Stack>
       </Stack>
       <Heading>Events</Heading>
-      {/* Display 8 random events */}
-      <EventCards events={getRandomEvents(events, 8)} />
+      {/* Display  random events */}
+      <EventCards events={getRandomEvents(events, 4)} />
     </>
   )
 }

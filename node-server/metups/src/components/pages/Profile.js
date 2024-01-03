@@ -36,22 +36,22 @@ const Profile = ({ user, setUser }) => {
     navigate('/')
   }
 
-  useEffect(() => {
-    try {
-      const getUserProfile = async () => {
-        const { data } = await axios.get('/api/profile', {
-          headers: {
-            Authorization: `Bearer ${getTokenFromLocalStorage()}`,
-          },
-        })
+  // useEffect(() => {
+  //   try {
+  //     const getUserProfile = async () => {
+  //       const { data } = await axios.get('/api/profile', {
+  //         headers: {
+  //           Authorization: `Bearer ${getTokenFromLocalStorage()}`,
+  //         },
+  //       })
 
-        setUser(data)
-      }
-      getUserProfile()
-    } catch (error) {
-      console.log(error)
-    }
-  }, [setUser])
+  //       setUser(data)
+  //     }
+  //     getUserProfile()
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }, [setUser])
 
   // const resetPass = () => {
   //   navigate('/resetPassword')

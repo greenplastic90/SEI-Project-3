@@ -15,10 +15,11 @@ import Login from './components/pages/auth/Login'
 import EventCreate from './components/pages/EventCreate'
 import SingleEvent from './components/pages/Event'
 import EventIndex from './components/pages/EventIndex'
-import Profile from './components/pages/Profile'
+
 import Footer from './components/pages/common/Footer'
 import { Box } from '@chakra-ui/react'
 import Events from './components/pages/events/Events.js'
+import Profile from './components/pages/profile/Profile.jsx'
 
 function App() {
   const [allEvents, setAllEvents] = useState([])
