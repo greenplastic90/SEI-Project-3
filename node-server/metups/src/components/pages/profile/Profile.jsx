@@ -44,6 +44,7 @@ function Profile({ user, setUser }) {
               </Text>
               <Text>My Events</Text>
             </VStack>
+
             <VStack>
               <Text fontSize={'xx-large'} fontWeight={'bold'}>
                 {user.ownedEvents.length}
