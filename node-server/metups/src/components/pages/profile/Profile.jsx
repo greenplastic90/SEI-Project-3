@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useEffect } from 'react'
 import { getTokenFromLocalStorage } from '../../../auth/helpers'
-import { HStack, Stack, Text, VStack } from '@chakra-ui/react'
+import { Box, HStack, Stack, Text, VStack } from '@chakra-ui/react'
 
 function Profile({ user, setUser }) {
   useEffect(() => {
@@ -21,17 +21,17 @@ function Profile({ user, setUser }) {
     }
   }, [setUser])
   return (
-    <>
+    <VStack>
       {user && (
         <VStack>
           <Stack
             justify={'end'}
-            p={4}
+            p={6}
             bgImage={user.profilePhoto}
             bgPosition={'center'}
             bgSize={'cover'}
-            h={'50vh'}
-            w={'full'}>
+            h={'350px'}
+            w={'350px'}>
             <Text fontSize={'xx-large'} fontWeight={'bold'} variant='profile'>
               {user.username}
             </Text>
@@ -44,17 +44,17 @@ function Profile({ user, setUser }) {
               </Text>
               <Text>My Events</Text>
             </VStack>
-
+            <Box w={'1px'} h={'50px'} borderRight={'1px solid'} borderColor={'gray.400'}></Box>
             <VStack>
               <Text fontSize={'xx-large'} fontWeight={'bold'}>
-                {user.ownedEvents.length}
+                {user.likedEvents.length}
               </Text>
-              <Text>My Events</Text>
+              <Text>RSVPs</Text>
             </VStack>
           </HStack>
         </VStack>
       )}
-    </>
+    </VStack>
   )
 }
 
