@@ -1,22 +1,24 @@
 import { Avatar, HStack, Text, Stack } from '@chakra-ui/react'
 import React from 'react'
 
-function BurgerFooter({ user, profilePath, handleLogout }) {
-  const { username, profilePhoto } = user
-
+function BurgerFooter({ user, actionFunc, handleLogout, action }) {
   return (
-    <HStack w={'full'} justify={'space-between'}>
-      <HStack onClick={profilePath}>
-        <Avatar name={username} src={profilePhoto} />
-        <Stack spacing={0}>
-          <Text fontWeight={'bold'}>{username}</Text>
-          <Text color={'blackAlpha.500'}>View profile</Text>
-        </Stack>
-      </HStack>
-      <Text onClick={handleLogout} fontSize={'lg'} cursor={'pointer'}>
-        Log out
-      </Text>
-    </HStack>
+    <>
+      {user && (
+        <HStack w={'full'} justify={'space-between'}>
+          <HStack onClick={actionFunc}>
+            <Avatar name={user.username} src={user.profilePhoto} />
+            <Stack spacing={0}>
+              <Text fontWeight={'bold'}>{user.username}</Text>
+              <Text color={'blackAlpha.500'}>{action}</Text>
+            </Stack>
+          </HStack>
+          <Text onClick={handleLogout} fontSize={'lg'} cursor={'pointer'}>
+            Log out
+          </Text>
+        </HStack>
+      )}
+    </>
   )
 }
 

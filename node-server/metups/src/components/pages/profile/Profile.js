@@ -1,9 +1,12 @@
 import axios from 'axios'
 import React, { useEffect } from 'react'
 import { getTokenFromLocalStorage } from '../../../auth/helpers'
-import { Box, HStack, Stack, Text, VStack } from '@chakra-ui/react'
+import { Box, HStack, Stack, Text, VStack, useDisclosure } from '@chakra-ui/react'
+import BurgerFooter from '../common/navbar/components/BurgerFooter'
+import ResetPasswordModal from './ResetPasswordModal'
 
 function Profile({ user, setUser }) {
+  const { isOpen, onOpen, onClose } = useDisclosure()
   useEffect(() => {
     try {
       const getUserProfile = async () => {
@@ -21,7 +24,8 @@ function Profile({ user, setUser }) {
     }
   }, [setUser])
   return (
-    <VStack>
+    <VStack mt={[-20, null, 0]} justify={'space-between'}>
+      {/* mt above is to offset the padding in APP */}
       {user && (
         <VStack>
           <Stack
@@ -38,14 +42,14 @@ function Profile({ user, setUser }) {
             <Text variant='profile'>{user.email}</Text>
           </Stack>
           <HStack w={'full'} justify={'space-around'}>
-            <VStack>
+            <VStack w={'full'}>
               <Text fontSize={'xx-large'} fontWeight={'bold'}>
                 {user.ownedEvents.length}
               </Text>
               <Text>My Events</Text>
             </VStack>
             <Box w={'1px'} h={'50px'} borderRight={'1px solid'} borderColor={'gray.400'}></Box>
-            <VStack>
+            <VStack w={'full'}>
               <Text fontSize={'xx-large'} fontWeight={'bold'}>
                 {user.likedEvents.length}
               </Text>
@@ -54,6 +58,8 @@ function Profile({ user, setUser }) {
           </HStack>
         </VStack>
       )}
+      <BurgerFooter user={user} action={'Reset password'} actionFunc={onOpen} />
+      <ResetPasswordModal isOpen={isOpen} onClose={onClose} />
     </VStack>
   )
 }

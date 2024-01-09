@@ -90,7 +90,8 @@ function BurgerMenu({ user, handleLogout }) {
             {user && (
               <BurgerFooter
                 user={user}
-                profilePath={() => navigateToPath('/profile')}
+                action={'View profile'}
+                actionFunc={() => navigateToPath('/profile')}
                 handleLogout={logout}
               />
             )}
