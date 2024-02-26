@@ -41,16 +41,28 @@ function Profile({ user, setUser, handleLogout }) {
       console.log(error)
     }
   }, [navigate, setUser])
+  function eventsSwitch(title) {
+    switch (title) {
+      case 'My Events':
+        setEventsToDisplay({ title: 'My Events', events: user.ownedEvents })
+        break
+      case 'RSVPs':
+        setEventsToDisplay({ title: 'RSVPs', events: user.likedEvents })
+        break
+      default:
+    }
+  }
   return (
-    <VStack>
+    <VStack spacing={6}>
       {user && (
         <>
           <VStack pb={4} justify={'space-between'} bgColor={'gray.100'} borderRadius={'xl'}>
             <ProfileImage user={user} />
-            <EventsCounter user={user} />
+            <EventsCounter user={user} action={eventsSwitch} />
           </VStack>
 
           {eventsToDisplay.title && (
+            // 350 is the width of the VStack above
             <Stack borderRadius={'xl'} maxW={'350'}>
               <Heading>{eventsToDisplay.title}</Heading>
               <EventCards events={eventsToDisplay.events} />

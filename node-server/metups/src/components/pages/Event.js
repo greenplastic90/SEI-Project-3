@@ -227,7 +227,7 @@ const SingleEvent = ({ user, userGeoLocation, allEvents }) => {
                                 colorScheme='blue'
                                 onClick={handleLikes}
                                 size={'sm'}>
-                                Cancel
+                                Cancel RSVP
                               </Button>
                             ) : (
                               <Button
