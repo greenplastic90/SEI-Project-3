@@ -8,6 +8,7 @@ import ResetPasswordModal from './ResetPasswordModal'
 function Profile({ user, setUser }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   useEffect(() => {
+    console.log('Token from local storage ->', getTokenFromLocalStorage())
     try {
       const getUserProfile = async () => {
         const { data } = await axios.get('/api/profile', {
@@ -43,14 +44,14 @@ function Profile({ user, setUser }) {
           <HStack w={'full'} justify={'space-around'}>
             <VStack w={'full'}>
               <Text fontSize={'xx-large'} fontWeight={'bold'}>
-                {user.ownedEvents.length}
+                {user.ownedEvents?.length}
               </Text>
               <Text>My Events</Text>
             </VStack>
             <Box w={'1px'} h={'50px'} borderRight={'1px solid'} borderColor={'gray.400'}></Box>
             <VStack w={'full'}>
               <Text fontSize={'xx-large'} fontWeight={'bold'}>
-                {user.likedEvents.length}
+                {user.likedEvents?.length}
               </Text>
               <Text>RSVPs</Text>
             </VStack>
