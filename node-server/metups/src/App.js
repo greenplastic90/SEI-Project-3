@@ -129,7 +129,10 @@ function App() {
               <Events options={options} events={allEvents} userGeoLocation={userGeoLocation} />
             }
           />
-          <Route path='/profile' element={<Profile user={user} setUser={setUser} />} />
+          <Route
+            path='/profile'
+            element={<Profile user={user} setUser={setUser} handleLogout={handleLogout} />}
+          />
 
           {/* <Route path='/resetPassword' element={<ResetPassword />} /> */}
         </Routes>

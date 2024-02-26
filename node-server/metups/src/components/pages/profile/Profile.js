@@ -4,11 +4,17 @@ import { getTokenFromLocalStorage } from '../../../auth/helpers'
 import { Box, HStack, Stack, Text, VStack, useDisclosure } from '@chakra-ui/react'
 import BurgerFooter from '../common/navbar/components/BurgerFooter'
 import ResetPasswordModal from './ResetPasswordModal'
+import { useNavigate } from 'react-router-dom'
 
-function Profile({ user, setUser }) {
+function Profile({ user, setUser, handleLogout }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const navigate = useNavigate()
+
+  function logoutAndNavigate() {
+    handleLogout()
+    navigate('/')
+  }
   useEffect(() => {
-    console.log('Token from local storage ->', getTokenFromLocalStorage())
     try {
       const getUserProfile = async () => {
         const { data } = await axios.get('/api/profile', {
@@ -23,7 +29,7 @@ function Profile({ user, setUser }) {
     } catch (error) {
       console.log(error)
     }
-  }, [setUser])
+  }, [navigate, setUser])
   return (
     <VStack>
       {user && (
@@ -60,7 +66,12 @@ function Profile({ user, setUser }) {
       )}
 
       <Box p={4} w={'350px'} border={'1px solid red'} borderRadius={'xl'}>
-        <BurgerFooter user={user} action={'Password reset'} actionFunc={onOpen} />
+        <BurgerFooter
+          user={user}
+          action={'Password reset'}
+          actionFunc={onOpen}
+          handleLogout={logoutAndNavigate}
+        />
       </Box>
 
       <ResetPasswordModal isOpen={isOpen} onClose={onClose} />
