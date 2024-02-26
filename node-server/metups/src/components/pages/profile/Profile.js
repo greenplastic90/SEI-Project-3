@@ -59,14 +59,7 @@ function Profile({ user, setUser }) {
         </VStack>
       )}
 
-      <Box
-        position='fixed'
-        bottom='4'
-        p={4}
-        w={'350px'}
-        zIndex='sticky'
-        border={'1px solid red'}
-        borderRadius={'xl'}>
+      <Box p={4} w={'350px'} border={'1px solid red'} borderRadius={'xl'}>
         <BurgerFooter user={user} action={'Password reset'} actionFunc={onOpen} />
       </Box>
 

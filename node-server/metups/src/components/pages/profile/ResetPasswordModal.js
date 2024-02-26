@@ -37,18 +37,43 @@ function ResetPasswordModal({ isOpen, onClose }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+
     try {
-      await axios.put('/api/profile', formData, {
+      const res = await axios.put('/api/profile', formData, {
         headers: {
           Authorization: `Bearer ${getTokenFromLocalStorage()}`,
         },
       })
-      navigate('/profile')
+      console.log({ res })
+      toast({
+        title: 'Success',
+        description: 'You have successfully changed your password',
+        status: 'success',
+        duration: '5000',
+        isClosable: true,
+      })
+      onClose()
+      setFormData({
+        password: '',
+        passwordConfirmation: '',
+      })
     } catch (err) {
+      let errorDescription = ''
+      if (err.response.data.message.includes('is shorter than the minimum allowed length (8).')) {
+        errorDescription = 'Password must be atleast 8 charecters long.'
+      } else if (err.response.data.message.includes('Path `password` is required')) {
+        errorDescription = 'New Password is a required feild.'
+      } else {
+        errorDescription = err.response.data.message
+      }
+      toast({
+        title: 'Change Failed',
+        description: errorDescription,
+        status: 'error',
+        duration: '8000',
+        isClosable: true,
+      })
       console.log(err.response.data)
-
-      if (err.response.data.message.includes('is shorter than the minimum allowed length (8).'))
-        setFormError('Password is shorter than is allowed (8).')
     }
   }
   return (
@@ -72,31 +97,14 @@ function ResetPasswordModal({ isOpen, onClose }) {
                 type='password'
               />
               <Center my={'3'}>
-                <Button
-                  type='submit'
-                  bgSize={'auto'}
-                  onClick={() => {
-                    toast({
-                      title: 'Successfully changed password',
-                      desc: 'You have successfully changed your password',
-                      status: 'success',
-                      duration: '2000',
-                      isClosable: true,
-                    })
-                  }}
-                  onClose={onClose}>
+                <Button type='submit' bgSize={'auto'}>
                   Submit
                 </Button>
               </Center>
-              {formError && <Text>{formError}</Text>}
+              {/* {formError && <Text>{formError}</Text>} */}
             </FormControl>
           </form>
         </ModalBody>
-        <ModalFooter alignSelf={'center'}>
-          <Center>
-            <Text textAlign={'center'}>Click anywhere on the page to leave</Text>
-          </Center>
-        </ModalFooter>
       </ModalContent>
     </Modal>
   )
