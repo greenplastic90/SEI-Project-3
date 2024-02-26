@@ -13,7 +13,7 @@ function BurgerFooter({ user, actionFunc, handleLogout, action }) {
               <Text color={'blackAlpha.500'}>{action}</Text>
             </Stack>
           </HStack>
-          <Text onClick={handleLogout} fontSize={'lg'} cursor={'pointer'}>
+          <Text onClick={handleLogout} fontSize={'lg'} cursor={'pointer'} fontWeight={'bold'}>
             Log out
           </Text>
         </HStack>

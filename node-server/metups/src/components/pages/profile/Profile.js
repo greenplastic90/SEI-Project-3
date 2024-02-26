@@ -24,10 +24,9 @@ function Profile({ user, setUser }) {
     }
   }, [setUser])
   return (
-    <VStack mt={[-20, null, 0]} justify={'space-between'}>
-      {/* mt above is to offset the padding in APP */}
+    <VStack>
       {user && (
-        <VStack>
+        <VStack justify={'space-between'}>
           <Stack
             justify={'end'}
             p={6}
@@ -58,7 +57,18 @@ function Profile({ user, setUser }) {
           </HStack>
         </VStack>
       )}
-      <BurgerFooter user={user} action={'Reset password'} actionFunc={onOpen} />
+
+      <Box
+        position='fixed'
+        bottom='4'
+        p={4}
+        w={'350px'}
+        zIndex='sticky'
+        border={'1px solid red'}
+        borderRadius={'xl'}>
+        <BurgerFooter user={user} action={'Password reset'} actionFunc={onOpen} />
+      </Box>
+
       <ResetPasswordModal isOpen={isOpen} onClose={onClose} />
     </VStack>
   )

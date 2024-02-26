@@ -1,4 +1,4 @@
-import { Avatar, Button, HStack, Text } from '@chakra-ui/react'
+import { Avatar, HStack, Text } from '@chakra-ui/react'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -23,9 +23,9 @@ function AuthenticatedLinks({ user, handleLogout }) {
           onClick={() => navigate('/profile')}
         />
       )}
-      <Button colorScheme='brand.primary' onClick={handleLogout}>
+      {/* <Button colorScheme='brand.primary' onClick={handleLogout}>
         Log out
-      </Button>
+      </Button> */}
     </HStack>
   )
 }

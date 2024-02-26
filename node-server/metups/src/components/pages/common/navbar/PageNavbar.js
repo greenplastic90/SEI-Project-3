@@ -10,7 +10,15 @@ const PageNavbar = ({ user, handleLogout }) => {
   const breakpointValue = useBreakpointValue({ base: 'base', md: 'md', lg: 'lg' })
 
   return (
-    <HStack as={'nav'} p={4} justifyContent={'space-between'}>
+    <HStack
+      pos={'fixed'}
+      w={'full'}
+      bgColor={'white'}
+      as={'nav'}
+      px={4}
+      py={2}
+      zIndex={'sticky'}
+      justifyContent={'space-between'}>
       <Logo />
 
       {breakpointValue !== 'base' ? (
