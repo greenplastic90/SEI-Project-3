@@ -1,13 +1,17 @@
 import axios from 'axios'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { getTokenFromLocalStorage } from '../../../auth/helpers'
-import { Box, HStack, Stack, Text, VStack, useDisclosure } from '@chakra-ui/react'
+import { Box, HStack, Heading, Stack, Text, VStack, useDisclosure } from '@chakra-ui/react'
 import BurgerFooter from '../common/navbar/components/BurgerFooter'
 import ResetPasswordModal from './ResetPasswordModal'
 import { useNavigate } from 'react-router-dom'
+import EventCards from '../common/EventCards'
+import ProfileImage from './ProfileImage'
+import EventsCounter from './EventsCounter'
 
 function Profile({ user, setUser, handleLogout }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const [eventsToDisplay, setEventsToDisplay] = useState({ title: '', events: [] })
   const navigate = useNavigate()
 
   function logoutAndNavigate() {
@@ -15,6 +19,9 @@ function Profile({ user, setUser, handleLogout }) {
     navigate('/')
   }
   useEffect(() => {
+    if (!getTokenFromLocalStorage()) {
+      navigate('/login')
+    }
     try {
       const getUserProfile = async () => {
         const { data } = await axios.get('/api/profile', {
@@ -22,8 +29,12 @@ function Profile({ user, setUser, handleLogout }) {
             Authorization: `Bearer ${getTokenFromLocalStorage()}`,
           },
         })
-        console.log(data)
         setUser(data)
+        if (data.ownedEvents.length) {
+          setEventsToDisplay({ title: 'My Events', events: data.ownedEvents })
+        } else if (data.likedEvents.length) {
+          setEventsToDisplay({ title: 'RSVPs', events: data.likedEvents })
+        }
       }
       getUserProfile()
     } catch (error) {
@@ -31,52 +42,34 @@ function Profile({ user, setUser, handleLogout }) {
     }
   }, [navigate, setUser])
   return (
-    <VStack>
-      {user && (
-        <VStack pb={4} justify={'space-between'} bgColor={'gray.100'} borderRadius={'xl'}>
-          <Stack
-            borderTopRadius={'xl'}
-            justify={'end'}
-            p={6}
-            bgImage={user.profilePhoto}
-            bgPosition={'center'}
-            bgSize={'cover'}
-            h={'350px'}
-            w={'350px'}>
-            <Text fontSize={'xx-large'} fontWeight={'bold'} variant='profile'>
-              {user.username}
-            </Text>
-            <Text variant='profile'>{user.email}</Text>
-          </Stack>
-          <HStack w={'full'} justify={'space-around'}>
-            <VStack w={'full'}>
-              <Text fontSize={'xx-large'} fontWeight={'bold'}>
-                {user.ownedEvents?.length}
-              </Text>
-              <Text>My Events</Text>
+    <Stack px={[4, 40, 0]} flexDirection={['column', null, 'row']} spacing={[2, null, 0]}>
+      <VStack>
+        {user && (
+          <>
+            <VStack pb={4} justify={'space-between'} bgColor={'gray.100'} borderRadius={'xl'}>
+              <ProfileImage user={user} />
+              <EventsCounter user={user} />
             </VStack>
-            <Box w={'1px'} h={'50px'} borderRight={'1px solid'} borderColor={'gray.400'}></Box>
-            <VStack w={'full'}>
-              <Text fontSize={'xx-large'} fontWeight={'bold'}>
-                {user.likedEvents?.length}
-              </Text>
-              <Text>RSVPs</Text>
-            </VStack>
-          </HStack>
-        </VStack>
+
+            <Box p={4} w={'350px'} borderRadius={'xl'} bgColor={'gray.100'}>
+              <BurgerFooter
+                user={user}
+                action={'Password reset'}
+                actionFunc={onOpen}
+                handleLogout={logoutAndNavigate}
+              />
+            </Box>
+          </>
+        )}
+        <ResetPasswordModal isOpen={isOpen} onClose={onClose} />
+      </VStack>
+      {eventsToDisplay.title && (
+        <Stack p={4} bgColor={'gray.100'} borderRadius={'xl'}>
+          <Heading>{eventsToDisplay.title}</Heading>
+          <EventCards events={eventsToDisplay.events} />
+        </Stack>
       )}
-
-      <Box p={4} w={'350px'} borderRadius={'xl'} bgColor={'gray.100'}>
-        <BurgerFooter
-          user={user}
-          action={'Password reset'}
-          actionFunc={onOpen}
-          handleLogout={logoutAndNavigate}
-        />
-      </Box>
-
-      <ResetPasswordModal isOpen={isOpen} onClose={onClose} />
-    </VStack>
+    </Stack>
   )
 }
 
