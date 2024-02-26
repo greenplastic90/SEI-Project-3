@@ -33,8 +33,9 @@ function Profile({ user, setUser, handleLogout }) {
   return (
     <VStack>
       {user && (
-        <VStack justify={'space-between'}>
+        <VStack pb={4} justify={'space-between'} bgColor={'gray.100'} borderRadius={'xl'}>
           <Stack
+            borderTopRadius={'xl'}
             justify={'end'}
             p={6}
             bgImage={user.profilePhoto}
@@ -65,7 +66,7 @@ function Profile({ user, setUser, handleLogout }) {
         </VStack>
       )}
 
-      <Box p={4} w={'350px'} border={'1px solid red'} borderRadius={'xl'}>
+      <Box p={4} w={'350px'} borderRadius={'xl'} bgColor={'gray.100'}>
         <BurgerFooter
           user={user}
           action={'Password reset'}
