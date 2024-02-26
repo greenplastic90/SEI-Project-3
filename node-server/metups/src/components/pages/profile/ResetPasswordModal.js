@@ -46,8 +46,8 @@ function ResetPasswordModal({ isOpen, onClose }) {
       })
       console.log({ res })
       toast({
-        title: 'Success',
-        description: 'You have successfully changed your password',
+        title: 'Reset Success',
+        description: 'You have successfully reset your password',
         status: 'success',
         duration: '5000',
         isClosable: true,
@@ -67,7 +67,7 @@ function ResetPasswordModal({ isOpen, onClose }) {
         errorDescription = err.response.data.message
       }
       toast({
-        title: 'Change Failed',
+        title: 'Rest Password Failed',
         description: errorDescription,
         status: 'error',
         duration: '8000',

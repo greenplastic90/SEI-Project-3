@@ -10,7 +10,9 @@ function BurgerFooter({ user, actionFunc, handleLogout, action }) {
             <Avatar name={user.username} src={user.profilePhoto} />
             <Stack spacing={0}>
               <Text fontWeight={'bold'}>{user.username}</Text>
-              <Text color={'blackAlpha.500'}>{action}</Text>
+              <Text cursor={'pointer'} color={'blackAlpha.500'}>
+                {action}
+              </Text>
             </Stack>
           </HStack>
           <Text onClick={handleLogout} fontSize={'lg'} cursor={'pointer'} fontWeight={'bold'}>
