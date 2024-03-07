@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Select from 'react-select'
 import AsyncSelect from 'react-select/async'
 import axios from 'axios'
-import { getTokenFromLocalStorage } from '../../auth/helpers'
+import { getTokenFromLocalStorage, reformatDate } from '../../auth/helpers'
 
 import Map, { Marker } from 'react-map-gl'
 
@@ -72,14 +72,18 @@ const EventCreate = ({ options, userGeoLocation }) => {
 
   const handleChange = (e) => {
     if (e.target) {
-      const newObj = { ...formData, [e.target.name]: e.target.value }
+      let value = e.target.value
+
+      // Check if the field is 'eventDate' and reformat the date to DD/MM/YYYY
+      if (e.target.name === 'eventDate') {
+        value = reformatDate(value)
+      }
+
+      const newObj = { ...formData, [e.target.name]: value }
       setFormData(newObj)
       setFormErrors({ ...formErrors, [e.target.name]: '' })
     } else {
-      const arrayOfValues = e.map((obj) => {
-        return obj.label
-      })
-
+      const arrayOfValues = e.map((obj) => obj.label)
       const newValue = { ...formData, eventType: arrayOfValues }
       setFormData(newValue)
     }
