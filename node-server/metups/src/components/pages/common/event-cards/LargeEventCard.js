@@ -7,7 +7,7 @@ import Info from './components/Info'
 import DeleteEventButton from './components/DeleteEventButton'
 import { userIsEventOwner } from '../../../../auth/helpers'
 
-function LargeEventCard({ events, showDelete = false }) {
+function LargeEventCard({ events, showDelete = false, fetchUserProfile }) {
   const navigate = useNavigate()
 
   return events.map((event) => {
@@ -28,7 +28,9 @@ function LargeEventCard({ events, showDelete = false }) {
             </AspectRatio>
           </Stack>
         </Stack>
-        {showDeleteButton && <DeleteEventButton eventID={event._id} />}
+        {showDeleteButton && (
+          <DeleteEventButton eventID={event._id} fetchUserProfile={fetchUserProfile} />
+        )}
       </Stack>
     )
   })

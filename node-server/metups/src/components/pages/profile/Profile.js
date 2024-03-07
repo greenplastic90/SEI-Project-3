@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { getTokenFromLocalStorage } from '../../../auth/helpers'
 import {
   Box,
@@ -24,7 +24,7 @@ const smallCardBreakpoints = ['base', 'sm']
 
 function Profile({ user, setUser, handleLogout }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const [eventsToDisplay, setEventsToDisplay] = useState({ title: '', events: [] })
+  const [eventsToDisplay, setEventsToDisplay] = useState({ title: 'My Events', events: [] })
   const navigate = useNavigate()
   const breakpoint = useBreakpoint()
 
@@ -32,41 +32,43 @@ function Profile({ user, setUser, handleLogout }) {
     handleLogout()
     navigate('/')
   }
-  useEffect(() => {
+  const eventsSwitch = useCallback(
+    (title) => {
+      switch (title) {
+        case 'My Events':
+          setEventsToDisplay({ title: 'My Events', events: user.ownedEvents })
+          break
+        case 'RSVPs':
+          setEventsToDisplay({ title: 'RSVPs', events: user.likedEvents })
+          break
+        default:
+      }
+    },
+    [setEventsToDisplay, user]
+  )
+  const fetchUserProfile = useCallback(async () => {
     if (!getTokenFromLocalStorage()) {
       navigate('/login')
+      return
     }
+
     try {
-      const getUserProfile = async () => {
-        const { data } = await axios.get('/api/profile', {
-          headers: {
-            Authorization: `Bearer ${getTokenFromLocalStorage()}`,
-          },
-        })
-        setUser(data)
-        if (data.ownedEvents.length) {
-          setEventsToDisplay({ title: 'My Events', events: data.ownedEvents })
-        } else if (data.likedEvents.length) {
-          setEventsToDisplay({ title: 'RSVPs', events: data.likedEvents })
-        }
-      }
-      getUserProfile()
+      const { data } = await axios.get('/api/profile', {
+        headers: {
+          Authorization: `Bearer ${getTokenFromLocalStorage()}`,
+        },
+      })
+
+      setUser(data)
+      setEventsToDisplay({ title: 'My Events', events: data.ownedEvents })
     } catch (error) {
       console.log(error)
     }
   }, [navigate, setUser])
 
-  function eventsSwitch(title) {
-    switch (title) {
-      case 'My Events':
-        setEventsToDisplay({ title: 'My Events', events: user.ownedEvents })
-        break
-      case 'RSVPs':
-        setEventsToDisplay({ title: 'RSVPs', events: user.likedEvents })
-        break
-      default:
-    }
-  }
+  useEffect(() => {
+    fetchUserProfile()
+  }, [fetchUserProfile])
 
   return (
     <VStack spacing={6}>
@@ -82,6 +84,7 @@ function Profile({ user, setUser, handleLogout }) {
                 logoutAndNavigate={logoutAndNavigate}
                 isOpen={isOpen}
                 onClose={onClose}
+                fetchUserProfile={fetchUserProfile}
               />
             </HStack>
           ) : (
@@ -94,6 +97,7 @@ function Profile({ user, setUser, handleLogout }) {
                 logoutAndNavigate={logoutAndNavigate}
                 isOpen={isOpen}
                 onClose={onClose}
+                fetchUserProfile={fetchUserProfile}
               />
             </Stack>
           )}
@@ -113,6 +117,7 @@ function ImageAndEvents({
   logoutAndNavigate,
   isOpen,
   onClose,
+  fetchUserProfile,
 }) {
   const breakpoint = useBreakpoint()
 
@@ -138,7 +143,11 @@ function ImageAndEvents({
           <Heading>{eventsToDisplay.title}</Heading>
           {eventsToDisplay.events.length !== 0 ? (
             smallCardBreakpoints.includes(breakpoint) ? (
-              <SmallEventCard events={eventsToDisplay.events} showDelete={true} />
+              <SmallEventCard
+                events={eventsToDisplay.events}
+                showDelete={true}
+                fetchUserProfile={fetchUserProfile}
+              />
             ) : (
               <Grid
                 templateColumns={[
@@ -151,7 +160,11 @@ function ImageAndEvents({
                   'repeat(3, 1fr)',
                 ]}
                 gap={4}>
-                <LargeEventCard events={eventsToDisplay.events} showDelete={true} />
+                <LargeEventCard
+                  events={eventsToDisplay.events}
+                  showDelete={true}
+                  fetchUserProfile={fetchUserProfile}
+                />
               </Grid>
             )
           ) : (
