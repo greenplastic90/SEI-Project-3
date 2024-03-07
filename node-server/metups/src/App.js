@@ -13,11 +13,11 @@ import Home from './components/pages/Home'
 import Signup from './components/pages/auth/Signup'
 import Login from './components/pages/auth/Login'
 import EventCreate from './components/pages/EventCreate'
-import SingleEvent from './components/pages/Event'
 
 import { Box } from '@chakra-ui/react'
 import Events from './components/pages/events/Events.js'
 import Profile from './components/pages/profile/Profile.js'
+import Event from './components/pages/event/Event.js'
 
 function App() {
   const [allEvents, setAllEvents] = useState([])
@@ -115,9 +115,7 @@ function App() {
           <Route path='/login' element={<Login setUser={setUser} />} />
           <Route
             path='/events/:id'
-            element={
-              <SingleEvent user={user} userGeoLocation={userGeoLocation} allEvents={allEvents} />
-            }
+            element={<Event user={user} userGeoLocation={userGeoLocation} allEvents={allEvents} />}
           />
           <Route
             path='/eventCreate'

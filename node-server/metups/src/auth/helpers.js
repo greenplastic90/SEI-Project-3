@@ -45,3 +45,7 @@ export function getRandomEvents(arr, numEvents) {
 
   return result
 }
+
+export function userIsEventOwner(eventOwnerID) {
+  return getPayload().sub === eventOwnerID
+}

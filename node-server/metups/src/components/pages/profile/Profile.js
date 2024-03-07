@@ -115,7 +115,7 @@ function ImageAndEvents({
   onClose,
 }) {
   const breakpoint = useBreakpoint()
-  console.log(breakpoint)
+
   return (
     <>
       <Stack>
@@ -138,7 +138,7 @@ function ImageAndEvents({
           <Heading>{eventsToDisplay.title}</Heading>
           {eventsToDisplay.events.length !== 0 ? (
             smallCardBreakpoints.includes(breakpoint) ? (
-              <SmallEventCard events={eventsToDisplay.events} />
+              <SmallEventCard events={eventsToDisplay.events} showDelete={true} />
             ) : (
               <Grid
                 templateColumns={[
@@ -151,7 +151,7 @@ function ImageAndEvents({
                   'repeat(3, 1fr)',
                 ]}
                 gap={4}>
-                <LargeEventCard events={eventsToDisplay.events} />
+                <LargeEventCard events={eventsToDisplay.events} showDelete={true} />
               </Grid>
             )
           ) : (
