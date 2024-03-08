@@ -61,7 +61,7 @@ function Event({ user, userGeoLocation, allEvents }) {
       {event && (
         <Stack>
           <TitleAndHost event={event} />
-          <DateAndMap event={event} />
+          <DateAndMap event={event} userGeoLocation={userGeoLocation} />
         </Stack>
       )}
     </>

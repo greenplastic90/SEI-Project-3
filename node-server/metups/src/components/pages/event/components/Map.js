@@ -1,0 +1,24 @@
+import React from 'react'
+import MapGl, { Marker } from 'react-map-gl'
+
+function Map({ userGeoLocation, longitude, latitude }) {
+  return (
+    <>
+      {userGeoLocation && (
+        <MapGl
+          initialViewState={{
+            longitude: longitude,
+            latitude: latitude,
+            zoom: 13,
+          }}
+          style={{ height: 200 }}
+          mapStyle='mapbox://styles/mapbox/streets-v11'
+          mapboxAccessToken={process.env.REACT_APP_MAP_TOKEN}>
+          <Marker color='green' longitude={longitude} latitude={latitude}></Marker>
+        </MapGl>
+      )}
+    </>
+  )
+}
+
+export default Map
