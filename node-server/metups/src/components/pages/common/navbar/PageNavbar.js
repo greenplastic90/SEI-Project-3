@@ -11,6 +11,7 @@ const PageNavbar = ({ user, handleLogout }) => {
 
   return (
     <HStack
+      h={'70px'}
       pos={'fixed'}
       w={'full'}
       bgColor={'white'}
@@ -18,7 +19,9 @@ const PageNavbar = ({ user, handleLogout }) => {
       px={4}
       py={2}
       zIndex={'sticky'}
-      justifyContent={'space-between'}>
+      justifyContent={'space-between'}
+      borderBottom={'1px solid'}
+      borderBottomColor={'gray.200'}>
       <Logo />
 
       {breakpointValue !== 'base' ? (
