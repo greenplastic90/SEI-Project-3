@@ -108,7 +108,7 @@ function App() {
   return (
     <Router>
       <PageNavbar user={user} handleLogout={handleLogout} />
-      <Box pt={40} pb={4} px={[4, 8, 32, 64]}>
+      <Box pt={[20, null, 40]} pb={4} px={[4, 8, 32, 64]}>
         <Routes>
           <Route path='/' element={<Home events={allEvents} />} />
           <Route path='/register' element={<Signup />} />

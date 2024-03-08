@@ -1,6 +1,9 @@
+import { Stack } from '@chakra-ui/react'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import TitleAndHost from './components/TitleAndHost'
+import DateAndMap from './components/DateAndMap'
 
 function Event({ user, userGeoLocation, allEvents }) {
   const [event, setEvent] = useState(null)
@@ -53,7 +56,16 @@ function Event({ user, userGeoLocation, allEvents }) {
     }
     getSingleEvent()
   }, [allEvents, id])
-  return <div>Event</div>
+  return (
+    <>
+      {event && (
+        <Stack>
+          <TitleAndHost event={event} />
+          <DateAndMap event={event} />
+        </Stack>
+      )}
+    </>
+  )
 }
 
 export default Event
