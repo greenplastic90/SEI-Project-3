@@ -1,8 +1,13 @@
-import { Stack } from '@chakra-ui/react'
 import React from 'react'
+import SectionWrapper from './SectionWrapper'
+import Date from './Date'
 
-function DateAndMap() {
-  return <Stack></Stack>
+function DateAndMap({ event }) {
+  return (
+    <SectionWrapper>
+      <Date date={event.eventDate} time={event.eventTime} />
+    </SectionWrapper>
+  )
 }
 
 export default DateAndMap
