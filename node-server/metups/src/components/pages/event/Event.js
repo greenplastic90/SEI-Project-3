@@ -7,6 +7,7 @@ import LogisticsAndMap from './components/LogisticsAndMap'
 import ImageAndDetails from './components/ImageAndDetails'
 import RSVP from './components/RSVP'
 
+const RSVP_HIEGHT = '80px'
 function Event({ user, userGeoLocation, allEvents }) {
   const [event, setEvent] = useState(null)
   const [refreshEvent, setRefreshEvent] = useState(false)
@@ -61,7 +62,7 @@ function Event({ user, userGeoLocation, allEvents }) {
   return (
     <>
       {event && (
-        <Stack>
+        <Stack pb={RSVP_HIEGHT}>
           <TitleAndHost event={event} />
           <LogisticsAndMap event={event} userGeoLocation={userGeoLocation} />
           <ImageAndDetails description={event.description} image={event.image} />
@@ -70,7 +71,7 @@ function Event({ user, userGeoLocation, allEvents }) {
               <Text key={person._id}>{person.owner.username}</Text>
             ))}
           </Stack>
-          <RSVP event={event} setRefreshEvent={setRefreshEvent} />
+          <RSVP event={event} setRefreshEvent={setRefreshEvent} hieght={RSVP_HIEGHT} />
         </Stack>
       )}
     </>
