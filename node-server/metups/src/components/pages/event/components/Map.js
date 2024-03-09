@@ -2,10 +2,12 @@ import React from 'react'
 import MapGl, { Marker } from 'react-map-gl'
 
 function Map({ userGeoLocation, longitude, latitude }) {
+  console.log(latitude)
   return (
     <>
       {userGeoLocation && (
         <MapGl
+          key={`${longitude}-${latitude}`}
           initialViewState={{
             longitude: longitude,
             latitude: latitude,
