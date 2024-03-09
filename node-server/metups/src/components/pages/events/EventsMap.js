@@ -1,4 +1,6 @@
+import { Box } from '@chakra-ui/react'
 import React from 'react'
+import { MdLocationPin } from 'react-icons/md'
 import { Map, Marker, NavigationControl } from 'react-map-gl'
 
 function EventsMap({ events, userGeoLocation }) {
@@ -21,14 +23,20 @@ function EventsMap({ events, userGeoLocation }) {
           <NavigationControl visualizePitch={true} />
 
           {events.map((event) => {
-            return <Marker key={event._id} longitude={event.longitude} latitude={event.latitude} />
+            return (
+              <Marker key={event._id} longitude={event.longitude} latitude={event.latitude}>
+                <Box color={'brand.primary.500'}>
+                  <MdLocationPin size={50} />
+                </Box>
+              </Marker>
+            )
           })}
 
-          <Marker
-            color='green'
-            longitude={userGeoLocation.longitude}
-            latitude={userGeoLocation.latitude}
-          />
+          <Marker longitude={userGeoLocation.longitude} latitude={userGeoLocation.latitude}>
+            <Box color={'brand.secondary.500'}>
+              <MdLocationPin size={50} />
+            </Box>
+          </Marker>
         </Map>
       )}
     </>

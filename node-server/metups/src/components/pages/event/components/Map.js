@@ -1,5 +1,7 @@
 import React from 'react'
 import MapGl, { Marker } from 'react-map-gl'
+import { MdLocationPin } from 'react-icons/md'
+import { Box } from '@chakra-ui/react'
 
 function Map({ userGeoLocation, longitude, latitude }) {
   return (
@@ -15,7 +17,11 @@ function Map({ userGeoLocation, longitude, latitude }) {
           style={{ height: 200 }}
           mapStyle='mapbox://styles/mapbox/streets-v11'
           mapboxAccessToken={process.env.REACT_APP_MAP_TOKEN}>
-          <Marker color='green' longitude={longitude} latitude={latitude}></Marker>
+          <Marker longitude={longitude} latitude={latitude}>
+            <Box color={'brand.primary.500'}>
+              <MdLocationPin size={50} />
+            </Box>
+          </Marker>
         </MapGl>
       )}
     </>
