@@ -1,4 +1,4 @@
-import { Stack } from '@chakra-ui/react'
+import { Stack, Text } from '@chakra-ui/react'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
@@ -9,6 +9,7 @@ import RSVP from './components/RSVP'
 
 function Event({ user, userGeoLocation, allEvents }) {
   const [event, setEvent] = useState(null)
+  const [refreshEvent, setRefreshEvent] = useState(false)
   const [comments, setComments] = useState({
     owner: '',
     text: '',
@@ -26,7 +27,6 @@ function Event({ user, userGeoLocation, allEvents }) {
           return
         }
 
-        // Find updated location and update it.
         const eventWithUpdatedGeolocation = allEvents.find((event) => event._id === id)
 
         data = {
@@ -57,7 +57,7 @@ function Event({ user, userGeoLocation, allEvents }) {
       }
     }
     getSingleEvent()
-  }, [allEvents, id])
+  }, [allEvents, id, refreshEvent])
   return (
     <>
       {event && (
@@ -65,8 +65,12 @@ function Event({ user, userGeoLocation, allEvents }) {
           <TitleAndHost event={event} />
           <LogisticsAndMap event={event} userGeoLocation={userGeoLocation} />
           <ImageAndDetails description={event.description} image={event.image} />
-          <Stack>{event.likedBy.map((person) => person)}</Stack>
-          <RSVP event={event} />
+          <Stack>
+            {event.likedBy.map((person) => (
+              <Text key={person._id}>{person.owner.username}</Text>
+            ))}
+          </Stack>
+          <RSVP event={event} setRefreshEvent={setRefreshEvent} />
         </Stack>
       )}
     </>

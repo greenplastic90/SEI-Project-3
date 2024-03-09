@@ -2,7 +2,6 @@ import React from 'react'
 import MapGl, { Marker } from 'react-map-gl'
 
 function Map({ userGeoLocation, longitude, latitude }) {
-  console.log(latitude)
   return (
     <>
       {userGeoLocation && (

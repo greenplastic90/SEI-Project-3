@@ -4,7 +4,7 @@ import axios from 'axios'
 import { Button } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
 
-function RSVP({ event }) {
+function RSVP({ event, setRefreshEvent }) {
   const navigate = useNavigate()
   const handleLikes = async () => {
     if (!userIsAuthenticated()) {
@@ -21,6 +21,9 @@ function RSVP({ event }) {
           headers: { Authorization: `Bearer ${getTokenFromLocalStorage()}` },
         }
       )
+      if (res.status === 202) {
+        setRefreshEvent((status) => !status)
+      }
     } catch (err) {
       console.log(err.response)
     }
