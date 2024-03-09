@@ -9,11 +9,7 @@ import {
   updateEvent,
   updateEventLikedBy,
 } from '../controllers/events.js'
-import {
-  deleteUser,
-  getUserProfile,
-  updateProfile,
-} from '../controllers/users.js'
+import { deleteUser, getUserProfile, updateProfile } from '../controllers/users.js'
 import { secureRoute } from './secureRoute.js'
 
 const router = express.Router()
@@ -26,13 +22,11 @@ router
   .delete(secureRoute, deleteEvent)
   .put(secureRoute, updateEvent)
 
-router.route('/events/:id/likes').put(secureRoute, updateEventLikedBy)
+router.route('/events/:eventID/user/:userID/likes').put(secureRoute, updateEventLikedBy)
 
 router.route('/events/:id/comments').post(secureRoute, addComment)
 
-router
-  .route('/events/:id/comments/:commentId')
-  .delete(secureRoute, deleteComment)
+router.route('/events/:id/comments/:commentId').delete(secureRoute, deleteComment)
 
 router.route('/register').post(registerUser)
 

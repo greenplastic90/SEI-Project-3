@@ -66,17 +66,31 @@ export const updateEvent = async (req, res) => {
 
 export const updateEventLikedBy = async (req, res) => {
   try {
-    const { id } = req.params
+    const { eventID, userID } = req.params
 
-    const eventToUpdate = await Event.findOne({ _id: id }).populate('likedBy.owner')
+    // Find the event to update
+    const eventToUpdate = await Event.findById(eventID)
 
-    if (!req.body.likedBy) throw new Error('Unauthorised action')
-    const likedBy = { likedBy: req.body.likedBy }
+    if (!eventToUpdate) {
+      return res.status(404).json({ message: 'Event not found' })
+    }
 
-    Object.assign(eventToUpdate, likedBy)
-    await eventToUpdate.save()
-    return res.status(202).json(eventToUpdate)
+    const index = eventToUpdate.likedBy.findIndex(
+      (userLike) => userLike.owner.toString() === userID
+    )
+
+    if (index !== -1) {
+      eventToUpdate.likedBy.splice(index, 1)
+    } else {
+      eventToUpdate.likedBy.push({ owner: userID })
+    }
+
+    const updatedEvent = await eventToUpdate.save()
+
+    await updatedEvent.populate('likedBy.owner')
+
+    return res.status(202).json(updatedEvent)
   } catch (err) {
-    return res.status(404).json({ message: err.message })
+    return res.status(400).json({ message: err.message })
   }
 }

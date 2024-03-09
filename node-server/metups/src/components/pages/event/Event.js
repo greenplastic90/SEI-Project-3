@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom'
 import TitleAndHost from './components/TitleAndHost'
 import LogisticsAndMap from './components/LogisticsAndMap'
 import ImageAndDetails from './components/ImageAndDetails'
+import RSVP from './components/RSVP'
 
 function Event({ user, userGeoLocation, allEvents }) {
   const [event, setEvent] = useState(null)
@@ -64,6 +65,8 @@ function Event({ user, userGeoLocation, allEvents }) {
           <TitleAndHost event={event} />
           <LogisticsAndMap event={event} userGeoLocation={userGeoLocation} />
           <ImageAndDetails description={event.description} image={event.image} />
+          <Stack>{event.likedBy.map((person) => person)}</Stack>
+          <RSVP event={event} />
         </Stack>
       )}
     </>
