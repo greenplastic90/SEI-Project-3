@@ -3,7 +3,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import TitleAndHost from './components/TitleAndHost'
-import DateAndMap from './components/DateAndMap'
+import LogisticsAndMap from './components/LogisticsAndMap'
 import ImageAndDetails from './components/ImageAndDetails'
 
 function Event({ user, userGeoLocation, allEvents }) {
@@ -62,7 +62,7 @@ function Event({ user, userGeoLocation, allEvents }) {
       {event && (
         <Stack>
           <TitleAndHost event={event} />
-          <DateAndMap event={event} userGeoLocation={userGeoLocation} />
+          <LogisticsAndMap event={event} userGeoLocation={userGeoLocation} />
           <ImageAndDetails description={event.description} image={event.image} />
         </Stack>
       )}
