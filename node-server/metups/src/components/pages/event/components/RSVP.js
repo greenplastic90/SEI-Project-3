@@ -39,7 +39,8 @@ function RSVP({ event, setRefreshEvent, hieght }) {
       py={4}
       px={8}
       pos={'fixed'}
-      bottom={0}>
+      bottom={0}
+      left={0}>
       <Text fontSize={'lg'} fontWeight={'bold'}>{`${attendingNumber} Attending`}</Text>
       <Button
         w={'150px'}
