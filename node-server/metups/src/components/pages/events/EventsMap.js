@@ -33,7 +33,7 @@ function EventsMap({ events, userGeoLocation }) {
           })}
 
           <Marker longitude={userGeoLocation.longitude} latitude={userGeoLocation.latitude}>
-            <Box color={'brand.secondary.500'}>
+            <Box color={'brand.danger.500'}>
               <MdLocationPin size={50} />
             </Box>
           </Marker>

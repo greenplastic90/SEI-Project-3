@@ -6,7 +6,9 @@ function ImageAndDetails({ description, image }) {
   return (
     <SectionWrapper>
       <Image src={image} />
-      <Heading>Details</Heading>
+      <Heading fontSize={'xl'} fontWeight={'bold'}>
+        Details
+      </Heading>
       <Text>{description}</Text>
     </SectionWrapper>
   )

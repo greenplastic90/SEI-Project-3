@@ -6,7 +6,7 @@ import SectionWrapper from './SectionWrapper'
 function TitleAndHost({ event }) {
   return (
     <SectionWrapper spacing={4} pb={4} borderBottom={'1px solid'} borderBottomColor={'gray.200'}>
-      <Heading>{event.eventName}</Heading>
+      <Heading fontWeight={'bold'}>{event.eventName}</Heading>
       <Host owner={event.owner} />
     </SectionWrapper>
   )
