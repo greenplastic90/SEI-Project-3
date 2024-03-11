@@ -65,7 +65,12 @@ function Event({ user, userGeoLocation, allEvents }) {
         <Stack pb={RSVP_HIEGHT}>
           <TitleAndHost event={event} />
           <LogisticsAndMap event={event} userGeoLocation={userGeoLocation} />
-          <ImageAndDetails description={event.description} image={event.image} />
+          <ImageAndDetails
+            description={event.description}
+            image={event.image}
+            types={event.eventType}
+          />
+
           <Stack>
             {event.likedBy.map((person) => (
               <Text key={person._id}>{person.owner.username}</Text>

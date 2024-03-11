@@ -1,8 +1,9 @@
 import React from 'react'
 import SectionWrapper from './SectionWrapper'
 import { Heading, Image, Text } from '@chakra-ui/react'
+import EventTypes from './EventTypes'
 
-function ImageAndDetails({ description, image }) {
+function ImageAndDetails({ description, image, types }) {
   return (
     <SectionWrapper>
       <Image src={image} />
@@ -10,6 +11,7 @@ function ImageAndDetails({ description, image }) {
         Details
       </Heading>
       <Text>{description}</Text>
+      <EventTypes types={types} />
     </SectionWrapper>
   )
 }
