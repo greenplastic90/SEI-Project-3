@@ -12,11 +12,13 @@ function Attending({ attending }) {
             borderRadius='md'
             justify={''}
             px={4}
-            pt={8}
-            pb={12}
+            pt={6}
+            pb={10}
             boxShadow={'0px 0px 5px 0px rgba(0, 0, 0, 0.12)'}>
             <Avatar size='lg' name={user.owner.username} src={user.owner.profilePhoto} />
-            <Text fontWeight={'bold'}>{user.owner.username}</Text>
+            <Text fontWeight={'bold'} fontSize={'sm'}>
+              {user.owner.username}
+            </Text>
           </VStack>
         ))}
       </HStack>
