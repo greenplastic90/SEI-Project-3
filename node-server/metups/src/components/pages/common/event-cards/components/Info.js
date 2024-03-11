@@ -12,7 +12,7 @@ function Info({ event }) {
       <Stack spacing={1}>
         {/* Owner */}
         <Text fontWeight={'black'} color={'blackAlpha.500'}>
-          Hosted by: {event.owner.name}
+          Hosted by: {event.owner.username}
         </Text>
         {/* Date */}
         <HStack>
