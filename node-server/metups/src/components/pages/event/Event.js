@@ -6,6 +6,7 @@ import TitleAndHost from './components/TitleAndHost'
 import LogisticsAndMap from './components/LogisticsAndMap'
 import ImageAndDetails from './components/ImageAndDetails'
 import RSVP from './components/RSVP'
+import Attending from './components/Attending'
 
 const RSVP_HIEGHT = '80px'
 function Event({ user, userGeoLocation, allEvents }) {
@@ -72,9 +73,7 @@ function Event({ user, userGeoLocation, allEvents }) {
           />
 
           <Stack>
-            {event.likedBy.map((person) => (
-              <Text key={person._id}>{person.owner.username}</Text>
-            ))}
+            <Attending attending={event.likedBy} />
           </Stack>
           <RSVP event={event} setRefreshEvent={setRefreshEvent} hieght={RSVP_HIEGHT} />
         </Stack>
