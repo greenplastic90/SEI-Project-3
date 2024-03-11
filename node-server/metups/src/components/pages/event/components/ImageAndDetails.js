@@ -6,7 +6,7 @@ import EventTypes from './EventTypes'
 function ImageAndDetails({ description, image, types }) {
   return (
     <SectionWrapper>
-      <Image src={image} />
+      <Image maxH='500px' maxW='100%' src={image} objectFit='contain' />
       <Heading fontSize={'xl'} fontWeight={'bold'}>
         Details
       </Heading>
