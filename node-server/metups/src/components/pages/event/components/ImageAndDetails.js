@@ -7,9 +7,7 @@ function ImageAndDetails({ description, image, types }) {
   return (
     <SectionWrapper>
       <Image maxH='500px' maxW='100%' src={image} objectFit='contain' />
-      <Heading fontSize={'xl'} fontWeight={'bold'}>
-        Details
-      </Heading>
+      <Heading variant='event'>Details</Heading>
       <Text>{description}</Text>
       <EventTypes types={types} />
     </SectionWrapper>

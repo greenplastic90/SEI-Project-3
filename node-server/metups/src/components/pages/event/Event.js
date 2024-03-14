@@ -7,6 +7,7 @@ import LogisticsAndMap from './components/LogisticsAndMap'
 import ImageAndDetails from './components/ImageAndDetails'
 import RSVP from './components/RSVP'
 import Attending from './components/Attending'
+import CommentForm from './components/CommentForm'
 
 const RSVP_HIEGHT = '80px'
 function Event({ user, userGeoLocation, allEvents }) {
@@ -72,10 +73,10 @@ function Event({ user, userGeoLocation, allEvents }) {
             types={event.eventType}
           />
 
-          <Stack>
-            <Attending attending={event.likedBy} />
-          </Stack>
+          <Attending attending={event.likedBy} />
+
           <RSVP event={event} setRefreshEvent={setRefreshEvent} hieght={RSVP_HIEGHT} />
+          <CommentForm />
         </Stack>
       )}
     </>

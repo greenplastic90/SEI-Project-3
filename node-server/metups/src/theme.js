@@ -46,6 +46,11 @@ const colors = {
   },
 }
 const components = {
+  Heading: {
+    variants: {
+      event: { fontSize: 'xl', fontWeight: 'bold' },
+    },
+  },
   Text: {
     variants: {
       profile: { color: 'white' },

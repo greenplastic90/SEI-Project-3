@@ -4,7 +4,7 @@ import React from 'react'
 function Attending({ attending }) {
   return (
     <Stack>
-      <Heading fontSize={'xl'} fontWeight={'bold'}>{`Attending (${attending.length})`}</Heading>
+      <Heading variant='event'>{`Attending (${attending.length})`}</Heading>
       {attending.length !== 0 ? (
         <HStack overflowX='auto' width='100%' minWidth='0' spacing={4} p={4}>
           {attending.map((user) => (
