@@ -25,7 +25,7 @@ export const loginUser = async (req, res) => {
         username: userToLogin.username,
       },
       process.env.SECRET,
-      { expiresIn: 10 }
+      { expiresIn: '10 seconds' }
     )
     // '7 days'
     return res
