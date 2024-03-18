@@ -1,14 +1,18 @@
 import { Avatar, HStack, Heading, Text, VStack } from '@chakra-ui/react'
 import React from 'react'
 import SectionWrapper from './SectionWrapper'
+import { parseISO } from 'date-fns'
 
 function Attending({ attending }) {
+  const sortedAttending = attending
+    .slice()
+    .sort((a, b) => parseISO(b.createdAt) - parseISO(a.createdAt))
   return (
     <SectionWrapper>
       <Heading variant='event'>{`Attending (${attending.length})`}</Heading>
-      {attending.length !== 0 ? (
+      {sortedAttending.length !== 0 ? (
         <HStack overflowX='auto' width='100%' minWidth='0' spacing={4} p={4}>
-          {attending.map((user) => (
+          {sortedAttending.map((user) => (
             <VStack
               key={user._id}
               borderRadius='md'
