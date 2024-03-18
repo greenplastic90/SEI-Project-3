@@ -11,7 +11,6 @@ function CommentForm({ eventID, setRefreshEvent }) {
 
   useEffect(() => {
     if (comment.text.length > 250) {
-      console.log('hi')
       setLimitExceeded(true)
       return
     }
