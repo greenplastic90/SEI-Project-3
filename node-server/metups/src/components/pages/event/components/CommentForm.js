@@ -61,7 +61,10 @@ function CommentForm({ eventID, setRefreshEvent }) {
               </Text>
               <Text>/250</Text>
             </HStack>
-            <Button colorScheme='brand.primary' onClick={handleSubmit} disabled={limitExceeded}>
+            <Button
+              colorScheme='brand.primary'
+              onClick={handleSubmit}
+              disabled={limitExceeded || comment.text.length === 0}>
               Comment
             </Button>
           </HStack>
