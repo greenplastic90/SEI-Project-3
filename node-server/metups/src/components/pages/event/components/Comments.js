@@ -30,8 +30,8 @@ function Comments({ comments, eventID, setRefreshEvent }) {
               bgColor={'gray.100'}
               borderRadius={'md'}>
               <Text>{text}</Text>
-              <Text color={'brand.secondary.300'} alignSelf={'end'}>
-                {format(parseISO(createdAt), 'dd/MM/yyyy - hh:mm a')}
+              <Text fontSize={'sm'} color={'brand.secondary.500'} alignSelf={'end'}>
+                {format(parseISO(createdAt), 'hh:mm a - dd/MM/yyyy')}
               </Text>
             </Stack>
           </HStack>

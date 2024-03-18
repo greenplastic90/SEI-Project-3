@@ -1,12 +1,22 @@
-import { Button, FormControl, Stack, Textarea } from '@chakra-ui/react'
+import { Button, FormControl, HStack, Stack, Text, Textarea } from '@chakra-ui/react'
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { getTokenFromLocalStorage } from '../../../../auth/helpers'
 
 function CommentForm({ eventID, setRefreshEvent }) {
   const [comment, setComment] = useState({
     text: '',
   })
+  const [limitExceeded, setLimitExceeded] = useState(false)
+
+  useEffect(() => {
+    if (comment.text.length > 250) {
+      console.log('hi')
+      setLimitExceeded(true)
+      return
+    }
+    setLimitExceeded(false)
+  }, [comment])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -39,9 +49,23 @@ function CommentForm({ eventID, setRefreshEvent }) {
             value={comment.text}
             placeholder='Add a comment'
           />
-          <Button colorScheme='brand.primary' alignSelf={'end'} onClick={handleSubmit}>
-            Comment
-          </Button>
+          <HStack justifyContent={'space-between'}>
+            <HStack
+              fontSize={'sm'}
+              color={'brand.secondary.400'}
+              alignSelf={'self-start'}
+              spacing={0}>
+              <Text
+                fontWeight={limitExceeded && 'bold'}
+                color={limitExceeded && 'brand.danger.500'}>
+                {comment.text.length}
+              </Text>
+              <Text>/250</Text>
+            </HStack>
+            <Button colorScheme='brand.primary' onClick={handleSubmit} disabled={limitExceeded}>
+              Comment
+            </Button>
+          </HStack>
         </Stack>
       </FormControl>
     </Stack>
