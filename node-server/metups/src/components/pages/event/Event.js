@@ -1,4 +1,4 @@
-import { Stack, Text } from '@chakra-ui/react'
+import { Stack } from '@chakra-ui/react'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
@@ -7,16 +7,12 @@ import LogisticsAndMap from './components/LogisticsAndMap'
 import ImageAndDetails from './components/ImageAndDetails'
 import RSVP from './components/RSVP'
 import Attending from './components/Attending'
-import CommentForm from './components/CommentForm'
+import Comments from './components/Comments'
 
 const RSVP_HIEGHT = '80px'
 function Event({ user, userGeoLocation, allEvents }) {
   const [event, setEvent] = useState(null)
   const [refreshEvent, setRefreshEvent] = useState(false)
-  const [comments, setComments] = useState({
-    owner: '',
-    text: '',
-  })
 
   const { id } = useParams()
 
@@ -75,8 +71,8 @@ function Event({ user, userGeoLocation, allEvents }) {
 
           <Attending attending={event.likedBy} />
 
+          <Comments eventID={id} setRefreshEvent={setRefreshEvent} comments={event.comments} />
           <RSVP event={event} setRefreshEvent={setRefreshEvent} hieght={RSVP_HIEGHT} />
-          <CommentForm />
         </Stack>
       )}
     </>

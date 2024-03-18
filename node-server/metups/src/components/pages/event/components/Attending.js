@@ -1,9 +1,10 @@
-import { Avatar, HStack, Heading, Stack, Text, VStack } from '@chakra-ui/react'
+import { Avatar, HStack, Heading, Text, VStack } from '@chakra-ui/react'
 import React from 'react'
+import SectionWrapper from './SectionWrapper'
 
 function Attending({ attending }) {
   return (
-    <Stack>
+    <SectionWrapper>
       <Heading variant='event'>{`Attending (${attending.length})`}</Heading>
       {attending.length !== 0 ? (
         <HStack overflowX='auto' width='100%' minWidth='0' spacing={4} p={4}>
@@ -28,7 +29,7 @@ function Attending({ attending }) {
           <Text fontWeight={'bold'}>Be the first to RSVP</Text>
         </VStack>
       )}
-    </Stack>
+    </SectionWrapper>
   )
 }
 

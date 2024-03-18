@@ -45,7 +45,7 @@ function RSVP({ event, setRefreshEvent, hieght }) {
       <Button
         w={'150px'}
         onClick={handleLikes}
-        colorScheme={hasRSVPed ? 'brand.secondary' : 'brand.danger'}>
+        colorScheme={hasRSVPed ? 'brand.primary' : 'brand.danger'}>
         {hasRSVPed ? 'Cancel RSVP' : 'RSVP'}
       </Button>
     </HStack>
