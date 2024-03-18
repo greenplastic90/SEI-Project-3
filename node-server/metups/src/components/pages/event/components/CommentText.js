@@ -8,8 +8,8 @@ function CommentText({ text, createdAt }) {
       w={'full'}
       justify={'space-around'}
       minH={'95px'}
-      px={2}
-      bgColor={'gray.100'}
+      p={2}
+      bgColor={'brand.primary.50'}
       borderRadius={'md'}>
       <Text>{text}</Text>
       <Text fontSize={'sm'} color={'brand.secondary.500'} alignSelf={'end'}>
