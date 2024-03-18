@@ -22,8 +22,18 @@ function Comments({ comments, eventID, setRefreshEvent }) {
 
       <Stack spacing={0}>
         {sortedComments.map((comment, i) => {
-          const bgColor = i % 2 === 0
-          return <Comment key={comment._id} comment={comment} bgColor={bgColor} />
+          const bgColor = i % 2 !== 0
+          let position = ''
+          if (i === 0) {
+            position = 'top'
+          }
+          if (i === sortedComments.length - 1) {
+            position = 'bottom'
+          }
+
+          return (
+            <Comment key={comment._id} comment={comment} bgColor={bgColor} position={position} />
+          )
         })}
       </Stack>
     </Stack>
