@@ -3,6 +3,8 @@ import { parseISO } from 'date-fns'
 import React from 'react'
 import CommentForm from './CommentForm'
 import Comment from './Comment'
+import { userIsAuthenticated } from '../../../../auth/helpers'
+import SignInMessage from './SignInMessage'
 
 function Comments({ comments, eventID, setRefreshEvent }) {
   const sortedComments = comments
@@ -12,7 +14,11 @@ function Comments({ comments, eventID, setRefreshEvent }) {
   return (
     <Stack spacing={4}>
       <Heading variant='event'>Comments</Heading>
-      <CommentForm eventID={eventID} setRefreshEvent={setRefreshEvent} />
+      {userIsAuthenticated() ? (
+        <CommentForm eventID={eventID} setRefreshEvent={setRefreshEvent} />
+      ) : (
+        <SignInMessage />
+      )}
 
       <Stack>
         {sortedComments.map((comment) => (
