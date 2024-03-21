@@ -20,11 +20,10 @@ function Comments({ comments, eventID, setRefreshEvent }) {
         <SignInMessage />
       )}
 
-      <Stack spacing={0}>
-        {sortedComments.map((comment, i) => {
-          const bgColor = i % 2 === 0
-          return <Comment key={comment._id} comment={comment} bgColor={bgColor} />
-        })}
+      <Stack>
+        {sortedComments.map((comment) => (
+          <Comment key={comment._id} comment={comment} />
+        ))}
       </Stack>
     </Stack>
   )

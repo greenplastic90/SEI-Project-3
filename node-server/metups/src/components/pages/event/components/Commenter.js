@@ -3,8 +3,8 @@ import React from 'react'
 
 function Commenter({ username, image }) {
   return (
-    <VStack minW={'80px'} maxW={'80px'} p={2}>
-      <Avatar size='sm' name={username} src={image} />
+    <VStack w={'170px'} p={2}>
+      <Avatar name={username} src={image} />
       <Text fontWeight={'bold'} fontSize={'xs'}>
         {username}
       </Text>
