@@ -7,7 +7,7 @@ function Comment({ comment }) {
   return (
     <HStack align={'self-start'}>
       <Commenter username={comment.owner.username} image={comment.owner.profilePhoto} />
-      <CommentText text={comment.text} createdAt={comment.createdAt} />
+      <CommentText text={comment.text} createdAt={comment.createdAt} owner={comment.owner} />
     </HStack>
   )
 }
