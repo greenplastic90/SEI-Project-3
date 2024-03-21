@@ -2,7 +2,7 @@ import { Stack, Text } from '@chakra-ui/react'
 import { format, parseISO } from 'date-fns'
 import React from 'react'
 
-function CommentText({ text, createdAt, bgColor, position }) {
+function CommentText({ text, createdAt, bgColor }) {
   return (
     <Stack
       w={'full'}
@@ -10,8 +10,8 @@ function CommentText({ text, createdAt, bgColor, position }) {
       minH={'95px'}
       px={2}
       bgColor={bgColor ? 'brand.primary.50' : 'brand.secondary.50'}
-      borderTopRadius={position === 'top' ? 'md' : ''}
-      borderBottomRadius={position === 'bottom' ? 'md' : ''}>
+      // borderRadius={'md'}
+    >
       <Text>{text}</Text>
       <Text
         fontSize={'sm'}
