@@ -4,7 +4,8 @@ import React from 'react'
 import DeleteComment from './DeleteComment'
 import { getPayload } from '../../../../auth/helpers'
 
-function CommentText({ text, createdAt, owner }) {
+function CommentText({ comment, handleDelete }) {
+  const { _id, text, createdAt, owner } = comment
   const isOwner = getPayload().sub === owner._id
   return (
     <Stack
@@ -16,7 +17,7 @@ function CommentText({ text, createdAt, owner }) {
       borderRadius={'md'}>
       <Text>{text}</Text>
       <HStack justify={isOwner ? 'space-between' : 'end'}>
-        {isOwner && <DeleteComment />}
+        {isOwner && <DeleteComment handleDelete={() => handleDelete(_id)} />}
         <Text fontSize={'sm'} color={'brand.secondary.500'}>
           {format(parseISO(createdAt), 'hh:mm a - dd/MM/yyyy')}
         </Text>

@@ -28,6 +28,7 @@ export const deleteComment = async (req, res) => {
     if (!eventToDeleteCommentFrom) throw new Error('Event not found')
     const commentToDelete = eventToDeleteCommentFrom.comments.id(commentId)
     if (!commentToDelete) throw new Error('Comment not found')
+    console.log('hi')
     if (!commentToDelete.owner.equals(req.currentUser._id)) throw new Error('Unauthorised')
     await commentToDelete.remove()
     await eventToDeleteCommentFrom.save()
