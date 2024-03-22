@@ -35,7 +35,6 @@ const EventCreate = ({ options, userGeoLocation }) => {
 
   const [requiredFields, setRequiredFields] = useState([])
 
-  const [formErrors, setFormErrors] = useState('')
   const [searchQueryData, setSearchQueryData] = useState([])
 
   // Test React Async
@@ -96,10 +95,11 @@ const EventCreate = ({ options, userGeoLocation }) => {
 
     let formDataUpdated = formData
     if (!formDataUpdated.image) {
+      const randomNumber = Math.floor(Math.random() * 250) + 1
+
       formDataUpdated = {
         ...formData,
-        image:
-          'https://png.pngtree.com/thumb_back/fh260/background/20200714/pngtree-modern-double-color-futuristic-neon-background-image_351866.jpg',
+        image: `https://picsum.photos/id/${randomNumber}/600/400`,
       }
     }
 
