@@ -19,6 +19,10 @@ export const userIsAuthenticated = () => {
   return currentTime < payload.exp
 }
 
+export const getRandomInRange = (from, to) => {
+  return (Math.random() * (to - from) + from).toFixed(2) * 1
+}
+
 export function getDayOfWeek(dateString) {
   // Split the date string and parse it to DD, MM, YYYY
   const parts = dateString.split('/')

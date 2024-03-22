@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 import axios from 'axios'
-import { getTokenFromLocalStorage } from './auth/helpers.js'
+import { getRandomInRange, getTokenFromLocalStorage } from './auth/helpers.js'
 
 // Importing
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
@@ -24,9 +24,6 @@ function App() {
   const [user, setUser] = useState(null)
   const [userGeoLocation, setUserGeoLocation] = useState(null)
 
-  const getRandomInRange = (from, to) => {
-    return (Math.random() * (to - from) + from).toFixed(2) * 1
-  }
   // get users location
   useEffect(() => {
     try {

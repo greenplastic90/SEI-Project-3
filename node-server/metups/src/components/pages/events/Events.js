@@ -3,13 +3,41 @@ import EventCards from '../common/EventCards'
 import EventsMap from './EventsMap'
 import { Heading, Stack } from '@chakra-ui/react'
 import EventsSearchInputs from './EventsSearchInputs'
+import { getRandomInRange } from '../../../auth/helpers'
+import axios from 'axios'
 
-function Events({ events, userGeoLocation, options }) {
+function Events({ userGeoLocation, options }) {
+  const [events, setEvents] = useState([])
   const [filteredEvents, setFilteredEvents] = useState([])
   const [searchParams, setSearchParams] = useState({
     type: '',
     searchBar: '',
   })
+
+  useEffect(() => {
+    const getAllEvents = async () => {
+      try {
+        const { data } = await axios.get('/api/events/')
+
+        const eventsWithUpdatedLocations = data.map((event) => {
+          if (userGeoLocation && event.isDemo) {
+            return {
+              ...event,
+              longitude: getRandomInRange(-0.12, 0.12) + userGeoLocation.longitude,
+              latitude: getRandomInRange(-0.08, 0.08) + userGeoLocation.latitude,
+            }
+          }
+
+          return event
+        })
+
+        setEvents(eventsWithUpdatedLocations)
+      } catch (err) {
+        console.log(err.response)
+      }
+    }
+    getAllEvents()
+  }, [userGeoLocation])
 
   useEffect(() => {
     const filtered = []
