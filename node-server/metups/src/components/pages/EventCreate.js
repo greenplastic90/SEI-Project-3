@@ -12,9 +12,10 @@ import Image from 'react-bootstrap/Image'
 import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
 
-import { Button, Text } from '@chakra-ui/react'
+import { Box, Button, Text } from '@chakra-ui/react'
 
 import { Heading } from '@chakra-ui/react'
+import { MdLocationPin } from 'react-icons/md'
 
 const EventCreate = ({ options, userGeoLocation }) => {
   const navigate = useNavigate()
@@ -196,7 +197,12 @@ const EventCreate = ({ options, userGeoLocation }) => {
                 mapboxAccessToken={process.env.REACT_APP_MAP_TOKEN}
                 style={{ height: 100 }}
                 mapStyle='mapbox://styles/mapbox/streets-v11'>
-                <Marker longitude={formData.longitude} latitude={formData.latitude}></Marker>
+                <Marker longitude={formData.longitude} latitude={formData.latitude}>
+                  {' '}
+                  <Box color={'brand.primary.500'}>
+                    <MdLocationPin size={50} />
+                  </Box>
+                </Marker>
               </Map>
             </>
           )}
