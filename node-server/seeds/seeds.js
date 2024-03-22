@@ -3,7 +3,6 @@ import eventData from './data/events.js'
 import userData from './data/users.js'
 // import eventTypes from './data/eventTypes.js'
 import userLocation from './data/userlocation.js'
-import { dbURI } from '../config/environment.js'
 import Event from '../models/event.js'
 import User from '../models/user.js'
 import dotenv from 'dotenv'
@@ -19,6 +18,7 @@ const seedDatabase = async () => {
     console.log('🚀 Database Connected')
     await mongoose.connection.db.dropDatabase()
     console.log('👌 Database dropped')
+
     const users = await User.create(userData)
     const eventsWithEverythingAdded = eventData.map((event, i) => {
       const randomUserIndex = Math.floor(Math.random() * users.length)
