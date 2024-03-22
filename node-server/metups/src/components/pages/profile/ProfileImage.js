@@ -2,12 +2,17 @@ import { Stack, Text } from '@chakra-ui/react'
 import React from 'react'
 
 function ProfileImage({ user }) {
+  console.log(user.profilePhoto)
   return (
     <Stack
       borderTopRadius={'xl'}
       justify={'end'}
       p={6}
-      bgImage={user.profilePhoto}
+      bgImage={
+        user.profilePhoto
+          ? user.profilePhoto
+          : 'https://christopherscottedwards.com/wp-content/uploads/2018/07/Generic-Profile.jpg'
+      }
       bgPosition={'center'}
       bgSize={'cover'}
       h={'350px'}

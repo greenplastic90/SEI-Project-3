@@ -46,7 +46,7 @@ const Signup = () => {
       formDataUpdated = {
         ...formDataUpdated,
         profilePhoto:
-          'https://prospectdirect.com/wpstagemct/wp-content/uploads/2017/05/generic-profile-photo-3.jpg',
+          'https://christopherscottedwards.com/wp-content/uploads/2018/07/Generic-Profile.jpg',
       }
     }
     try {
