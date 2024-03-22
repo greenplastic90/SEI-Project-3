@@ -211,7 +211,9 @@ const Signup = () => {
             </Row>
           </Form.Group>
           <Form.Group className='mt-4 text-center'>
-            <Button type='submit'>Signup</Button>
+            <Button colorScheme='brand.primary' type='submit'>
+              Signup
+            </Button>
           </Form.Group>
         </Form>
       </Container>
