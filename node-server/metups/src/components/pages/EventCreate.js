@@ -12,7 +12,7 @@ import Image from 'react-bootstrap/Image'
 import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
 
-import { Button } from '@chakra-ui/react'
+import { Button, Text } from '@chakra-ui/react'
 
 import { Heading } from '@chakra-ui/react'
 
@@ -32,6 +32,8 @@ const EventCreate = ({ options, userGeoLocation }) => {
     image: '',
     isDemo: false, // always false if we want the event to not change its location.
   })
+
+  const [requiredFields, setRequiredFields] = useState([])
 
   const [formErrors, setFormErrors] = useState('')
   const [searchQueryData, setSearchQueryData] = useState([])
@@ -81,7 +83,7 @@ const EventCreate = ({ options, userGeoLocation }) => {
 
       const newObj = { ...formData, [e.target.name]: value }
       setFormData(newObj)
-      setFormErrors({ ...formErrors, [e.target.name]: '' })
+      setRequiredFields(requiredFields.filter((field) => field !== e.target.name))
     } else {
       const arrayOfValues = e.map((obj) => obj.label)
       const newValue = { ...formData, eventType: arrayOfValues }
@@ -91,6 +93,7 @@ const EventCreate = ({ options, userGeoLocation }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+
     let formDataUpdated = formData
     if (!formDataUpdated.image) {
       formDataUpdated = {
@@ -109,6 +112,9 @@ const EventCreate = ({ options, userGeoLocation }) => {
       navigate(`/events/${data._id}`)
     } catch (err) {
       console.log(err.response)
+      const requiredKeys = Object.keys(err.response.data.errors)
+
+      setRequiredFields(requiredKeys)
     }
   }
 
@@ -131,6 +137,10 @@ const EventCreate = ({ options, userGeoLocation }) => {
       latitude: feature.geometry.coordinates[1],
       locationName: feature.text,
     })
+
+    setRequiredFields(
+      requiredFields.filter((field) => !['longitude', 'latitude', 'locationName'].includes(field))
+    )
   }
 
   return (
@@ -148,6 +158,7 @@ const EventCreate = ({ options, userGeoLocation }) => {
               placeholder='Event Name'
               onChange={handleChange}
             />
+            <RequiredMsg fieldName={'eventName'} requiredFields={requiredFields} />
             <Form.Text className='text-muted'>Add the name of your event here</Form.Text>
           </Form.Group>
 
@@ -169,6 +180,7 @@ const EventCreate = ({ options, userGeoLocation }) => {
           <Form.Group className='mb-3'>
             <Form.Label htmlFor='description'>Description</Form.Label>
             <Form.Control required as='textarea' name='description' onChange={handleChange} />
+            <RequiredMsg fieldName={'description'} requiredFields={requiredFields} />
             <Form.Text className='text-muted'>Add a description for your event</Form.Text>
           </Form.Group>
 
@@ -207,6 +219,7 @@ const EventCreate = ({ options, userGeoLocation }) => {
               name='map'
               onChange={handleChange}
             /> */}
+            <RequiredMsg fieldName={'longitude'} requiredFields={requiredFields} />
           </Form.Group>
 
           {/* eventDate */}
@@ -219,6 +232,7 @@ const EventCreate = ({ options, userGeoLocation }) => {
               onChange={handleChange}
               placeholder='eventDate'
             />
+            <RequiredMsg fieldName={'eventDate'} requiredFields={requiredFields} />
             <Form.Text className='text-muted'>
               Add the date on which your event will take place
             </Form.Text>
@@ -234,6 +248,7 @@ const EventCreate = ({ options, userGeoLocation }) => {
               placeholder='eventTime'
               onChange={handleChange}
             />
+            <RequiredMsg fieldName={'eventTime'} requiredFields={requiredFields} />
             <Form.Text className='text-muted'>
               Add the time at which your event will take place
             </Form.Text>
@@ -269,3 +284,13 @@ const EventCreate = ({ options, userGeoLocation }) => {
 }
 
 export default EventCreate
+
+function RequiredMsg({ fieldName, requiredFields }) {
+  return (
+    <>
+      {requiredFields.includes(fieldName) && (
+        <Text color={'brand.danger.500'}>* required field</Text>
+      )}
+    </>
+  )
+}
