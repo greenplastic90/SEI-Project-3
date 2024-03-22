@@ -39,8 +39,6 @@ const Login = ({ setUser }) => {
       setUser(data.user)
       navigate('/')
     } catch (err) {
-      console.log(err.response)
-
       setFormError(err.response.data.message)
     }
   }
@@ -62,7 +60,6 @@ const Login = ({ setUser }) => {
                       onChange={handleChange}
                       type='username'
                       name='username'
-                      placeholder='Username'
                       defaultValue={formData.username}
                     />
                   </Form.Group>
@@ -74,24 +71,29 @@ const Login = ({ setUser }) => {
                       onChange={handleChange}
                       type='password'
                       name='password'
-                      placeholder='Password'
                       defaultValue={formData.password}
                     />
                   </Form.Group>
                 </Col>
-                {formError && <Form.Text className='text-center'>{formError}</Form.Text>}
+                {formError && (
+                  <Text color={'brand.danger.500'} className='text-center'>
+                    {formError}
+                  </Text>
+                )}
               </Row>
             </Col>
           </Row>
 
           <Form.Group className='mt-4 text-center'>
-            <Button type='submit'>Log in</Button>
+            <Button colorScheme='brand.primary' type='submit'>
+              Log in
+            </Button>
           </Form.Group>
         </Form>
         <Text textAlign={'center'} mt='5'>
           If you aren't already signed up,{' '}
           <Link className='signup-link' to='/register'>
-            sign up here
+            <Text color={'brand.primary.500'}>Sign up here</Text>
           </Link>
         </Text>
       </Container>
