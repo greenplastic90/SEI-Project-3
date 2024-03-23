@@ -6,7 +6,7 @@ import { getPayload } from '../../../../auth/helpers'
 
 function CommentText({ comment, handleDelete }) {
   const { _id, text, createdAt, owner } = comment
-  const isOwner = getPayload().sub === owner._id
+  const isOwner = getPayload()?.sub === owner._id
   return (
     <Stack
       w={'full'}
