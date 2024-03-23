@@ -12,6 +12,27 @@ const getRandomInRange = (from, to) => {
   return (Math.random() * (to - from) + from).toFixed(2) * 1
 }
 
+const getRandomElement = (arr) => arr[Math.floor(Math.random() * arr.length)]
+
+const createRandomComments = (event, users) => {
+  // Add specific comment texts here based on your event types
+  const commentsText = {
+    Outdoor: ['Amazing experience!', 'Loved the adventure!'],
+    Food: ['Delicious food!', 'Great vegan options!'],
+    Party: ['Best party ever!', 'Had an amazing time!'],
+    // ...other event types
+  }
+
+  return Array.from({ length: Math.floor(Math.random() * 5) }, () => {
+    const user = getRandomElement(users)
+    const eventComments = commentsText[event.eventType] || ['What an event!']
+    return {
+      owner: user._id,
+      text: getRandomElement(eventComments),
+    }
+  })
+}
+
 const seedDatabase = async () => {
   try {
     await mongoose.connect(process.env.DB_URI)
@@ -19,21 +40,36 @@ const seedDatabase = async () => {
     await mongoose.connection.db.dropDatabase()
     console.log('👌 Database dropped')
 
-    const users = await User.create(userData)
-    const eventsWithEverythingAdded = eventData.map((event, i) => {
+    const userDataWithPasswords = userData.map((user) => {
+      return {
+        ...user,
+        password: process.env.DEMO_USER_PASSWORD,
+        passwordConfirmation: process.env.DEMO_USER_PASSWORD,
+      }
+    })
+
+    const users = await User.create(userDataWithPasswords)
+
+    const eventsWithEverythingAdded = eventData.map((event) => {
       const randomUserIndex = Math.floor(Math.random() * users.length)
-      // const randomTypeIndex = Math.floor(Math.random() * eventTypes.length)
       const randomLat = getRandomInRange(-0.02, 0.02) + userLocation.latitude
       const randomLong = getRandomInRange(-0.04, 0.04) + userLocation.longitude
+
+      // Create random likes and comments
+      const likedBy = users
+        .slice(0, Math.floor(Math.random() * users.length))
+        .map((user) => ({ owner: user._id }))
+      const comments = createRandomComments(event, users)
+
       return {
         ...event,
         owner: users[randomUserIndex]._id,
-        // eventType: eventTypes[randomTypeIndex],
         longitude: randomLong,
         latitude: randomLat,
         eventTime: '12:30pm',
-        // image: `https://picsum.photos/2000/500?random=${i}`,
         isDemo: true,
+        likedBy,
+        comments,
       }
     })
 
@@ -49,4 +85,5 @@ const seedDatabase = async () => {
     console.log('👋 Bye!')
   }
 }
+
 seedDatabase()

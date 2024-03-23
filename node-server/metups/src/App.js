@@ -64,6 +64,7 @@ function App() {
   }, [userGeoLocation])
 
   useEffect(() => {
+    if (!getTokenFromLocalStorage()) return
     try {
       const getUserProfile = async () => {
         const { data } = await axios.get('/api/profile', {
@@ -71,6 +72,7 @@ function App() {
             Authorization: `Bearer ${getTokenFromLocalStorage()}`,
           },
         })
+        console.log(data)
         setUser(data)
       }
       getUserProfile()
