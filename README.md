@@ -8,6 +8,7 @@ Projects front end and some backend functionality has been updated
 - This app is now responsive and looks great on mobile as well
 
 I have Left the rest of the README unedited.
+The App is still deployed by Heroku and is available [here](https://metups.herokuapp.com).
 
 ##
 
